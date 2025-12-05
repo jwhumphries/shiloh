@@ -1,0 +1,29 @@
+<div class="flex flex-wrap items-center gap-2 text-sm text-base-content/70">
+  {{ if .Params.showDate | default (.Site.Params.article.showDate | default true) }}
+    <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+      {{ .Date.Format (.Site.Params.dateFormat | default "January 2, 2006") }}
+    </time>
+  {{ end }}
+
+  {{ if and (.Params.showDateUpdated | default (.Site.Params.article.showDateUpdated | default false)) (ne .Date .Lastmod) }}
+    <span>·</span>
+    <span>Updated {{ .Lastmod.Format (.Site.Params.dateFormat | default "January 2, 2006") }}</span>
+  {{ end }}
+
+  {{ if and (.Params.showReadingTime | default (.Site.Params.article.showReadingTime | default true)) (ne .ReadingTime 0) }}
+    <span>·</span>
+    <span>{{ .ReadingTime }} min read</span>
+  {{ end }}
+
+  {{ if and (.Params.showWordCount | default (.Site.Params.article.showWordCount | default false)) (ne .WordCount 0) }}
+    <span>·</span>
+    <span>{{ .WordCount }} words</span>
+  {{ end }}
+
+  {{ if .Params.showAuthor | default (.Site.Params.article.showAuthor | default true) }}
+    {{ with .Site.Params.author.name }}
+      <span>·</span>
+      <span>{{ . }}</span>
+    {{ end }}
+  {{ end }}
+</div>

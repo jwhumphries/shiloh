@@ -1,0 +1,11 @@
+{{ $toc := .TableOfContents }}
+{{ if and $toc (gt .WordCount 400) }}
+<aside class="toc-sidebar hidden lg:block">
+  <div class="sticky top-24">
+    <nav class="menu bg-base-200 rounded-box p-4 max-h-[calc(100vh-8rem)] overflow-y-auto" id="toc-nav">
+      <div class="menu-title mb-2">Table of Contents</div>
+      {{ $toc }}
+    </nav>
+  </div>
+</aside>
+{{ end }}

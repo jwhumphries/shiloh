@@ -1,0 +1,30 @@
+# Main menu configuration
+# Override this in your site's config to customize
+
+[[main]]
+  name = "Posts"
+  pageRef = "posts"
+  weight = 10
+
+[[main]]
+  name = "Topics"
+  pageRef = "topics"
+  weight = 20
+
+[[main]]
+  name = "About"
+  pageRef = "about"
+  weight = 30
+
+# Search action
+[[main]]
+  identifier = "search"
+  weight = 99
+  [main.params]
+    action = "search"
+
+# Footer menu (disabled by default)
+# [[footer]]
+#   name = "Tags"
+#   pageRef = "tags"
+#   weight = 10

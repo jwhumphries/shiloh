@@ -1,0 +1,213 @@
+# ==============================================================================
+# SHILOH THEME PARAMETERS
+# ==============================================================================
+# These are the default theme parameters. Override them in your site's
+# config file (hugo.yml, hugo.toml, or config/_default/params.toml)
+#
+# Based on: Congo v2 Theme
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# Appearance & Color Scheme
+# ------------------------------------------------------------------------------
+
+# Color scheme name
+colorScheme = "shiloh"
+
+# Default appearance: "light" or "dark"
+defaultAppearance = "light"
+
+# Auto-switch appearance based on system preference
+autoSwitchAppearance = true
+
+# Default theme color for browser chrome
+defaultThemeColor = "#ffffff"
+
+# ------------------------------------------------------------------------------
+# Feature Flags
+# ------------------------------------------------------------------------------
+
+# Enable site search (powered by Fuse.js)
+enableSearch = true
+
+# Enable code copy button
+enableCodeCopy = true
+
+# Enable lazy loading for images
+enableImageLazyLoading = true
+
+# Enable WebP image format
+enableImageWebp = true
+
+# Enable Quicklink for faster navigation
+enableQuicklink = true
+
+# ------------------------------------------------------------------------------
+# Site Metadata
+# ------------------------------------------------------------------------------
+
+# Site description (used in meta tags)
+description = ""
+
+# Site keywords (used in meta tags)
+keywords = []
+
+# Main content sections (for homepage recent posts)
+mainSections = ["posts"]
+
+# Robots meta tag
+# robots = ""
+
+# Fingerprint algorithm for asset integrity
+fingerprintAlgorithm = "sha256"
+
+# ------------------------------------------------------------------------------
+# Author Configuration
+# ------------------------------------------------------------------------------
+
+[author]
+  name = ""
+  image = ""
+  headline = ""
+  bio = ""
+  links = []
+  # Example links:
+  # links = [
+  #   { email = "mailto:your@email.com" },
+  #   { x-twitter = "https://twitter.com/username" },
+  #   { github = "https://github.com/username" },
+  #   { linkedin = "https://linkedin.com/in/username" },
+  # ]
+
+# ------------------------------------------------------------------------------
+# Header Configuration
+# ------------------------------------------------------------------------------
+
+[header]
+  # Logo image path (relative to assets/ or static/)
+  # logo = "img/logo.jpg"
+
+  # Dark mode logo image path
+  # logoDark = "img/logo-dark.jpg"
+
+# ------------------------------------------------------------------------------
+# Footer Configuration
+# ------------------------------------------------------------------------------
+
+[footer]
+  # Show copyright notice
+  showCopyright = true
+
+  # Show appearance switcher (light/dark toggle)
+  showAppearanceSwitcher = true
+
+  # Show scroll to top button
+  showScrollToTop = true
+
+# ------------------------------------------------------------------------------
+# Homepage Configuration
+# ------------------------------------------------------------------------------
+
+[homepage]
+  # Show recent articles on homepage
+  showRecent = true
+
+  # Number of recent articles to show
+  recentLimit = 5
+
+# ------------------------------------------------------------------------------
+# Article Configuration
+# ------------------------------------------------------------------------------
+
+[article]
+  # Show publication date
+  showDate = true
+
+  # Show last updated date
+  showDateUpdated = false
+
+  # Show author information
+  showAuthor = true
+
+  # Show draft label on draft posts
+  showDraftLabel = true
+
+  # Append article path to edit URL
+  editAppendPath = true
+
+  # Show heading anchors
+  showHeadingAnchors = true
+
+  # Show article pagination (prev/next)
+  showPagination = true
+
+  # Invert pagination order
+  invertPagination = false
+
+  # Show reading time
+  showReadingTime = true
+
+  # Show table of contents
+  showTableOfContents = true
+
+  # Show taxonomies (tags, categories, etc.)
+  showTaxonomies = false
+
+  # Show word count
+  showWordCount = false
+
+  # Show comments section
+  showComments = false
+
+  # Sharing links (available: facebook, x-twitter, mastodon, pinterest, reddit,
+  # linkedin, email, threads, telegram, line, weibo, xing, bluesky)
+  # sharingLinks = ["x-twitter", "linkedin", "email"]
+
+# ------------------------------------------------------------------------------
+# List Configuration (for list/archive pages)
+# ------------------------------------------------------------------------------
+
+[list]
+  # Show breadcrumb navigation
+  showBreadcrumbs = false
+
+  # Show article summary
+  showSummary = false
+
+  # Show table of contents
+  showTableOfContents = false
+
+  # Show taxonomies
+  showTaxonomies = false
+
+  # Group articles by year
+  groupByYear = true
+
+  # Pagination width (number of page links to show)
+  paginationWidth = 1
+
+# ------------------------------------------------------------------------------
+# Sitemap Configuration
+# ------------------------------------------------------------------------------
+
+[sitemap]
+  # Exclude these kinds from sitemap
+  excludedKinds = ["taxonomy", "term"]
+
+# ------------------------------------------------------------------------------
+# Taxonomy Configuration
+# ------------------------------------------------------------------------------
+
+[taxonomy]
+  # Show term count on taxonomy pages
+  showTermCount = true
+
+# ------------------------------------------------------------------------------
+# Search Engine Verification
+# ------------------------------------------------------------------------------
+
+[verification]
+  # google = ""
+  # bing = ""
+  # pinterest = ""
+  # yandex = ""

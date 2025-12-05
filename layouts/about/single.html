@@ -1,0 +1,34 @@
+{{ define "main" }}
+<div class="container mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+
+  <div class="flex items-center gap-6 mb-8">
+    {{ if .Params.image }}
+    <img
+      src="{{ .Params.image | relURL }}"
+      alt="{{ .Params.imageAlt | default .Title }}"
+      class="rounded-full w-24 h-24 object-cover shadow-lg border-2 border-base-content/10"
+    />
+    {{ end }}
+    <div>
+      <h1 class="text-4xl font-bold text-base-content">{{ .Title }}</h1>
+      {{ if .Params.author }}
+      <p class="text-base-content/60 mt-2">{{ .Params.author }}</p>
+      {{ end }}
+    </div>
+  </div>
+
+  <div class="article-prose text-base-content/80">
+    {{ .Content }}
+  </div>
+
+  {{ if .Params.quote }}
+  <blockquote class="border-l-4 border-primary pl-6 py-4 bg-base-200/30 rounded-r-lg mt-8">
+    <p class="text-lg italic text-base-content/90 mb-2">{{ .Params.quote }}</p>
+    {{ if .Params.quoteAuthor }}
+    <cite class="text-sm text-base-content/60 not-italic">— {{ .Params.quoteAuthor }}</cite>
+    {{ end }}
+  </blockquote>
+  {{ end }}
+
+</div>
+{{ end }}

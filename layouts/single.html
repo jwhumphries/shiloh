@@ -1,0 +1,33 @@
+{{ define "main" }}
+<div class="container mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+  <article>
+    <header class="mb-8">
+      <h1 class="mb-4 text-4xl font-extrabold">{{ .Title | emojify }}</h1>
+      {{ if .Params.showDraftLabel | default (.Site.Params.article.showDraftLabel | default true) }}
+        {{ if .Draft }}
+          <div class="badge badge-warning mb-4">Draft</div>
+        {{ end }}
+      {{ end }}
+      {{ partial "article-meta.html" . }}
+    </header>
+
+    <div class="grid lg:grid-cols-[1fr_16rem] xl:grid-cols-[1fr_20rem] gap-12">
+      <div class="article-prose">
+        {{ .Content }}
+      </div>
+
+      {{ if .Params.showTableOfContents | default (.Site.Params.article.showTableOfContents | default true) }}
+        {{ partial "toc.html" . }}
+      {{ end }}
+    </div>
+
+    {{ if .Params.showPagination | default (.Site.Params.article.showPagination | default true) }}
+      {{ partial "article-pagination.html" . }}
+    {{ end }}
+  </article>
+</div>
+
+{{ if and (.Params.showTableOfContents | default (.Site.Params.article.showTableOfContents | default true)) (gt .WordCount 400) }}
+  <script src="{{ (resources.Get "js/toc.js").RelPermalink }}" defer></script>
+{{ end }}
+{{ end }}

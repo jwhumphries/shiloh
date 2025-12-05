@@ -1,0 +1,54 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  NAME: shiloh-blog
+  IMAGES:
+    [
+      dev
+    ]
+  DEV_IMAGE: '{{.NAME}}:{{index .IMAGES 0}}'
+
+tasks:
+  build-target:
+    internal: true
+    cmds:
+      - docker build --target {{.DOCKER_TARGET}} -t {{.DOCKER_IMAGE}} .
+  clean-image:
+    internal: true
+    cmds:
+      - docker rmi {{.DOCKER_IMAGE}}
+  clean-images:
+    internal: true
+    cmds:
+      - for: { var: IMAGES }
+        task: clean-image
+        vars: { DOCKER_IMAGE: '{{.NAME}}:{{.ITEM}}' } 
+  clean:
+    desc: Clean all images
+    cmds:
+      - echo "🧹 Cleaning Docker images..."
+      - task: clean-images
+      - echo "✅ Cleaned Docker images"
+    silent: true
+  clean-node-deps:
+    internal: true
+    cmds:
+      - rm -rf themes/shiloh/node_modules
+      - rm -rf themes/shiloh/bun.lock
+  build-dev:
+    desc: Build development image
+    cmds:
+      - task: build-target
+        vars:
+          DOCKER_TARGET: develop
+          DOCKER_IMAGE: '{{.DEV_IMAGE}}'
+  dev:
+    desc: Start development container and mount files
+    cmds:
+      - echo "🎨 Starting Shiloh development environment in Docker..."
+      - task: build-dev
+      - defer: { task: clean-node-deps }
+      - docker run --rm -it -p 1313:1313 -v "{{.USER_WORKING_DIR}}:/blog" {{.DEV_IMAGE}}
+    silent: true

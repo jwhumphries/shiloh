@@ -1,0 +1,13 @@
+name = "Shiloh"
+license = "MIT"
+licenselink = "https://github.com/jwhumphries/shiloh/blob/main/LICENSE"
+description = "A custom Hugo theme built with Tailwind CSS v4 and daisyUI"
+homepage = "https://github.com/jwhumphries/shiloh/"
+demosite = "https://shiloh.johnhumphries.dev/"
+tags = ["blog", "personal", "tailwindcss", "daisyui", "responsive", "minimal"]
+features = ["responsive", "dark-mode", "tailwindcss-v4", "daisyui", "search"]
+min_version = "0.151.0"
+
+[author]
+  name = "John Humphries"
+  homepage = "https://blog.johnhumphries.dev"

@@ -1,0 +1,18 @@
+{{ define "main" }}
+<div class="container mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+  <div class="article-prose mx-auto">
+    {{ .Content }}
+  </div>
+
+  {{ if .Site.Params.homepage.showRecent | default true }}
+    <div class="mt-12">
+      <h2 class="mb-6 text-3xl font-bold">Recent Posts</h2>
+      <div class="grid gap-6 md:grid-cols-2">
+        {{ range first (.Site.Params.homepage.recentLimit | default 5) (where .Site.RegularPages "Type" "in" .Site.Params.mainSections) }}
+          {{ partial "article-link.html" . }}
+        {{ end }}
+      </div>
+    </div>
+  {{ end }}
+</div>
+{{ end }}

@@ -1,0 +1,13 @@
+# Markup configuration
+# These settings are required for the theme to function properly
+
+[goldmark]
+  [goldmark.renderer]
+    unsafe = true  # Allow HTML in markdown
+
+[highlight]
+  noClasses = false  # Use CSS classes for syntax highlighting
+
+[tableOfContents]
+  startLevel = 2
+  endLevel = 3

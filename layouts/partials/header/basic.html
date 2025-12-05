@@ -1,0 +1,43 @@
+<div class="container mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10 lg:px-8">
+  <div class="navbar">
+    <div class="navbar-start">
+      {{ if .Site.Params.header.logo }}
+        <a href="{{ "/" | relURL }}" class="link link-hover text-2xl font-bold">
+          <img src="{{ .Site.Params.header.logo | relURL }}" alt="{{ .Site.Title }}" class="h-8" />
+        </a>
+      {{ else }}
+        <a href="{{ "/" | relURL }}" class="link link-hover text-2xl font-bold">
+          {{ .Site.Title }}
+        </a>
+      {{ end }}
+    </div>
+
+    <div class="navbar-end">
+      <ul class="menu menu-horizontal px-1 hidden lg:flex">
+        {{ range .Site.Menus.main }}
+          {{ if eq .Params.action "search" }}
+            {{/* Skip search for now */}}
+          {{ else }}
+            <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+          {{ end }}
+        {{ end }}
+      </ul>
+      <div class="dropdown dropdown-end lg:hidden">
+        <div tabindex="0" role="button" class="btn btn-ghost">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+          </svg>
+        </div>
+        <ul tabindex="0" class="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow">
+          {{ range .Site.Menus.main }}
+            {{ if eq .Params.action "search" }}
+              {{/* Skip search for now */}}
+            {{ else }}
+              <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+            {{ end }}
+          {{ end }}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

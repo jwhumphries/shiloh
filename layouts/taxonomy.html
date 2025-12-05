@@ -1,0 +1,26 @@
+{{ define "main" }}
+<div class="container mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+  <header class="mb-8">
+    <h1 class="text-4xl font-extrabold">{{ .Title }}</h1>
+  </header>
+
+  {{ if .Content }}
+    <div class="article-prose mx-auto mb-12">
+      {{ .Content }}
+    </div>
+  {{ end }}
+
+  <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    {{ range .Data.Terms }}
+      <a href="{{ .Page.Permalink }}" class="card bg-base-200 hover:bg-base-300 transition">
+        <div class="card-body">
+          <h2 class="card-title text-lg">{{ .Page.Title }}</h2>
+          {{ if $.Site.Params.taxonomy.showTermCount | default true }}
+            <div class="badge badge-neutral">{{ .Count }}</div>
+          {{ end }}
+        </div>
+      </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

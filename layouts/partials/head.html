@@ -1,0 +1,106 @@
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="{{ .Site.Params.defaultThemeColor | default "#ffffff" }}" />
+
+  {{/* Title */}}
+  {{ if .IsHome -}}
+    <title>{{ .Site.Title | emojify }}</title>
+    <meta name="title" content="{{ .Site.Title | emojify }}" />
+  {{- else -}}
+    <title>{{ .Title | emojify }} · {{ .Site.Title | emojify }}</title>
+    <meta name="title" content="{{ .Title | emojify }} · {{ .Site.Title | emojify }}" />
+  {{- end }}
+
+  {{/* Description */}}
+  {{ with .Description }}
+    <meta name="description" content="{{ . }}" />
+  {{ else }}
+    {{ with .Site.Params.description }}
+      <meta name="description" content="{{ . }}" />
+    {{ end }}
+  {{ end }}
+
+  {{/* Keywords */}}
+  {{ with .Site.Params.keywords }}
+    <meta name="keywords" content="{{ delimit . ", " }}" />
+  {{ end }}
+
+  {{/* Canonical URL */}}
+  <link rel="canonical" href="{{ .Permalink }}" />
+
+  {{/* RSS */}}
+  {{ with .OutputFormats.Get "rss" -}}
+    {{ printf `<link rel=%q type=%q href=%q title=%q>` .Rel .MediaType.Type .Permalink site.Title | safeHTML }}
+  {{ end }}
+
+  {{/* CSS */}}
+  {{ $css := resources.Get "css/main.bundle.css" }}
+  {{ if not $css }}
+    {{ errorf "CSS file not found. Run 'bun run build' in themes/shiloh to generate CSS." }}
+  {{ end }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
+
+  {{/* Search Index */}}
+  {{ if .Site.Params.enableSearch | default false }}
+    {{ if .Site.Home.OutputFormats.Get "json" }}
+      <link rel="preload" href="{{ "index.json" | relURL }}" as="fetch" crossorigin="anonymous" />
+    {{ end }}
+  {{ end }}
+
+  {{/* Open Graph */}}
+  <meta property="og:url" content="{{ .Permalink }}" />
+  <meta property="og:site_name" content="{{ .Site.Title }}" />
+  <meta property="og:title" content="{{ .Title }}" />
+  <meta property="og:locale" content="{{ .Lang }}" />
+  {{ if .IsPage }}
+    <meta property="og:type" content="article" />
+    {{ with .PublishDate }}
+      <meta property="article:published_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}" />
+    {{ end }}
+    {{ with .Lastmod }}
+      <meta property="article:modified_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}" />
+    {{ end }}
+  {{ else }}
+    <meta property="og:type" content="website" />
+  {{ end }}
+  {{ with .Description }}
+    <meta property="og:description" content="{{ . }}" />
+  {{ end }}
+
+  {{/* Twitter Card */}}
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="{{ .Title }}" />
+  {{ with .Description }}
+    <meta name="twitter:description" content="{{ . }}" />
+  {{ end }}
+
+  {{/* Generator */}}
+  {{ hugo.Generator }}
+
+  {{/* Search Engine Verification */}}
+  {{ with .Site.Params.verification.google }}
+    <meta name="google-site-verification" content="{{ . }}" />
+  {{ end }}
+  {{ with .Site.Params.verification.bing }}
+    <meta name="msvalidate.01" content="{{ . }}" />
+  {{ end }}
+  {{ with .Site.Params.verification.pinterest }}
+    <meta name="p:domain_verify" content="{{ . }}" />
+  {{ end }}
+  {{ with .Site.Params.verification.yandex }}
+    <meta name="yandex-verification" content="{{ . }}" />
+  {{ end }}
+
+  {{/* Robots */}}
+  {{ with .Params.robots }}
+    <meta name="robots" content="{{ . }}" />
+  {{ else }}
+    {{ with .Site.Params.robots }}
+      <meta name="robots" content="{{ . }}" />
+    {{ end }}
+  {{ end }}
+
+  {{/* Structured Data */}}
+  {{ partial "seo/structured-data.html" . }}
+</head>

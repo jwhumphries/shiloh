@@ -1,0 +1,31 @@
+<article class="card bg-base-100 shadow-xl">
+  <a href="{{ .RelPermalink }}" class="block">
+    {{ with .Params.feature }}
+      <figure>
+        <img src="{{ . | relURL }}" alt="{{ $.Title }}" class="w-full" loading="lazy" />
+      </figure>
+    {{ end }}
+    <div class="card-body">
+      <h2 class="card-title">
+        {{ .Title | emojify }}
+        {{ if and .Draft (.Site.Params.article.showDraftLabel | default true) }}
+          <div class="badge badge-warning">Draft</div>
+        {{ end }}
+      </h2>
+      {{ if .Params.showSummary | default (.Site.Params.list.showSummary | default false) }}
+        <p class="text-base-content/70">{{ .Summary }}</p>
+      {{ end }}
+      <div class="card-actions justify-start text-sm text-base-content/60">
+        {{ if .Params.showDate | default (.Site.Params.article.showDate | default true) }}
+          <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+            {{ .Date.Format (.Site.Params.dateFormat | default "January 2, 2006") }}
+          </time>
+        {{ end }}
+        {{ if and (.Params.showReadingTime | default (.Site.Params.article.showReadingTime | default true)) (ne .ReadingTime 0) }}
+          <span>·</span>
+          <span>{{ .ReadingTime }} min read</span>
+        {{ end }}
+      </div>
+    </div>
+  </a>
+</article>
