@@ -3,7 +3,7 @@
 version: '3'
 
 vars:
-  NAME: shiloh-blog
+  NAME: shiloh-theme
   IMAGES:
     [
       dev
@@ -35,8 +35,8 @@ tasks:
   clean-node-deps:
     internal: true
     cmds:
-      - rm -rf themes/shiloh/node_modules
-      - rm -rf themes/shiloh/bun.lock
+      - rm -rf node_modules
+      - rm -rf bun.lock
   build-dev:
     desc: Build development image
     cmds:
@@ -50,5 +50,5 @@ tasks:
       - echo "🎨 Starting Shiloh development environment in Docker..."
       - task: build-dev
       - defer: { task: clean-node-deps }
-      - docker run --rm -it -p 1313:1313 -v "{{.USER_WORKING_DIR}}:/blog" {{.DEV_IMAGE}}
+      - docker run --rm -it -p 1313:1313 -v "{{.USER_WORKING_DIR}}:/workdir" {{.DEV_IMAGE}}
     silent: true
