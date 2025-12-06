@@ -25,10 +25,8 @@ FROM frontend AS builder
 WORKDIR /release
 COPY assets ./assets
 COPY layouts ./layouts
-COPY static ./static
 COPY package.json .
 RUN bun install \
-    && bun run index \
     && bun run build
 
 # This stage requires the project directory to be mounted to /${THEME_NAME}
@@ -44,7 +42,6 @@ FROM hugo AS docs
 ARG THEME_NAME=shiloh
 ENV THEME_NAME=${THEME_NAME}
 COPY --from=builder /release/assets/css/compiled /release/assets/css/compiled
-COPY --from=builder /release/static /release/static
 WORKDIR /${THEME_NAME}
 COPY --chmod=755 scripts/docker/docs.sh /docs.sh
 ENTRYPOINT ["/docs.sh"]

@@ -3,5 +3,4 @@
 TARGET_DIR="${THEME_NAME:-/}"
 cd /"${TARGET_DIR}"
 cp /release/assets/css/compiled/* ./assets/css/compiled/
-cp /release/static/* ./static/
 hugo --minify --buildDrafts --theme ${THEME_NAME} --themesDir ../.. -s ./exampleSite

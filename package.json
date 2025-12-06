@@ -6,18 +6,16 @@
   "scripts": {
     "init": "tailwindcss -i ./assets/css/main.css -o ./assets/css/compiled/main.css",
     "dev": "tailwindcss -i ./assets/css/main.css -o ./assets/css/compiled/main.css --watch",
-    "build": "tailwindcss -i ./assets/css/main.css -o ./assets/css/compiled/main.css --minify",
-    "index": "hugo-lunr -i \"content/**/*.md\" -o static/lunr-index.json"
+    "build": "tailwindcss -i ./assets/css/main.css -o ./assets/css/compiled/main.css --minify"
   },
   "dependencies": {
-    "lunr": "^2.3.9"
+    "fuse.js": "^7.1.0"
   },
   "devDependencies": {
     "daisyui": "^5.5.8",
     "theme-change": "^2.5.0",
     "flyonui": "^2.4.1",
     "@iconify/tailwind4": "^1.2.0",
-    "@iconify-json/tabler": "^1.2.23",
-    "hugo-lunr": "^0.0.4"
+    "@iconify-json/tabler": "^1.2.23"
   }
 }

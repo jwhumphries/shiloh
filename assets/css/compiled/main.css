@@ -11,7 +11,6 @@
     --container-2xl: 42rem;
     --container-3xl: 48rem;
     --container-4xl: 56rem;
-    --container-6xl: 72rem;
     --container-7xl: 80rem;
     --text-xs: 0.75rem;
     --text-xs--line-height: calc(1 / 0.75);
@@ -2331,6 +2330,9 @@
   .fixed {
     position: fixed;
   }
+  .relative {
+    position: relative;
+  }
   .static {
     position: static;
   }
@@ -2565,9 +2567,6 @@
   }
   .z-50 {
     z-index: 50;
-  }
-  .z-\[1\] {
-    z-index: 1;
   }
   .hero {
     @layer daisyui.l1.l2.l3 {
@@ -3156,6 +3155,33 @@
       font-weight: var(--font-weight-normal);
     }
   }
+  .stat {
+    display: inline-grid;
+    width: 100%;
+    column-gap: calc(0.25rem * 4);
+    row-gap: calc(0.25rem * 1);
+    padding-inline: calc(0.25rem * 6);
+    padding-block: calc(0.25rem * 4);
+    grid-template-columns: repeat(1, 1fr);
+    border-color: inherit;
+  }
+  .stat {
+    @layer daisyui.l1.l2.l3 {
+      display: inline-grid;
+      width: 100%;
+      column-gap: calc(0.25rem * 4);
+      padding-inline: calc(0.25rem * 6);
+      padding-block: calc(0.25rem * 4);
+      grid-template-columns: repeat(1, 1fr);
+      &:not(:last-child) {
+        border-inline-end: var(--border) dashed currentColor;
+        @supports (color: color-mix(in lab, red, red)) {
+          border-inline-end: var(--border) dashed color-mix(in oklab, currentColor 10%, #0000);
+        }
+        border-block-end: none;
+      }
+    }
+  }
   .navbar-end {
     @layer daisyui.l1.l2.l3 {
       display: inline-flex;
@@ -3633,9 +3659,6 @@
   .max-w-4xl {
     max-width: var(--container-4xl);
   }
-  .max-w-6xl {
-    max-width: var(--container-6xl);
-  }
   .max-w-7xl {
     max-width: var(--container-7xl);
   }
@@ -3779,6 +3802,9 @@
         padding-block: calc(0.25rem * 2);
       }
     }
+  }
+  .rounded {
+    border-radius: 0.25rem;
   }
   .rounded-box {
     border-radius: var(--radius-box);
@@ -3967,6 +3993,12 @@
       background-color: color-mix(in oklab, var(--color-base-200) 30%, transparent);
     }
   }
+  .bg-secondary\/30 {
+    background-color: var(--color-secondary);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-secondary) 30%, transparent);
+    }
+  }
   .bg-gradient-to-br {
     --tw-gradient-position: to bottom right in oklab;
     background-image: linear-gradient(var(--tw-gradient-stops));
@@ -4060,6 +4092,9 @@
     --size: calc(var(--size-selector, 0.25rem) * 5);
     padding-inline: calc(0.25rem * 2);
   }
+  .px-0\.5 {
+    padding-inline: calc(var(--spacing) * 0.5);
+  }
   .px-1 {
     padding-inline: calc(var(--spacing) * 1);
   }
@@ -4068,9 +4103,6 @@
   }
   .py-4 {
     padding-block: calc(var(--spacing) * 4);
-  }
-  .py-6 {
-    padding-block: calc(var(--spacing) * 6);
   }
   .py-8 {
     padding-block: calc(var(--spacing) * 8);
@@ -4233,6 +4265,9 @@
   .text-primary {
     color: var(--color-primary);
   }
+  .text-secondary-content {
+    color: var(--color-secondary-content);
+  }
   .italic {
     font-style: italic;
   }
@@ -4296,10 +4331,6 @@
   }
   .opacity-100 {
     opacity: 100%;
-  }
-  .shadow {
-    --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
-    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
   .shadow-lg {
     --tw-shadow: 0 10px 15px -3px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 4px 6px -4px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
@@ -4510,11 +4541,6 @@
   .sm\:px-6 {
     @media (width >= 40rem) {
       padding-inline: calc(var(--spacing) * 6);
-    }
-  }
-  .sm\:py-10 {
-    @media (width >= 40rem) {
-      padding-block: calc(var(--spacing) * 10);
     }
   }
   .sm\:py-12 {

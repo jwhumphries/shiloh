@@ -7,7 +7,14 @@ summaryLength = 0
   pagerSize = 10
 
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
+  home = ["HTML", "RSS", "JSON", "SearchData"]
+
+[outputFormats]
+  [outputFormats.SearchData]
+    mediaType = "application/json"
+    baseName = "search-data"
+    isPlainText = true
+    notAlternative = true
 
 [privacy]
   [privacy.vimeo]
