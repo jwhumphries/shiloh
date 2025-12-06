@@ -12,7 +12,7 @@
   "author": {
     "@type": "Person",
     "name": {{ . | jsonify }}
-    {{ with $site.Params.author.links }}
+    {{ with site.Params.author.links }}
     {{ range . }}
     {{ if .email }}
     ,"email": {{ strings.TrimPrefix "mailto:" .email | jsonify }}
