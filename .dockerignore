@@ -20,3 +20,14 @@ node_modules/
 
 # GitHub
 .github/
+
+# Task
+Taskfile.yml
+
+# License
+LICENSE
+
+# AI
+.claude/
+CLAUDE.md
+AGENTS.md

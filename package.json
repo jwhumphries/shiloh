@@ -4,6 +4,7 @@
   "description": "A custom Hugo theme built with Tailwind CSS v4 and FlyonUI",
   "private": true,
   "scripts": {
+    "init": "tailwindcss -i ./assets/css/main.css -o ./assets/css/compiled/main.css",
     "dev": "tailwindcss -i ./assets/css/main.css -o ./assets/css/compiled/main.css --watch",
     "build": "tailwindcss -i ./assets/css/main.css -o ./assets/css/compiled/main.css --minify",
     "index": "hugo-lunr -i \"content/**/*.md\" -o static/lunr-index.json"
