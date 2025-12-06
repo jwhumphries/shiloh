@@ -18,8 +18,16 @@
     searchNoResults.classList.add('hidden');
 
     try {
-      const response = await fetch('/search-data.json');
+      const searchIndexUrl = searchModal.getAttribute('data-search-index') || '/index.json';
+      const response = await fetch(searchIndexUrl);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const searchData = await response.json();
+
+      if (typeof Fuse === 'undefined') {
+        throw new Error('Fuse.js is not loaded');
+      }
 
       fuse = new Fuse(searchData, {
         keys: [
