@@ -1,6 +1,6 @@
 <h{{ .Level }} id="{{ .Anchor | safeURL }}">
   {{ .Text | safeHTML }}
-  {{ if .Page.Params.showHeadingAnchors | default (.Page.Site.Params.article.showHeadingAnchors | default true) }}
+  {{ if .Page.Params.showHeadingAnchors | default (.Pagesite.Params.article.showHeadingAnchors | default true) }}
     <a href="#{{ .Anchor | safeURL }}" class="anchor-link opacity-0 hover:opacity-100 ml-2 text-primary no-underline" aria-label="Link to this section">
       #
     </a>

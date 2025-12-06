@@ -1,0 +1,30 @@
+{{- $showTaxonomies := .Params.showTaxonomies | default (site.Params.article.showTaxonomies | default false) }}
+{{- if $showTaxonomies }}
+  <div class="mt-8 pt-8 border-t border-base-300">
+    {{- $taxonomies := slice }}
+
+    {{- with .GetTerms "tags" }}
+      {{- $taxonomies = $taxonomies | append (dict "title" (i18n "taxonomy.tags" | default "Tags") "terms" .) }}
+    {{- end }}
+
+    {{- with .GetTerms "categories" }}
+      {{- $taxonomies = $taxonomies | append (dict "title" (i18n "taxonomy.categories" | default "Categories") "terms" .) }}
+    {{- end }}
+
+    {{- range $taxonomies }}
+      <div class="mb-4">
+        <h3 class="text-sm font-semibold text-base-content/60 mb-3">{{ .title }}</h3>
+        <div class="flex flex-wrap gap-2">
+          {{- range .terms }}
+            <a
+              href="{{ .Permalink }}"
+              class="badge badge-primary badge-lg hover:badge-secondary transition-colors"
+            >
+              {{ .LinkTitle }}
+            </a>
+          {{- end }}
+        </div>
+      </div>
+    {{- end }}
+  </div>
+{{- end }}

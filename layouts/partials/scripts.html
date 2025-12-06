@@ -1,0 +1,32 @@
+{{- /* Iconify for icons */ -}}
+<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
+{{- /* Theme Change Library */ -}}
+<script src="https://cdn.jsdelivr.net/npm/theme-change@2.5.0/index.js"></script>
+
+{{- /* Search functionality */ -}}
+{{- if site.Params.enableSearch | default true }}
+  <script src="https://unpkg.com/lunr@2.3.9/lunr.min.js"></script>
+  {{- $searchJS := resources.Get "js/search.js" }}
+  {{- if $searchJS }}
+    <script src="{{ $searchJS.RelPermalink }}"></script>
+  {{- end }}
+{{- end }}
+
+{{- /* Code copy button */ -}}
+{{- if site.Params.enableCodeCopy | default true }}
+  {{- $codeCopyJS := resources.Get "js/code-copy.js" }}
+  {{- if $codeCopyJS }}
+    <script src="{{ $codeCopyJS.RelPermalink }}"></script>
+  {{- end }}
+{{- end }}
+
+{{- /* Quicklink for faster navigation */ -}}
+{{- if site.Params.enableQuicklink | default true }}
+  <script src="https://unpkg.com/quicklink@2.3.0/dist/quicklink.umd.js"></script>
+  <script>
+    window.addEventListener('load', () => {
+      quicklink.listen();
+    });
+  </script>
+{{- end }}

@@ -1,0 +1,61 @@
+{{ define "main" }}
+<div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+  {{- /* Page Header */ -}}
+  <header class="mb-12">
+    {{- /* Breadcrumbs */ -}}
+    {{- if .Params.showBreadcrumbs | default (site.Params.list.showBreadcrumbs | default false) }}
+      {{- partial "breadcrumbs.html" . -}}
+    {{- end }}
+
+    <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">
+      {{ .Title | emojify }}
+    </h1>
+
+    {{- /* Page Description */ -}}
+    {{- with .Content }}
+      <div class="article-prose max-w-3xl mb-8">
+        {{ . }}
+      </div>
+    {{- end }}
+  </header>
+
+  {{- /* Articles List */ -}}
+  {{- if .Pages }}
+    {{- /* Group by Year Option */ -}}
+    {{- if .Params.groupByYear | default (site.Params.list.groupByYear | default true) }}
+      {{- range (.Paginate (.Pages.GroupByDate "2006")).PageGroups }}
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold mb-6 pb-2 border-b-2 border-primary/30">
+            {{ .Key }}
+          </h2>
+          <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {{- range .Pages }}
+              {{- partial "article-card.html" . }}
+            {{- end }}
+          </div>
+        </section>
+      {{- end }}
+    {{- else }}
+      {{- /* Regular List */ -}}
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {{- range (.Paginate .Pages).Pages }}
+          {{- partial "article-card.html" . }}
+        {{- end }}
+      </div>
+    {{- end }}
+
+    {{- /* Pagination */ -}}
+    {{- partial "pagination.html" . -}}
+  {{- else }}
+    {{- /* Empty State */ -}}
+    <div class="flex flex-col items-center justify-center py-16 text-center">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-base-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+      <p class="text-xl text-base-content/60">
+        {{ i18n "list.no_posts" | default "No posts found" }}
+      </p>
+    </div>
+  {{- end }}
+</div>
+{{ end }}

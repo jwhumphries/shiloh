@@ -1,25 +1,38 @@
-{{ if or .NextInSection .PrevInSection }}
-<nav class="mt-12 flex items-center justify-between">
-  {{ with .PrevInSection }}
-    <a href="{{ .RelPermalink }}" class="btn btn-outline flex-1 max-w-md">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-      </svg>
-      <span class="truncate">{{ .Title }}</span>
-    </a>
-  {{ else }}
-    <div class="flex-1"></div>
-  {{ end }}
+{{- if or .NextInSection .PrevInSection }}
+<nav class="mt-12 pt-8 border-t border-base-300" aria-label="{{ i18n "article.pagination" | default "Article navigation" }}">
+  <h3 class="text-sm font-semibold text-base-content/60 mb-4">
+    {{ i18n "article.more_posts" | default "More Posts" }}
+  </h3>
+  <div class="grid md:grid-cols-2 gap-4">
+    {{- with .PrevInSection }}
+      <a href="{{ .RelPermalink }}" class="card bg-base-200 hover:bg-base-300 transition-colors p-4 group" aria-label="{{ i18n "article.previous" | default "Previous" }}: {{ .Title }}">
+        <div class="flex items-start gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 text-primary mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          <div class="flex-1 min-w-0">
+            <p class="text-xs text-base-content/60 mb-1">{{ i18n "article.previous" | default "Previous" }}</p>
+            <p class="font-medium group-hover:text-primary transition-colors line-clamp-2">{{ .Title | emojify }}</p>
+          </div>
+        </div>
+      </a>
+    {{- else }}
+      <div></div>
+    {{- end }}
 
-  {{ with .NextInSection }}
-    <a href="{{ .RelPermalink }}" class="btn btn-outline flex-1 max-w-md">
-      <span class="truncate">{{ .Title }}</span>
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-      </svg>
-    </a>
-  {{ else }}
-    <div class="flex-1"></div>
-  {{ end }}
+    {{- with .NextInSection }}
+      <a href="{{ .RelPermalink }}" class="card bg-base-200 hover:bg-base-300 transition-colors p-4 group" aria-label="{{ i18n "article.next" | default "Next" }}: {{ .Title }}">
+        <div class="flex items-start gap-3">
+          <div class="flex-1 min-w-0 text-right">
+            <p class="text-xs text-base-content/60 mb-1">{{ i18n "article.next" | default "Next" }}</p>
+            <p class="font-medium group-hover:text-primary transition-colors line-clamp-2">{{ .Title | emojify }}</p>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 text-primary mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </div>
+      </a>
+    {{- end }}
+  </div>
 </nav>
-{{ end }}
+{{- end }}

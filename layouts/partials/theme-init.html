@@ -1,0 +1,20 @@
+<script>
+  (function() {
+    const defaultTheme = '{{ site.Params.colorScheme | default "shiloh" }}';
+    const darkTheme = '{{ site.Params.colorScheme | default "shiloh" }}-dark';
+    const autoSwitch = {{ site.Params.autoSwitchAppearance | default true }};
+    const defaultAppearance = '{{ site.Params.defaultAppearance | default "light" }}';
+
+    let theme = localStorage.getItem('theme');
+
+    if (!theme) {
+      if (autoSwitch && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        theme = darkTheme;
+      } else {
+        theme = defaultAppearance === 'dark' ? darkTheme : defaultTheme;
+      }
+    }
+
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
