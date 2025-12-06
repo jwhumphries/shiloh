@@ -73,7 +73,7 @@
   {{ end }}
 }
 </script>
-{{ else if or .IsSection .IsTaxonomy }}
+{{ else if or .IsSection (eq .Kind "taxonomy") (eq .Kind "term") }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
