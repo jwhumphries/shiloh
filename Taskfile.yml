@@ -37,6 +37,7 @@ tasks:
     cmds:
       - rm -rf node_modules
       - rm -rf bun.lock
+      - rm static/lunr-index.json
   build-dev:
     desc: Build development image
     cmds:

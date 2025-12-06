@@ -5,7 +5,11 @@
   "private": true,
   "scripts": {
     "dev": "tailwindcss -i ./assets/css/main.css -o ./assets/css/main.bundle.css --watch",
-    "build": "tailwindcss -i ./assets/css/main.css -o ./assets/css/main.bundle.css --minify"
+    "build": "tailwindcss -i ./assets/css/main.css -o ./assets/css/main.bundle.css --minify",
+    "index": "hugo-lunr -i \"content/**/*.md\" -o static/lunr-index.json"
+  },
+  "dependencies": {
+    "lunr": "^2.3.9"
   },
   "devDependencies": {
     "daisyui": "^5.5.8",
@@ -13,6 +17,7 @@
     "flyonui": "^2.4.1",
     "@iconify/tailwind4": "^1.2.0",
     "@iconify-json/tabler": "^1.2.23",
-    "@tailwindcss/typography": "^0.5.5-alpha.3"
+    "@tailwindcss/typography": "^0.5.5-alpha.3",
+    "hugo-lunr": "^0.0.6"
   }
 }
