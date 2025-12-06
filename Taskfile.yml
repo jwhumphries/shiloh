@@ -38,7 +38,6 @@ tasks:
       - rm -rf node_modules
       - rm -rf bun.lock
       - rm static/lunr-index.json
-      - rm assets/css/main.bundle.css
   build-dev:
     desc: Build development image
     cmds:
