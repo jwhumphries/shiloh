@@ -5,7 +5,9 @@ FROM oven/bun:alpine AS bun
 
 # This stage requires the project directory to be mounted to /blog
 FROM oven/bun:alpine AS develop
-WORKDIR /workdir
+ARG THEME_NAME=shiloh
+ENV THEME_NAME=${THEME_NAME}
+WORKDIR /${THEME_NAME}
 RUN apk add --no-cache \
     libc6-compat \
     git
@@ -17,4 +19,3 @@ EXPOSE 1313
 COPY scripts/docker/develop.sh /develop.sh
 RUN [ "chmod", "+x", "/develop.sh"]
 ENTRYPOINT ["/develop.sh"]
-CMD ["/workdir"]

@@ -1,4 +1,4 @@
-name = "Shiloh"
+name = "shiloh"
 license = "MIT"
 licenselink = "https://github.com/jwhumphries/shiloh/blob/main/LICENSE"
 description = "A custom Hugo theme built with Tailwind CSS v4 and daisyUI"

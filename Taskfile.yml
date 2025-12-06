@@ -3,7 +3,7 @@
 version: '3'
 
 vars:
-  NAME: shiloh-theme
+  NAME: shiloh
   IMAGES:
     [
       dev
@@ -14,7 +14,7 @@ tasks:
   build-target:
     internal: true
     cmds:
-      - docker build --target {{.DOCKER_TARGET}} -t {{.DOCKER_IMAGE}} .
+      - docker build --target {{.DOCKER_TARGET}} -t {{.DOCKER_IMAGE}} --build-arg THEME_NAME={{.NAME}} .
   clean-image:
     internal: true
     cmds:
@@ -32,12 +32,13 @@ tasks:
       - task: clean-images
       - echo "✅ Cleaned Docker images"
     silent: true
-  clean-node-deps:
+  clean-build-files:
     internal: true
     cmds:
       - rm -rf node_modules
       - rm -rf bun.lock
       - rm static/lunr-index.json
+      - rm assets/css/main.bundle.css
   build-dev:
     desc: Build development image
     cmds:
@@ -50,6 +51,6 @@ tasks:
     cmds:
       - echo "🎨 Starting Shiloh development environment in Docker..."
       - task: build-dev
-      - defer: { task: clean-node-deps }
-      - docker run --rm -it -p 1313:1313 -v "{{.USER_WORKING_DIR}}:/workdir" {{.DEV_IMAGE}}
+      - defer: { task: clean-build-files }
+      - docker run --rm -it -p 1313:1313 -v "{{.USER_WORKING_DIR}}:/{{.NAME}}" {{.DEV_IMAGE}}
     silent: true

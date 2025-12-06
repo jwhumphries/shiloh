@@ -2,7 +2,6 @@ baseURL: https://example.org/
 languageCode: en-us
 title: Shiloh Theme Example
 theme: shiloh
-themesDir: ../..
 
 pagination:
   pagerSize: 10
