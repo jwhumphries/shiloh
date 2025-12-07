@@ -1,10 +1,10 @@
 {{ define "main" }}
 {{- $showTOC := and (.Params.showTableOfContents | default (site.Params.article.showTableOfContents | default true)) (gt .WordCount 400) -}}
-<article class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+<article class="page-container py-8 sm:py-12">
   {{- /* Article Grid */ -}}
   <div class="grid {{ if $showTOC }}lg:grid-cols-[1fr_16rem] xl:grid-cols-[1fr_20rem] gap-8 lg:gap-12{{ end }}">
     {{- /* Main Content Wrapper */ -}}
-    <div class="mx-auto max-w-4xl min-w-0 w-full">
+    <div class="min-w-0 w-full">
       {{- /* Article Header */ -}}
       <header class="mb-8">
         {{- /* Draft Label */ -}}

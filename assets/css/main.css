@@ -272,6 +272,30 @@
   padding-left: calc(1rem - 3px);
 }
 
+@utility page-container {
+  width: 100%;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+
+  @media (min-width: 640px) {
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
+  }
+
+  @media (min-width: 768px) {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
+}
+
 /* Fix modal visibility conflict between daisyUI and FlyonUI */
 dialog.modal[open] {
   opacity: 1;

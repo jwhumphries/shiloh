@@ -1,5 +1,6 @@
 <header class="sticky top-0 z-50 bg-base-100/80 backdrop-blur-md border-b border-base-300">
-  <nav class="navbar container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" role="navigation" aria-label="{{ i18n "nav.main" | default "Main navigation" }}">
+  <div class="page-container">
+    <nav class="navbar px-0" role="navigation" aria-label="{{ i18n "nav.main" | default "Main navigation" }}">
     {{- /* Logo / Site Title */ -}}
     <div class="navbar-start">
       <a href="{{ "/" | relURL }}" class="flex items-center gap-3 text-xl font-bold hover:text-primary transition-colors">
@@ -93,7 +94,8 @@
         </ul>
       </div>
     </div>
-  </nav>
+    </nav>
+  </div>
 </header>
 
 {{- /* Search Modal */ -}}
