@@ -1,0 +1,31 @@
+<div class="w-full rounded-lg pb-2 shadow-base-300/20 shadow-sm">
+  <div class="overflow-x-auto">
+    <table class="table" {{ range $k, $v :=.Attributes }} {{$k}}="{{$v}}" {{ end }}>
+
+      <thead>
+        {{ range .THead }}
+        <tr>
+          {{ range . }}
+          <th {{ with .Alignment }}style="text-align: {{ . }}" {{ end }}>
+            {{ .Text }}
+          </th>
+          {{ end }}
+        </tr>
+        {{ end }}
+      </thead>
+
+      <tbody>
+        {{ range .TBody }}
+        <tr>
+          {{ range . }}
+          <td {{ with .Alignment }}style="text-align: {{ . }}" {{ end }}>
+            {{ .Text }}
+          </td>
+          {{ end }}
+        </tr>
+        {{ end }}
+      </tbody>
+
+    </table>
+  </div>
+</div>

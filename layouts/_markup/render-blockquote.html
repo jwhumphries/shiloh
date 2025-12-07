@@ -1,0 +1,18 @@
+{{ $author := .Attributes.author }}
+
+<blockquote class="relative p-4" {{ range $k, $v :=.Attributes }}{{ if ne $k "author" }} {{$k}}="{{$v}}" {{ end }}{{ end
+  }}>
+
+  <span class="icon-[tabler--quote] text-base-300/20 absolute -start-3 -top-3 size-16 rotate-180 rtl:rotate-0"></span>
+
+  <div class="relative z-1 [&_p]:text-base-content [&_p]:text-lg [&_p]:italic">
+    {{ .Text }}
+  </div>
+
+  {{ with $author }}
+  <footer class="mt-4">
+    <div class="text-base-content/50 text-base font-semibold">~ {{ . }}</div>
+  </footer>
+  {{ end }}
+
+</blockquote>
