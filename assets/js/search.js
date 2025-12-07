@@ -32,15 +32,18 @@
       fuse = new Fuse(searchData, {
         keys: [
           { name: 'title', weight: 2.0 },
-          { name: 'content', weight: 0.2 },
-          { name: 'tags', weight: 1.0 },
+          { name: 'content', weight: 0.5 },
+          { name: 'tags', weight: 1.5 },
           { name: 'categories', weight: 1.0 }
         ],
-        threshold: 0.4,
+        threshold: 0.3,
         includeScore: true,
         includeMatches: true,
-        minMatchCharLength: 2,
-        ignoreLocation: true
+        minMatchCharLength: 3,
+        ignoreLocation: true,
+        useExtendedSearch: false,
+        findAllMatches: false,
+        distance: 100
       });
     } catch (error) {
       console.error('Failed to load search index:', error);
@@ -48,50 +51,6 @@
     } finally {
       searchLoading.classList.add('hidden');
     }
-  }
-
-  function mergeIndices(indices) {
-    if (indices.length === 0) return [];
-    const sorted = [...indices].sort((a, b) => a[0] - b[0]);
-    const merged = [sorted[0]];
-    for (let i = 1; i < sorted.length; i++) {
-      const last = merged[merged.length - 1];
-      const current = sorted[i];
-      if (current[0] <= last[1] + 1) {
-        last[1] = Math.max(last[1], current[1]);
-      } else {
-        merged.push(current);
-      }
-    }
-    return merged;
-  }
-
-  function highlightMatches(text, matches, offset = 0) {
-    if (!matches || matches.length === 0) return escapeHtml(text);
-
-    const indices = matches.flatMap(m => m.indices);
-    if (indices.length === 0) return escapeHtml(text);
-
-    const adjustedIndices = indices
-      .map(([start, end]) => [start - offset, end - offset])
-      .filter(([start, end]) => end >= 0 && start < text.length)
-      .map(([start, end]) => [Math.max(0, start), Math.min(text.length - 1, end)]);
-
-    const merged = mergeIndices(adjustedIndices);
-
-    let result = '';
-    let lastIndex = 0;
-
-    merged.forEach(([start, end]) => {
-      if (start >= lastIndex) {
-        result += escapeHtml(text.substring(lastIndex, start));
-        result += `<mark class="bg-primary/20 text-base-content font-medium px-0.5 rounded">${escapeHtml(text.substring(start, end + 1))}</mark>`;
-        lastIndex = end + 1;
-      }
-    });
-
-    result += escapeHtml(text.substring(lastIndex));
-    return result;
   }
 
   function escapeHtml(text) {
@@ -134,21 +93,16 @@
       const doc = result.item;
       const matches = result.matches || [];
 
-      const titleMatches = matches.filter(m => m.key === 'title');
-      const highlightedTitle = highlightMatches(doc.title, titleMatches);
-
-      const { text: previewText, offset: previewOffset } = getContentPreview(doc.content, matches);
-      const contentMatches = matches.filter(m => m.key === 'content');
-      const highlightedContent = highlightMatches(previewText, contentMatches, previewOffset);
+      const { text: previewText } = getContentPreview(doc.content, matches);
 
       const resultElement = document.createElement('div');
       resultElement.className = 'card bg-base-200 hover:bg-base-300 transition-colors';
       resultElement.innerHTML = `
         <div class="card-body p-4">
           <h4 class="card-title text-base">
-            <a href="${doc.uri}" class="link link-hover text-primary">${highlightedTitle}</a>
+            <a href="${doc.uri}" class="link link-hover text-primary">${escapeHtml(doc.title)}</a>
           </h4>
-          <p class="text-sm text-base-content/70 line-clamp-2">${highlightedContent}</p>
+          <p class="text-sm text-base-content/70 line-clamp-2">${escapeHtml(previewText)}</p>
           ${doc.tags && doc.tags.length > 0 ? `
             <div class="flex gap-2 mt-2 flex-wrap">
               ${doc.tags.slice(0, 3).map(tag => `<span class="badge badge-sm badge-primary">${tag}</span>`).join('')}
@@ -161,7 +115,7 @@
   }
 
   function performSearch(query) {
-    if (!fuse || query.length < 2) {
+    if (!fuse || query.length < 3) {
       searchResultsList.innerHTML = '';
       searchNoResults.classList.add('hidden');
       return;
