@@ -1,18 +1,44 @@
-{{- $toc := .TableOfContents }}
-{{- if $toc }}
+{{- $fragments := .Page.Fragments }}
+{{- if and $fragments $fragments.Headings }}
+{{- $rootHeadings := (index $fragments.Headings 0).Headings }}
+{{- if $rootHeadings }}
+<style>
+  #toc-nav a.active {
+    color: oklch(52% 0.09 142) !important;
+    font-weight: 500 !important;
+  }
+</style>
 <aside class="toc-sidebar hidden lg:block">
   <div class="sticky top-24">
-    <nav class="menu bg-base-200 rounded-box p-4 max-h-[calc(100vh-8rem)] overflow-y-auto shadow-sm" id="toc-nav">
-      <div class="menu-title mb-3 text-primary">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-        </svg>
-        {{ i18n "article.table_of_contents" | default "Table of Contents" }}
-      </div>
-      <div class="toc-content prose-sm">
-        {{ $toc | safeHTML }}
-      </div>
+    <nav class="max-h-[calc(100vh-8rem)] overflow-y-auto" id="toc-nav">
+      <ul class="text-sm leading-6 [--scrollspy-offset:120]" id="toc-scrollspy" data-scrollspy="#article-content">
+        <li class="text-base-content font-semibold mb-2 flex items-center gap-2">
+          <span class="icon-[tabler--list] size-4"></span>
+          {{ i18n "article.table_of_contents" | default "On This Page" }}
+        </li>
+        {{- range $rootHeadings }}
+          {{- $hasChildren := and .Headings (gt (len .Headings) 0) }}
+        <li{{ if $hasChildren }} data-scrollspy-group=""{{ end }}>
+          <a href="#{{ .ID }}" class="toc-link text-base-content/70 hover:text-base-content block py-1">
+            {{ .Title }}
+          </a>
+          {{- if $hasChildren }}
+          <ul>
+            {{- range .Headings }}
+            <li class="ms-4">
+              <a href="#{{ .ID }}" class="toc-link text-base-content/60 hover:text-base-content flex items-center gap-2 py-0.5">
+                <span class="icon-[tabler--point] size-3"></span>
+                {{ .Title }}
+              </a>
+            </li>
+            {{- end }}
+          </ul>
+          {{- end }}
+        </li>
+        {{- end }}
+      </ul>
     </nav>
   </div>
 </aside>
+{{- end }}
 {{- end }}

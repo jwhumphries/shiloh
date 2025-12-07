@@ -24,7 +24,7 @@
       </header>
 
       {{- /* Article Content */ -}}
-      <div class="article-prose">
+      <div id="article-content" class="article-prose">
         {{ .Content }}
       </div>
 
@@ -46,11 +46,4 @@
   </div>
 </article>
 
-{{- /* Load TOC JavaScript if needed */ -}}
-{{ if $showTOC }}
-  {{- $tocJS := resources.Get "js/toc.js" }}
-  {{- if $tocJS }}
-    <script src="{{ $tocJS.RelPermalink }}" defer></script>
-  {{- end }}
-{{ end }}
 {{ end }}
