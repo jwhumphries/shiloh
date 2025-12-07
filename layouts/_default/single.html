@@ -1,42 +1,29 @@
 {{ define "main" }}
 {{- $showTOC := and (.Params.showTableOfContents | default (site.Params.article.showTableOfContents | default true)) (gt .WordCount 400) -}}
 <article class="page-container py-8 sm:py-12">
-  {{- /* Article Grid */ -}}
-  <div class="grid {{ if $showTOC }}lg:grid-cols-[1fr_16rem] xl:grid-cols-[1fr_20rem] gap-8 lg:gap-12{{ end }}">
-    {{- /* Main Content Wrapper */ -}}
-    <div class="min-w-0 w-full">
-      {{- /* Article Header */ -}}
-      <header class="mb-8">
-        {{- /* Draft Label */ -}}
-        {{- if and .Draft (.Params.showDraftLabel | default (site.Params.article.showDraftLabel | default true)) }}
-          <div class="badge badge-warning badge-lg mb-4">
-            {{ i18n "article.draft" | default "Draft" }}
-          </div>
-        {{- end }}
-
-        {{- /* Title */ -}}
-        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">
-          {{ .Title | emojify }}
-        </h1>
-
-        {{- /* Article Meta */ -}}
-        {{- partial "article-meta.html" . -}}
-      </header>
-
-      {{- /* Article Content */ -}}
-      <div class="article-prose">
-        {{ .Content }}
+  {{- /* Article Header */ -}}
+  <header class="mb-8">
+    {{- /* Draft Label */ -}}
+    {{- if and .Draft (.Params.showDraftLabel | default (site.Params.article.showDraftLabel | default true)) }}
+      <div class="badge badge-warning badge-lg mb-4">
+        {{ i18n "article.draft" | default "Draft" }}
       </div>
+    {{- end }}
 
-      {{- /* Taxonomies (Tags/Categories) */ -}}
-      {{- if .Params.showTaxonomies | default (site.Params.article.showTaxonomies | default false) }}
-        {{- partial "taxonomies.html" . -}}
-      {{- end }}
+    {{- /* Title */ -}}
+    <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">
+      {{ .Title | emojify }}
+    </h1>
 
-      {{- /* Article Pagination (Prev/Next) */ -}}
-      {{- if .Params.showPagination | default (site.Params.article.showPagination | default true) }}
-        {{- partial "article-pagination.html" . -}}
-      {{- end }}
+    {{- /* Article Meta */ -}}
+    {{- partial "article-meta.html" . -}}
+  </header>
+
+  {{- /* Article Content Grid (with TOC) */ -}}
+  <div class="grid {{ if $showTOC }}lg:grid-cols-[1fr_12rem] xl:grid-cols-[1fr_14rem] gap-6 lg:gap-8{{ end }}">
+    {{- /* Main Content */ -}}
+    <div id="article-content" class="article-prose min-w-0">
+      {{ .Content }}
     </div>
 
     {{- /* Table of Contents Sidebar */ -}}
@@ -44,13 +31,16 @@
       {{- partial "toc.html" . -}}
     {{- end }}
   </div>
+
+  {{- /* Taxonomies (Tags/Categories) */ -}}
+  {{- if .Params.showTaxonomies | default (site.Params.article.showTaxonomies | default false) }}
+    {{- partial "taxonomies.html" . -}}
+  {{- end }}
+
+  {{- /* Article Pagination (Prev/Next) */ -}}
+  {{- if .Params.showPagination | default (site.Params.article.showPagination | default true) }}
+    {{- partial "article-pagination.html" . -}}
+  {{- end }}
 </article>
 
-{{- /* Load TOC JavaScript if needed */ -}}
-{{ if $showTOC }}
-  {{- $tocJS := resources.Get "js/toc.js" }}
-  {{- if $tocJS }}
-    <script src="{{ $tocJS.RelPermalink }}" defer></script>
-  {{- end }}
-{{ end }}
 {{ end }}
