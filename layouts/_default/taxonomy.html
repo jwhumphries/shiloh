@@ -1,50 +1,86 @@
 {{ define "main" }}
-<div class="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-  {{- /* Taxonomy Header */ -}}
-  <header class="mb-12">
-    <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">
-      {{ .Title | emojify }}
-    </h1>
-
-    {{- with .Content }}
-      <div class="article-prose max-w-3xl mb-8">
-        {{ . }}
+{{- if eq .Kind "term" }}
+  {{- /* Term Page - show posts for this term */ -}}
+  <div class="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <header class="mb-12">
+      <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">
+        {{ .Title | emojify }}
+      </h1>
+      {{- with .Content }}
+        <div class="article-prose max-w-3xl mb-8">
+          {{ . }}
+        </div>
+      {{- end }}
+      <p class="text-base-content/60">
+        {{ len .Pages }}
+        {{ if eq (len .Pages) 1 }}
+          {{ i18n "term.post" | default "post" }}
+        {{ else }}
+          {{ i18n "term.posts" | default "posts" }}
+        {{ end }}
+      </p>
+    </header>
+    {{- if .Pages }}
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {{- range (.Paginate .Pages).Pages }}
+          {{- partial "article-card.html" . }}
+        {{- end }}
+      </div>
+      {{- partial "pagination.html" . -}}
+    {{- else }}
+      <div class="flex flex-col items-center justify-center py-16 text-center">
+        <p class="text-xl text-base-content/60">
+          {{ i18n "term.no_posts" | default "No posts found" }}
+        </p>
       </div>
     {{- end }}
-  </header>
-
-  {{- /* Taxonomy Terms */ -}}
-  {{- if .Pages }}
-    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {{- range .Pages.ByTitle }}
-        <a
-          href="{{ .Permalink }}"
-          class="card bg-base-200 hover:bg-base-300 transition-colors shadow-sm hover:shadow-md"
-        >
-          <div class="card-body">
-            <h2 class="card-title text-lg">
-              {{ .Title | emojify }}
-            </h2>
-            {{- if site.Params.taxonomy.showTermCount | default true }}
-              <p class="text-sm text-base-content/60">
-                {{ len .Pages }}
-                {{ if eq (len .Pages) 1 }}
-                  {{ i18n "taxonomy.post" | default "post" }}
-                {{ else }}
-                  {{ i18n "taxonomy.posts" | default "posts" }}
-                {{ end }}
-              </p>
-            {{- end }}
-          </div>
-        </a>
+  </div>
+{{- else }}
+  {{- /* Taxonomy Page - show all terms */ -}}
+  <div class="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <header class="mb-12">
+      <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">
+        {{ .Title | emojify }}
+      </h1>
+      {{- with .Content }}
+        <div class="article-prose max-w-3xl mb-8">
+          {{ . }}
+        </div>
       {{- end }}
-    </div>
-  {{- else }}
-    <div class="flex flex-col items-center justify-center py-16 text-center">
-      <p class="text-xl text-base-content/60">
-        {{ i18n "taxonomy.no_terms" | default "No terms found" }}
-      </p>
-    </div>
-  {{- end }}
-</div>
+    </header>
+    {{- $taxonomy := index .Site.Taxonomies .Data.Plural }}
+    {{- if $taxonomy }}
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {{- range $taxonomy.Alphabetical }}
+          <a
+            href="{{ .Page.Permalink }}"
+            class="card bg-base-200 hover:bg-base-300 transition-colors shadow-sm hover:shadow-md"
+          >
+            <div class="card-body">
+              <h2 class="card-title text-lg">
+                {{ .Page.Title | emojify }}
+              </h2>
+              {{- if site.Params.taxonomy.showTermCount | default true }}
+                <p class="text-sm text-base-content/60">
+                  {{ .Count }}
+                  {{ if eq .Count 1 }}
+                    {{ i18n "taxonomy.post" | default "post" }}
+                  {{ else }}
+                    {{ i18n "taxonomy.posts" | default "posts" }}
+                  {{ end }}
+                </p>
+              {{- end }}
+            </div>
+          </a>
+        {{- end }}
+      </div>
+    {{- else }}
+      <div class="flex flex-col items-center justify-center py-16 text-center">
+        <p class="text-xl text-base-content/60">
+          {{ i18n "taxonomy.no_terms" | default "No terms found" }}
+        </p>
+      </div>
+    {{- end }}
+  </div>
+{{- end }}
 {{ end }}
