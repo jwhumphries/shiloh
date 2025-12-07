@@ -53,7 +53,7 @@
 
   {{- /* Preload search index if enabled */ -}}
   {{- if site.Params.enableSearch | default true }}
-  <link rel="preload" href="{{ " search-data.json" | relURL }}" as="fetch" crossorigin="anonymous" />
+  <link rel="preload" href="{{ "index.json" | relURL }}" as="fetch" crossorigin="anonymous" />
   {{- end }}
 
   {{- /* Open Graph */ -}}

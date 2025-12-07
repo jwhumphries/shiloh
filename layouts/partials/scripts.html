@@ -6,7 +6,12 @@
 
 {{- /* Search functionality */ -}}
 {{- if site.Params.enableSearch | default true }}
-  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0"></script>
+  {{- $fuseJS := resources.Get "js/fuse.min.js" }}
+  {{- if $fuseJS }}
+    <script src="{{ $fuseJS.RelPermalink }}"></script>
+  {{- else }}
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0"></script>
+  {{- end }}
   {{- $searchJS := resources.Get "js/search.js" }}
   {{- if $searchJS }}
     <script src="{{ $searchJS.RelPermalink }}"></script>
