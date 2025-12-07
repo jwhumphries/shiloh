@@ -50,45 +50,75 @@
     }
   }
 
-  function highlightMatches(text, matches) {
-    if (!matches || matches.length === 0) return text;
+  function mergeIndices(indices) {
+    if (indices.length === 0) return [];
+    const sorted = [...indices].sort((a, b) => a[0] - b[0]);
+    const merged = [sorted[0]];
+    for (let i = 1; i < sorted.length; i++) {
+      const last = merged[merged.length - 1];
+      const current = sorted[i];
+      if (current[0] <= last[1] + 1) {
+        last[1] = Math.max(last[1], current[1]);
+      } else {
+        merged.push(current);
+      }
+    }
+    return merged;
+  }
+
+  function highlightMatches(text, matches, offset = 0) {
+    if (!matches || matches.length === 0) return escapeHtml(text);
 
     const indices = matches.flatMap(m => m.indices);
-    if (indices.length === 0) return text;
+    if (indices.length === 0) return escapeHtml(text);
 
-    indices.sort((a, b) => a[0] - b[0]);
+    const adjustedIndices = indices
+      .map(([start, end]) => [start - offset, end - offset])
+      .filter(([start, end]) => end >= 0 && start < text.length)
+      .map(([start, end]) => [Math.max(0, start), Math.min(text.length - 1, end)]);
+
+    const merged = mergeIndices(adjustedIndices);
 
     let result = '';
     let lastIndex = 0;
 
-    indices.forEach(([start, end]) => {
+    merged.forEach(([start, end]) => {
       if (start >= lastIndex) {
-        result += text.substring(lastIndex, start);
-        result += `<mark class="bg-secondary/30 text-secondary-content px-0.5 rounded">${text.substring(start, end + 1)}</mark>`;
+        result += escapeHtml(text.substring(lastIndex, start));
+        result += `<mark class="bg-primary/20 text-base-content font-medium px-0.5 rounded">${escapeHtml(text.substring(start, end + 1))}</mark>`;
         lastIndex = end + 1;
       }
     });
 
-    result += text.substring(lastIndex);
+    result += escapeHtml(text.substring(lastIndex));
     return result;
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
   }
 
   function getContentPreview(content, matches) {
     if (!matches || matches.length === 0) {
-      return content.substring(0, 150);
+      return { text: content.substring(0, 150), offset: 0 };
     }
 
     const contentMatches = matches.find(m => m.key === 'content');
     if (!contentMatches || !contentMatches.indices[0]) {
-      return content.substring(0, 150);
+      return { text: content.substring(0, 150), offset: 0 };
     }
 
     const firstMatchStart = contentMatches.indices[0][0];
     const start = Math.max(0, firstMatchStart - 75);
-    const end = Math.min(content.length, firstMatchStart + 75);
+    const end = Math.min(content.length, firstMatchStart + 150);
     const preview = content.substring(start, end);
 
-    return (start > 0 ? '...' : '') + preview + (end < content.length ? '...' : '');
+    return {
+      text: (start > 0 ? '...' : '') + preview + (end < content.length ? '...' : ''),
+      offset: start - (start > 0 ? 3 : 0)
+    };
   }
 
   function displayResults(results) {
@@ -107,9 +137,9 @@
       const titleMatches = matches.filter(m => m.key === 'title');
       const highlightedTitle = highlightMatches(doc.title, titleMatches);
 
-      const contentPreview = getContentPreview(doc.content, matches);
+      const { text: previewText, offset: previewOffset } = getContentPreview(doc.content, matches);
       const contentMatches = matches.filter(m => m.key === 'content');
-      const highlightedContent = highlightMatches(contentPreview, contentMatches);
+      const highlightedContent = highlightMatches(previewText, contentMatches, previewOffset);
 
       const resultElement = document.createElement('div');
       resultElement.className = 'card bg-base-200 hover:bg-base-300 transition-colors';
