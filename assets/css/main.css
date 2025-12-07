@@ -1,7 +1,10 @@
 @import "tailwindcss";
+@source "../../layouts";
+
 @plugin "daisyui" {
   themes: shiloh --default, shiloh-dark;
 }
+
 @plugin "flyonui";
 @plugin "@iconify/tailwind4";
 

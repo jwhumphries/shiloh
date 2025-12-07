@@ -1,0 +1,97 @@
+baseURL: https://example.org/
+languageCode: en-us
+title: Shiloh Theme Example
+theme: shiloh
+
+pagination:
+  pagerSize: 10
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+params:
+  colorScheme: shiloh
+  defaultAppearance: light
+  autoSwitchAppearance: true
+  defaultThemeColor: "#ffffff"
+
+  enableSearch: true
+  enableCodeCopy: true
+  enableImageLazyLoading: true
+  enableImageWebp: true
+  enableQuicklink: true
+
+  description: "A beautiful example site showcasing the Shiloh Hugo theme"
+  keywords:
+    - hugo
+    - theme
+    - shiloh
+    - tailwindcss
+    - daisyui
+
+  mainSections:
+    - posts
+
+  author:
+    name: "John Doe"
+    headline: "Web Developer & Blogger"
+    bio: "Passionate about creating beautiful and functional websites"
+
+  header: {}
+
+  footer:
+    showCopyright: true
+    showAppearanceSwitcher: true
+    showScrollToTop: true
+
+  homepage:
+    showRecent: true
+    recentLimit: 6
+
+  article:
+    showDate: true
+    showDateUpdated: false
+    showAuthor: true
+    showDraftLabel: true
+    showHeadingAnchors: true
+    showPagination: true
+    showReadingTime: true
+    showTableOfContents: true
+    showTaxonomies: true
+    showWordCount: false
+
+  list:
+    showBreadcrumbs: false
+    showSummary: false
+    groupByYear: true
+    paginationWidth: 1
+
+  taxonomy:
+    showTermCount: true
+
+menus:
+  main:
+    - name: Home
+      pageRef: /
+      weight: 10
+    - name: Posts
+      pageRef: /posts
+      weight: 20
+    - name: About
+      pageRef: /about
+      weight: 30
+
+  footer:
+    - name: Privacy
+      url: /privacy
+      weight: 10
+    - name: Terms
+      url: /terms
+      weight: 20
+
+taxonomies:
+  tag: tags
+  category: categories

@@ -1,0 +1,14 @@
+{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections -}}
+[
+  {{- range $index, $page := $pages -}}
+    {{- if $index }},{{ end }}
+    {
+      "uri": {{ $page.RelPermalink | jsonify }},
+      "title": {{ $page.Title | jsonify }},
+      "content": {{ $page.Plain | jsonify }},
+      "tags": {{ with $page.GetTerms "tags" }}[{{ range $i, $tag := . }}{{ if $i }}, {{ end }}{{ $tag.Title | jsonify }}{{ end }}]{{ else }}[]{{ end }},
+      "categories": {{ with $page.GetTerms "categories" }}[{{ range $i, $cat := . }}{{ if $i }}, {{ end }}{{ $cat.Title | jsonify }}{{ end }}]{{ else }}[]{{ end }},
+      "date": {{ $page.Date.Format "2006-01-02" | jsonify }}
+    }
+  {{- end -}}
+]

@@ -1,0 +1,102 @@
+<header class="sticky top-0 z-50 bg-base-100/80 backdrop-blur-md border-b border-base-300">
+  <nav class="navbar container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" role="navigation" aria-label="{{ i18n "nav.main" | default "Main navigation" }}">
+    {{- /* Logo / Site Title */ -}}
+    <div class="navbar-start">
+      <a href="{{ "/" | relURL }}" class="flex items-center gap-3 text-xl font-bold hover:text-primary transition-colors">
+        {{- if site.Params.header.logo }}
+          <img
+            src="{{ site.Params.header.logo | relURL }}"
+            alt="{{ site.Title }}"
+            class="h-8 w-auto dark:hidden"
+          />
+        {{- end }}
+        {{- if site.Params.header.logoDark }}
+          <img
+            src="{{ site.Params.header.logoDark | relURL }}"
+            alt="{{ site.Title }}"
+            class="h-8 w-auto hidden dark:block"
+          />
+        {{- end }}
+        {{- if not site.Params.header.logo }}
+          <span>{{ site.Title }}</span>
+        {{- end }}
+      </a>
+    </div>
+
+    {{- /* Desktop Menu */ -}}
+    <div class="navbar-center hidden lg:flex">
+      <ul class="menu menu-horizontal px-1 gap-1">
+        {{- range site.Menus.main }}
+          {{- if not (eq .Params.type "search") }}
+            <li>
+              <a
+                href="{{ .URL | relURL }}"
+                class="rounded-btn {{ if $.IsMenuCurrent "main" . }}text-primary font-semibold{{ end }}"
+              >
+                {{ .Name }}
+              </a>
+            </li>
+          {{- end }}
+        {{- end }}
+      </ul>
+    </div>
+
+    {{- /* Actions: Search + Theme Toggle + Mobile Menu */ -}}
+    <div class="navbar-end gap-2">
+      {{- /* Search Button */ -}}
+      {{- if site.Params.enableSearch | default true }}
+        <button
+          id="search-toggle"
+          class="btn btn-ghost btn-circle"
+          aria-label="{{ i18n "ui.search" | default "Search" }}"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </button>
+      {{- end }}
+
+      {{- /* Theme Toggle */ -}}
+      {{- if site.Params.footer.showAppearanceSwitcher | default true }}
+        <label class="swap swap-rotate btn btn-ghost btn-circle" aria-label="{{ i18n "ui.toggle_theme" | default "Toggle theme" }}">
+          <input
+            type="checkbox"
+            data-toggle-theme="{{ site.Params.colorScheme | default "shiloh" }},{{ site.Params.colorScheme | default "shiloh" }}-dark"
+            data-act-class="swap-active"
+          />
+          <svg class="swap-on h-5 w-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21.64 13a1 1 0 0 0-1.05-.14 8.05 8.05 0 0 1-3.37.73A8.15 8.15 0 0 1 9.08 5.49a8.59 8.59 0 0 1 .25-2 1 1 0 0 0-1.33-1.13A10.14 10.14 0 1 0 22 14.05a1 1 0 0 0-.36-1.05zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.79 9.79 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32z"/>
+          </svg>
+          <svg class="swap-off h-5 w-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5.64 17l-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71a1 1 0 0 0-1.41-1.41zM5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1zm7-10a1 1 0 0 0 1-1V0a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1zM5.64 7.05a1 1 0 0 0 .7.29 1 1 0 0 0 .71-.29 1 1 0 0 0 0-1.41l-.71-.71a1 1 0 0 0-1.41 1.41l.71.71zm12 .29a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29zM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2zm-9 8a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1zm6.36-2a1 1 0 0 0-1.41 1.41l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71zM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5zm0 9a3.5 3.5 0 1 1 3.5-3.5 3.5 3.5 0 0 1-3.5 3.5z"/>
+          </svg>
+        </label>
+      {{- end }}
+
+      {{- /* Mobile Menu Toggle */ -}}
+      <div class="dropdown dropdown-end lg:hidden">
+        <div tabindex="0" role="button" class="btn btn-ghost btn-circle" aria-label="{{ i18n "ui.menu" | default "Menu" }}">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </div>
+        <ul tabindex="0" class="menu dropdown-content menu-sm z-50 mt-3 w-52 rounded-box bg-base-100 p-2 shadow-lg border border-base-300">
+          {{- range site.Menus.main }}
+            {{- if not (eq .Params.type "search") }}
+              <li>
+                <a href="{{ .URL | relURL }}" class="{{ if $.IsMenuCurrent "main" . }}text-primary font-semibold{{ end }}">
+                  {{ .Name }}
+                </a>
+              </li>
+            {{- end }}
+          {{- end }}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+{{- /* Search Modal */ -}}
+{{- if site.Params.enableSearch | default true }}
+  {{- partial "search-modal.html" . -}}
+{{- end }}

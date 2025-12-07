@@ -1,29 +1,62 @@
-<div class="flex flex-wrap items-center gap-2 text-sm text-base-content/70">
-  {{ if .Params.showDate | default (.Site.Params.article.showDate | default true) }}
-    <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
-      {{ .Date.Format (.Site.Params.dateFormat | default "January 2, 2006") }}
-    </time>
-  {{ end }}
+<div class="flex flex-wrap items-center gap-4 text-sm text-base-content/70">
+  {{- /* Author */ -}}
+  {{- if .Params.showAuthor | default (site.Params.article.showAuthor | default true) }}
+    {{- with site.Params.author }}
+      <div class="flex items-center gap-2">
+        {{- if .image }}
+          <div class="avatar">
+            <div class="w-8 rounded-full">
+              <img src="{{ .image | relURL }}" alt="{{ .name }}" />
+            </div>
+          </div>
+        {{- end }}
+        <span class="font-medium">{{ .name }}</span>
+      </div>
+    {{- end }}
+  {{- end }}
 
-  {{ if and (.Params.showDateUpdated | default (.Site.Params.article.showDateUpdated | default false)) (ne .Date .Lastmod) }}
-    <span>·</span>
-    <span>Updated {{ .Lastmod.Format (.Site.Params.dateFormat | default "January 2, 2006") }}</span>
-  {{ end }}
+  {{- /* Publish Date */ -}}
+  {{- if .Params.showDate | default (site.Params.article.showDate | default true) }}
+    <div class="flex items-center gap-1.5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+      <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+        {{ .Date.Format (site.Params.dateFormat | default "January 2, 2006") }}
+      </time>
+    </div>
+  {{- end }}
 
-  {{ if and (.Params.showReadingTime | default (.Site.Params.article.showReadingTime | default true)) (ne .ReadingTime 0) }}
-    <span>·</span>
-    <span>{{ .ReadingTime }} min read</span>
-  {{ end }}
+  {{- /* Updated Date */ -}}
+  {{- if and (.Params.showDateUpdated | default (site.Params.article.showDateUpdated | default false)) (ne .Lastmod .Date) }}
+    <div class="flex items-center gap-1.5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+      </svg>
+      <span>{{ i18n "article.updated" | default "Updated" }}</span>
+      <time datetime="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
+        {{ .Lastmod.Format (site.Params.dateFormat | default "January 2, 2006") }}
+      </time>
+    </div>
+  {{- end }}
 
-  {{ if and (.Params.showWordCount | default (.Site.Params.article.showWordCount | default false)) (ne .WordCount 0) }}
-    <span>·</span>
-    <span>{{ .WordCount }} words</span>
-  {{ end }}
+  {{- /* Reading Time */ -}}
+  {{- if and (.Params.showReadingTime | default (site.Params.article.showReadingTime | default true)) (ne .ReadingTime 0) }}
+    <div class="flex items-center gap-1.5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <span>{{ .ReadingTime }} {{ i18n "article.reading_time_minutes" | default "min read" }}</span>
+    </div>
+  {{- end }}
 
-  {{ if .Params.showAuthor | default (.Site.Params.article.showAuthor | default true) }}
-    {{ with .Site.Params.author.name }}
-      <span>·</span>
-      <span>{{ . }}</span>
-    {{ end }}
-  {{ end }}
+  {{- /* Word Count */ -}}
+  {{- if .Params.showWordCount | default (site.Params.article.showWordCount | default false) }}
+    <div class="flex items-center gap-1.5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+      <span>{{ .WordCount }} {{ i18n "article.words" | default "words" }}</span>
+    </div>
+  {{- end }}
 </div>

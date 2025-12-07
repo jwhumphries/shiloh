@@ -1,26 +1,75 @@
-{{ $paginator := .Paginator }}
-{{ if gt $paginator.TotalPages 1 }}
-<div class="mt-12 flex justify-center">
-  <div class="join">
-    {{ if $paginator.HasPrev }}
-      <a href="{{ $paginator.Prev.URL }}" class="join-item btn">«</a>
-    {{ else }}
-      <button class="join-item btn btn-disabled">«</button>
-    {{ end }}
+{{- $paginator := .Paginator }}
+{{- if gt $paginator.TotalPages 1 }}
+<nav class="mt-12 flex justify-center" aria-label="{{ i18n "pagination.label" | default "Pagination" }}">
+  <div class="join shadow-sm">
+    {{- /* Previous Button */ -}}
+    {{- if $paginator.HasPrev }}
+      <a href="{{ $paginator.Prev.URL }}" class="join-item btn" aria-label="{{ i18n "pagination.previous" | default "Previous page" }}">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </a>
+    {{- else }}
+      <button class="join-item btn btn-disabled" aria-label="{{ i18n "pagination.previous" | default "Previous page" }}" disabled>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+    {{- end }}
 
-    {{ range $paginator.Pagers }}
-      {{ if eq . $paginator }}
-        <button class="join-item btn btn-active">{{ .PageNumber }}</button>
-      {{ else }}
-        <a href="{{ .URL }}" class="join-item btn">{{ .PageNumber }}</a>
-      {{ end }}
-    {{ end }}
+    {{- /* Page Numbers */ -}}
+    {{- $paginationWidth := site.Params.list.paginationWidth | default 1 }}
+    {{- $currentPage := $paginator.PageNumber }}
+    {{- $totalPages := $paginator.TotalPages }}
 
-    {{ if $paginator.HasNext }}
-      <a href="{{ $paginator.Next.URL }}" class="join-item btn">»</a>
-    {{ else }}
-      <button class="join-item btn btn-disabled">»</button>
-    {{ end }}
+    {{- if le $totalPages 7 }}
+      {{- range $paginator.Pagers }}
+        {{- if eq . $paginator }}
+          <button class="join-item btn btn-active btn-primary" aria-current="page" aria-label="{{ i18n "pagination.page" | default "Page" }} {{ .PageNumber }}">{{ .PageNumber }}</button>
+        {{- else }}
+          <a href="{{ .URL }}" class="join-item btn" aria-label="{{ i18n "pagination.page" | default "Page" }} {{ .PageNumber }}">{{ .PageNumber }}</a>
+        {{- end }}
+      {{- end }}
+    {{- else }}
+      {{- /* Show first page */ -}}
+      {{- if gt $currentPage (add $paginationWidth 2) }}
+        <a href="{{ $paginator.First.URL }}" class="join-item btn" aria-label="{{ i18n "pagination.page" | default "Page" }} 1">1</a>
+        <button class="join-item btn btn-disabled" aria-hidden="true">...</button>
+      {{- end }}
+
+      {{- /* Show surrounding pages */ -}}
+      {{- range $paginator.Pagers }}
+        {{- $pageNum := .PageNumber }}
+        {{- if and (ge $pageNum (sub $currentPage $paginationWidth)) (le $pageNum (add $currentPage $paginationWidth)) }}
+          {{- if eq . $paginator }}
+            <button class="join-item btn btn-active btn-primary" aria-current="page" aria-label="{{ i18n "pagination.page" | default "Page" }} {{ $pageNum }}">{{ $pageNum }}</button>
+          {{- else }}
+            <a href="{{ .URL }}" class="join-item btn" aria-label="{{ i18n "pagination.page" | default "Page" }} {{ $pageNum }}">{{ $pageNum }}</a>
+          {{- end }}
+        {{- end }}
+      {{- end }}
+
+      {{- /* Show last page */ -}}
+      {{- if lt $currentPage (sub $totalPages (add $paginationWidth 1)) }}
+        <button class="join-item btn btn-disabled" aria-hidden="true">...</button>
+        <a href="{{ $paginator.Last.URL }}" class="join-item btn" aria-label="{{ i18n "pagination.page" | default "Page" }} {{ $totalPages }}">{{ $totalPages }}</a>
+      {{- end }}
+    {{- end }}
+
+    {{- /* Next Button */ -}}
+    {{- if $paginator.HasNext }}
+      <a href="{{ $paginator.Next.URL }}" class="join-item btn" aria-label="{{ i18n "pagination.next" | default "Next page" }}">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+    {{- else }}
+      <button class="join-item btn btn-disabled" aria-label="{{ i18n "pagination.next" | default "Next page" }}" disabled>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    {{- end }}
   </div>
-</div>
-{{ end }}
+</nav>
+{{- end }}

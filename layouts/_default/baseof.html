@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="{{ site.Language.LanguageCode | default "en" }}" dir="{{ site.Language.LanguageDirection | default "ltr" }}">
+  {{- partial "head.html" . -}}
+  <body class="flex min-h-screen flex-col bg-base-100 text-base-content antialiased">
+    {{- partial "theme-init.html" . -}}
+
+    <a href="#main-content" class="btn btn-primary sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50">
+      {{ i18n "nav.skip_to_main" | default "Skip to main content" }}
+    </a>
+
+    {{- partial "header.html" . -}}
+
+    <main id="main-content" class="flex-1 w-full">
+      {{- block "main" . }}{{- end }}
+    </main>
+
+    {{- partial "footer.html" . -}}
+
+    {{- if site.Params.footer.showScrollToTop | default true }}
+      {{- partial "scroll-to-top.html" . -}}
+    {{- end }}
+
+    {{- partial "scripts.html" . -}}
+  </body>
+</html>

@@ -3,36 +3,42 @@
 version: '3'
 
 vars:
-  NAME: shiloh-theme
+  NAME: shiloh
   IMAGES:
     [
-      dev
+      dev,
+      releaser,
+      docs,
     ]
   DEV_IMAGE: '{{.NAME}}:{{index .IMAGES 0}}'
+  RELEASE_IMAGE: '{{.NAME}}:{{index .IMAGES 1}}'
+  DOCS_IMAGE: '{{.NAME}}:{{index .IMAGES 2}}'
 
 tasks:
-  build-target:
+  docker-build-target:
     internal: true
     cmds:
-      - docker build --target {{.DOCKER_TARGET}} -t {{.DOCKER_IMAGE}} .
-  clean-image:
+      - docker build --target {{.DOCKER_TARGET}} -t {{.DOCKER_IMAGE}} --build-arg THEME_NAME={{.NAME}} .
+  docker-clean-image:
     internal: true
     cmds:
       - docker rmi {{.DOCKER_IMAGE}}
-  clean-images:
+    silent: true
+    ignore_error: true
+  docker-clean-images:
     internal: true
     cmds:
       - for: { var: IMAGES }
-        task: clean-image
+        task: docker-clean-image
         vars: { DOCKER_IMAGE: '{{.NAME}}:{{.ITEM}}' } 
-  clean:
+  clean-docker:
     desc: Clean all images
     cmds:
       - echo "🧹 Cleaning Docker images..."
-      - task: clean-images
+      - task: docker-clean-images
       - echo "✅ Cleaned Docker images"
     silent: true
-  clean-node-deps:
+  clean-js-files:
     internal: true
     cmds:
       - rm -rf node_modules
@@ -40,7 +46,7 @@ tasks:
   build-dev:
     desc: Build development image
     cmds:
-      - task: build-target
+      - task: docker-build-target
         vars:
           DOCKER_TARGET: develop
           DOCKER_IMAGE: '{{.DEV_IMAGE}}'
@@ -49,6 +55,37 @@ tasks:
     cmds:
       - echo "🎨 Starting Shiloh development environment in Docker..."
       - task: build-dev
-      - defer: { task: clean-node-deps }
-      - docker run --rm -it -p 1313:1313 -v "{{.USER_WORKING_DIR}}:/workdir" {{.DEV_IMAGE}}
+      - defer: { task: clean-js-files }
+      - docker run --rm -it -p 1313:1313 -v "{{.USER_WORKING_DIR}}:/{{.NAME}}" {{.DEV_IMAGE}}
     silent: true
+  build-releaser:
+    internal: true
+    cmds:
+      - task: docker-build-target
+        vars:
+          DOCKER_TARGET: releaser
+          DOCKER_IMAGE: '{{.RELEASE_IMAGE}}'
+  release:
+    desc: Build the theme
+    cmds:
+      - echo "🏭 Building Shiloh theme..."
+      - task: build-releaser
+      - docker run --rm -v "{{.USER_WORKING_DIR}}:/{{.NAME}}" {{.RELEASE_IMAGE}}
+      - echo "CSS compiled!"
+    silent: true
+  build-docs:
+    internal: true
+    cmds:
+      - task: docker-build-target
+        vars:
+          DOCKER_TARGET: docs
+          DOCKER_IMAGE: '{{.DOCS_IMAGE}}'
+  docs:
+    desc: Build the documentation exampleSite
+    cmds:
+      - echo "🏭 Building the docs site..."
+      - task: build-docs
+      - docker run --rm -v "{{.USER_WORKING_DIR}}:/{{.NAME}}" {{.DOCS_IMAGE}}
+      - echo "All done! Site is generated in public/"
+    silent: true
+    

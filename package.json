@@ -4,15 +4,18 @@
   "description": "A custom Hugo theme built with Tailwind CSS v4 and FlyonUI",
   "private": true,
   "scripts": {
-    "dev": "tailwindcss -i ./assets/css/main.css -o ./assets/css/main.bundle.css --watch",
-    "build": "tailwindcss -i ./assets/css/main.css -o ./assets/css/main.bundle.css --minify"
+    "init": "tailwindcss -i ./assets/css/main.css -o ./assets/css/compiled/main.css",
+    "dev": "tailwindcss -i ./assets/css/main.css -o ./assets/css/compiled/main.css --watch",
+    "build": "tailwindcss -i ./assets/css/main.css -o ./assets/css/compiled/main.css --minify"
+  },
+  "dependencies": {
+    "fuse.js": "^7.1.0"
   },
   "devDependencies": {
     "daisyui": "^5.5.8",
     "theme-change": "^2.5.0",
     "flyonui": "^2.4.1",
     "@iconify/tailwind4": "^1.2.0",
-    "@iconify-json/tabler": "^1.2.23",
-    "@tailwindcss/typography": "^0.5.5-alpha.3"
+    "@iconify-json/tabler": "^1.2.23"
   }
 }

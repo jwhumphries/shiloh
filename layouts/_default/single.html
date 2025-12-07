@@ -1,0 +1,56 @@
+{{ define "main" }}
+{{- $showTOC := and (.Params.showTableOfContents | default (site.Params.article.showTableOfContents | default true)) (gt .WordCount 400) -}}
+<article class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+  {{- /* Article Grid */ -}}
+  <div class="grid {{ if $showTOC }}lg:grid-cols-[1fr_16rem] xl:grid-cols-[1fr_20rem] gap-8 lg:gap-12{{ end }}">
+    {{- /* Main Content Wrapper */ -}}
+    <div class="mx-auto max-w-4xl min-w-0 w-full">
+      {{- /* Article Header */ -}}
+      <header class="mb-8">
+        {{- /* Draft Label */ -}}
+        {{- if and .Draft (.Params.showDraftLabel | default (site.Params.article.showDraftLabel | default true)) }}
+          <div class="badge badge-warning badge-lg mb-4">
+            {{ i18n "article.draft" | default "Draft" }}
+          </div>
+        {{- end }}
+
+        {{- /* Title */ -}}
+        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">
+          {{ .Title | emojify }}
+        </h1>
+
+        {{- /* Article Meta */ -}}
+        {{- partial "article-meta.html" . -}}
+      </header>
+
+      {{- /* Article Content */ -}}
+      <div class="article-prose">
+        {{ .Content }}
+      </div>
+
+      {{- /* Taxonomies (Tags/Categories) */ -}}
+      {{- if .Params.showTaxonomies | default (site.Params.article.showTaxonomies | default false) }}
+        {{- partial "taxonomies.html" . -}}
+      {{- end }}
+
+      {{- /* Article Pagination (Prev/Next) */ -}}
+      {{- if .Params.showPagination | default (site.Params.article.showPagination | default true) }}
+        {{- partial "article-pagination.html" . -}}
+      {{- end }}
+    </div>
+
+    {{- /* Table of Contents Sidebar */ -}}
+    {{- if $showTOC }}
+      {{- partial "toc.html" . -}}
+    {{- end }}
+  </div>
+</article>
+
+{{- /* Load TOC JavaScript if needed */ -}}
+{{ if $showTOC }}
+  {{- $tocJS := resources.Get "js/toc.js" }}
+  {{- if $tocJS }}
+    <script src="{{ $tocJS.RelPermalink }}" defer></script>
+  {{- end }}
+{{ end }}
+{{ end }}
