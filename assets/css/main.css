@@ -271,3 +271,10 @@
   border-left: 3px solid var(--color-primary);
   padding-left: calc(1rem - 3px);
 }
+
+/* Fix modal visibility conflict between daisyUI and FlyonUI */
+dialog.modal[open] {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}

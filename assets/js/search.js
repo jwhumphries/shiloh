@@ -32,15 +32,18 @@
       fuse = new Fuse(searchData, {
         keys: [
           { name: 'title', weight: 2.0 },
-          { name: 'content', weight: 0.2 },
-          { name: 'tags', weight: 1.0 },
+          { name: 'content', weight: 0.5 },
+          { name: 'tags', weight: 1.5 },
           { name: 'categories', weight: 1.0 }
         ],
-        threshold: 0.4,
+        threshold: 0.3,
         includeScore: true,
         includeMatches: true,
-        minMatchCharLength: 2,
-        ignoreLocation: true
+        minMatchCharLength: 3,
+        ignoreLocation: true,
+        useExtendedSearch: false,
+        findAllMatches: false,
+        distance: 100
       });
     } catch (error) {
       console.error('Failed to load search index:', error);
@@ -50,45 +53,31 @@
     }
   }
 
-  function highlightMatches(text, matches) {
-    if (!matches || matches.length === 0) return text;
-
-    const indices = matches.flatMap(m => m.indices);
-    if (indices.length === 0) return text;
-
-    indices.sort((a, b) => a[0] - b[0]);
-
-    let result = '';
-    let lastIndex = 0;
-
-    indices.forEach(([start, end]) => {
-      if (start >= lastIndex) {
-        result += text.substring(lastIndex, start);
-        result += `<mark class="bg-secondary/30 text-secondary-content px-0.5 rounded">${text.substring(start, end + 1)}</mark>`;
-        lastIndex = end + 1;
-      }
-    });
-
-    result += text.substring(lastIndex);
-    return result;
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
   }
 
   function getContentPreview(content, matches) {
     if (!matches || matches.length === 0) {
-      return content.substring(0, 150);
+      return { text: content.substring(0, 150), offset: 0 };
     }
 
     const contentMatches = matches.find(m => m.key === 'content');
     if (!contentMatches || !contentMatches.indices[0]) {
-      return content.substring(0, 150);
+      return { text: content.substring(0, 150), offset: 0 };
     }
 
     const firstMatchStart = contentMatches.indices[0][0];
     const start = Math.max(0, firstMatchStart - 75);
-    const end = Math.min(content.length, firstMatchStart + 75);
+    const end = Math.min(content.length, firstMatchStart + 150);
     const preview = content.substring(start, end);
 
-    return (start > 0 ? '...' : '') + preview + (end < content.length ? '...' : '');
+    return {
+      text: (start > 0 ? '...' : '') + preview + (end < content.length ? '...' : ''),
+      offset: start - (start > 0 ? 3 : 0)
+    };
   }
 
   function displayResults(results) {
@@ -104,21 +93,16 @@
       const doc = result.item;
       const matches = result.matches || [];
 
-      const titleMatches = matches.filter(m => m.key === 'title');
-      const highlightedTitle = highlightMatches(doc.title, titleMatches);
-
-      const contentPreview = getContentPreview(doc.content, matches);
-      const contentMatches = matches.filter(m => m.key === 'content');
-      const highlightedContent = highlightMatches(contentPreview, contentMatches);
+      const { text: previewText } = getContentPreview(doc.content, matches);
 
       const resultElement = document.createElement('div');
       resultElement.className = 'card bg-base-200 hover:bg-base-300 transition-colors';
       resultElement.innerHTML = `
         <div class="card-body p-4">
           <h4 class="card-title text-base">
-            <a href="${doc.uri}" class="link link-hover text-primary">${highlightedTitle}</a>
+            <a href="${doc.uri}" class="link link-hover text-primary">${escapeHtml(doc.title)}</a>
           </h4>
-          <p class="text-sm text-base-content/70 line-clamp-2">${highlightedContent}</p>
+          <p class="text-sm text-base-content/70 line-clamp-2">${escapeHtml(previewText)}</p>
           ${doc.tags && doc.tags.length > 0 ? `
             <div class="flex gap-2 mt-2 flex-wrap">
               ${doc.tags.slice(0, 3).map(tag => `<span class="badge badge-sm badge-primary">${tag}</span>`).join('')}
@@ -131,7 +115,7 @@
   }
 
   function performSearch(query) {
-    if (!fuse || query.length < 2) {
+    if (!fuse || query.length < 3) {
       searchResultsList.innerHTML = '';
       searchNoResults.classList.add('hidden');
       return;
