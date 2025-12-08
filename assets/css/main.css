@@ -174,25 +174,44 @@
 
   & ul {
     list-style-type: disc;
-    list-style-position: inside;
+    list-style-position: outside;
     margin-top: 1.25em;
     margin-bottom: 1.25em;
+    padding-left: 1.5em;
   }
 
   & ol {
     list-style-type: decimal;
-    list-style-position: inside;
+    list-style-position: outside;
     margin-top: 1.25em;
     margin-bottom: 1.25em;
+    padding-left: 1.5em;
   }
 
   & li {
     margin-bottom: 0.5rem;
     line-height: 1.65;
+    padding-left: 0.25em;
   }
 
   & li::marker {
     color: var(--color-primary);
+  }
+
+  & ul ul,
+  & ul ol,
+  & ol ul,
+  & ol ol {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  & :is(ul, ol) ul {
+    list-style-type: circle;
+  }
+
+  & :is(ul, ol) :is(ul, ol) ul {
+    list-style-type: square;
   }
 
   & li:has(> input[type="checkbox"]) {
@@ -303,6 +322,16 @@
 }
 
 
+
+.text-center .article-prose ul,
+.text-center .article-prose ol {
+  list-style-position: inside;
+  padding-left: 0;
+}
+
+.text-center .article-prose li {
+  padding-left: 0;
+}
 
 @utility page-container {
   width: 100%;
