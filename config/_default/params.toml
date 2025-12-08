@@ -23,6 +23,9 @@ autoSwitchAppearance = true
 # Default theme color for browser chrome
 defaultThemeColor = "#ffffff"
 
+# Font family: "fira" (Fira Code) or "prata" (Prata)
+font = "fira"
+
 # ------------------------------------------------------------------------------
 # Feature Flags
 # ------------------------------------------------------------------------------
