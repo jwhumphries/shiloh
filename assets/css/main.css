@@ -34,10 +34,10 @@
   --color-error: oklch(55% 0.14 25);
   --color-error-content: oklch(0.0% 0.020 25.000);
   --radius-selector: 1rem;
-  --radius-field: 0.25rem;
-  --radius-box: 0.5rem;
-  --size-selector: 0.21875rem;
-  --size-field: 0.28125rem;
+  --radius-field: 1rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
   --border: 1px;
   --depth: 1;
   --noise: 1;
@@ -69,10 +69,10 @@
   --color-error: oklch(65% 0.16 25);
   --color-error-content: oklch(18% 0.01 25);
   --radius-selector: 1rem;
-  --radius-field: 0.25rem;
-  --radius-box: 0.5rem;
-  --size-selector: 0.21875rem;
-  --size-field: 0.28125rem;
+  --radius-field: 1rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
   --border: 1px;
   --depth: 1;
   --noise: 1;
@@ -218,7 +218,7 @@
     list-style: none;
   }
 
-  & li > input[type="checkbox"] {
+  & li>input[type="checkbox"] {
     appearance: none;
     width: 1.125em;
     height: 1.125em;

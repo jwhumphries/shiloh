@@ -100,7 +100,7 @@
       resultElement.innerHTML = `
         <div class="card-body p-4">
           <h4 class="card-title text-base">
-            <a href="${doc.uri}" class="link link-hover text-primary">${escapeHtml(doc.title)}</a>
+            <a href="${doc.uri}" class="link link-animated text-primary">${escapeHtml(doc.title)}</a>
           </h4>
           <p class="text-sm text-base-content/70 line-clamp-2">${escapeHtml(previewText)}</p>
           ${doc.tags && doc.tags.length > 0 ? `

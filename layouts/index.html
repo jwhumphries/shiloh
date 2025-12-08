@@ -26,14 +26,6 @@
           <h2 class="text-3xl font-bold">
             {{ i18n "homepage.recent_posts" | default "Recent Posts" }}
           </h2>
-          {{- if gt (len $pages) $limit }}
-            <a href="{{ "/posts" | relURL }}" class="btn btn-ghost btn-sm gap-2">
-              {{ i18n "homepage.view_all" | default "View all" }}
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
-          {{- end }}
         </div>
 
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

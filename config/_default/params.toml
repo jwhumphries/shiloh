@@ -98,6 +98,12 @@ fingerprintAlgorithm = "sha256"
   # Show copyright notice
   showCopyright = true
 
+  # Show attribution (Powered by Hugo & Shiloh)
+  showAttribution = true
+
+  # Show author social links
+  showLinks = true
+
   # Show appearance switcher (light/dark toggle)
   showAppearanceSwitcher = true
 
