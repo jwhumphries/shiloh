@@ -1,6 +1,6 @@
 baseURL: https://example.org/
 languageCode: en-us
-title: Shiloh Theme Example
+title: Shiloh
 theme: shiloh
 
 pagination:
@@ -24,21 +24,22 @@ params:
   enableImageWebp: true
   enableQuicklink: true
 
-  description: "A beautiful example site showcasing the Shiloh Hugo theme"
+  description: "A modern Hugo theme built with Tailwind CSS v4, daisyUI, and FlyonUI"
   keywords:
     - hugo
     - theme
     - shiloh
     - tailwindcss
     - daisyui
+    - flyonui
 
   mainSections:
-    - posts
+    - samples
 
   author:
-    name: "John Doe"
-    headline: "Web Developer & Blogger"
-    bio: "Passionate about creating beautiful and functional websites"
+    name: "Shiloh Theme"
+    headline: "Modern Hugo Theming"
+    bio: "Built with Tailwind CSS v4, daisyUI v5, and FlyonUI v2"
 
   header: {}
 
@@ -65,8 +66,8 @@ params:
 
   list:
     showBreadcrumbs: false
-    showSummary: false
-    groupByYear: true
+    showSummary: true
+    groupByYear: false
     paginationWidth: 1
 
   taxonomy:
@@ -74,23 +75,17 @@ params:
 
 menus:
   main:
-    - name: Home
-      pageRef: /
+    - name: Docs
+      pageRef: /docs
       weight: 10
-    - name: Posts
-      pageRef: /posts
+    - name: Samples
+      pageRef: /samples
       weight: 20
     - name: About
       pageRef: /about
       weight: 30
 
-  footer:
-    - name: Privacy
-      url: /privacy
-      weight: 10
-    - name: Terms
-      url: /terms
-      weight: 20
+  footer: []
 
 taxonomies:
   tag: tags
