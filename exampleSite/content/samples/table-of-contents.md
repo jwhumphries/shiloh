@@ -104,3 +104,34 @@ The scroll spy implementation uses the Intersection Observer API for efficient s
 This section adds more content to demonstrate the TOC with a longer article. The 400-word threshold ensures the TOC only appears when it provides value.
 
 For very short articles, the TOC would be redundant. The automatic threshold handles this gracefully.
+
+## Configuration Reference
+
+The table of contents behavior can be customized through several configuration options in your site configuration file.
+
+### Markup Settings
+
+In `config/_default/markup.toml`, you can control which heading levels appear in the TOC:
+
+```toml
+[tableOfContents]
+  startLevel = 2
+  endLevel = 3
+  ordered = false
+```
+
+The `startLevel` determines the minimum heading level to include. Setting it to 2 means h1 headings are excluded, which is typical since h1 is usually reserved for the page title.
+
+The `endLevel` determines the maximum heading level. Setting it to 3 includes h2 and h3 headings but excludes h4 and below.
+
+### Theme Parameters
+
+The theme provides additional control through `params.article.showTableOfContents`. When set to true globally, all articles will show a TOC if they exceed the word threshold.
+
+Individual pages can override this setting using front matter, allowing you to disable the TOC on specific pages even if they have enough content to trigger it.
+
+## Performance Considerations
+
+The table of contents is generated at build time by Hugo, so there is no runtime performance impact. The scroll spy JavaScript uses the Intersection Observer API, which is highly optimized and does not cause layout thrashing.
+
+The sticky positioning uses CSS `position: sticky`, which is hardware-accelerated in modern browsers and performs well even during rapid scrolling.
