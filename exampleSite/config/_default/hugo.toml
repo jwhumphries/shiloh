@@ -1,0 +1,101 @@
+baseURL = "https://example.org/"
+languageCode = "en-us"
+title = "Shiloh"
+theme = "shiloh"
+
+enableRobotsTXT = true
+
+[pagination]
+  pagerSize = 10
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[privacy]
+  [privacy.vimeo]
+    enableDNT = true
+  [privacy.x]
+    enableDNT = true
+  [privacy.youtube]
+    privacyEnhanced = true
+
+[services]
+  [services.x]
+    disableInlineCSS = true
+
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = "0.152.0"
+
+[params]
+  colorScheme = "shiloh"
+  defaultAppearance = "light"
+  autoSwitchAppearance = true
+  defaultThemeColor = "#ffffff"
+
+  enableSearch = true
+  enableCodeCopy = true
+  enableImageLazyLoading = true
+  enableImageWebp = true
+  enableQuicklink = true
+
+  description = "A modern Hugo theme built with Tailwind CSS v4, daisyUI, and FlyonUI"
+  keywords = ["hugo", "theme", "shiloh", "tailwindcss", "daisyui", "flyonui"]
+
+  mainSections = ["samples"]
+
+  [params.author]
+    name = "Shiloh Theme"
+    headline = "Modern Hugo Theming"
+    bio = "Built with Tailwind CSS v4, daisyUI v5, and FlyonUI v2"
+
+  [params.header]
+
+  [params.footer]
+    showCopyright = true
+    showAppearanceSwitcher = true
+    showScrollToTop = true
+
+  [params.homepage]
+    showRecent = true
+    recentLimit = 6
+
+  [params.article]
+    showDate = true
+    showDateUpdated = false
+    showAuthor = true
+    showDraftLabel = true
+    showHeadingAnchors = true
+    showPagination = true
+    showReadingTime = true
+    showTableOfContents = true
+    showTaxonomies = true
+    showWordCount = false
+
+  [params.list]
+    showBreadcrumbs = false
+    showSummary = true
+    groupByYear = false
+    paginationWidth = 1
+
+  [params.taxonomy]
+    showTermCount = true
+
+[menus]
+  [[menus.main]]
+    name = "Docs"
+    pageRef = "/docs"
+    weight = 10
+  [[menus.main]]
+    name = "Samples"
+    pageRef = "/samples"
+    weight = 20
+  [[menus.main]]
+    name = "About"
+    pageRef = "/about"
+    weight = 30
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
