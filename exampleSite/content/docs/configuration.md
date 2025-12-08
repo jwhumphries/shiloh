@@ -5,7 +5,18 @@ weight: 20
 description: "All available theme parameters."
 ---
 
-All parameters go in `params` section of your site configuration.
+All parameters go in `params` section of your site configuration. Shiloh uses a modular configuration structure in `config/_default/`.
+
+## Configuration Files
+
+| File | Purpose |
+|------|---------|
+| `hugo.toml` | Core Hugo settings (outputs, pagination, privacy) |
+| `params.toml` | Theme parameters (all options below) |
+| `languages.en.toml` | Language and site title settings |
+| `menus.en.toml` | Navigation menus |
+| `markup.toml` | Markdown rendering and code highlighting |
+| `module.toml` | Hugo module configuration |
 
 ## Appearance
 
@@ -15,6 +26,15 @@ All parameters go in `params` section of your site configuration.
 | `defaultAppearance` | string | `"light"` | Initial theme: `"light"` or `"dark"` |
 | `autoSwitchAppearance` | boolean | `true` | Respect system preference |
 | `defaultThemeColor` | string | `"#ffffff"` | Browser chrome color |
+
+### Theme Colors
+
+Shiloh includes two custom daisyUI themes defined in `assets/css/main.css`:
+
+- `shiloh` - Light theme (default)
+- `shiloh-dark` - Dark theme
+
+Both themes use OKLCH color space for perceptually uniform colors. The color palette includes primary, secondary, accent, neutral, and semantic colors (info, success, warning, error).
 
 ## Features
 
@@ -50,6 +70,8 @@ Configure in `params.author`:
 
 ### Social Links
 
+Supported platforms: `email`, `github`, `x-twitter`, `linkedin`, `mastodon`, `bluesky`, `instagram`, `youtube`, `facebook`, `threads`, `discord`, `reddit`, `telegram`, `rss`
+
 ```yaml
 author:
   links:
@@ -70,6 +92,14 @@ Configure in `params.header`:
 | `logo` | string | Logo image path |
 | `logoDark` | string | Dark mode logo path |
 
+The header includes:
+
+- Site logo or title
+- Main navigation menu
+- Search button (if `enableSearch: true`)
+- Theme toggle button
+- Mobile hamburger menu (screens < 1024px)
+
 ## Footer
 
 Configure in `params.footer`:
@@ -77,8 +107,9 @@ Configure in `params.footer`:
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `showCopyright` | boolean | `true` | Show copyright notice |
-| `showAppearanceSwitcher` | boolean | `true` | Show theme toggle |
+| `showAppearanceSwitcher` | boolean | `true` | Show theme toggle in header |
 | `showScrollToTop` | boolean | `true` | Show scroll-to-top button |
+| `showSocialLinks` | boolean | `true` | Show author social links |
 
 ## Homepage
 
@@ -161,3 +192,51 @@ verification:
   pinterest: "verification-code"
   yandex: "verification-code"
 ```
+
+## Menus
+
+Configure navigation in `menus.en.toml`:
+
+```toml
+[[main]]
+  name = "Posts"
+  pageRef = "posts"
+  weight = 10
+
+[[main]]
+  name = "About"
+  pageRef = "about"
+  weight = 20
+
+[[main]]
+  identifier = "search"
+  weight = 99
+
+[[footer]]
+  name = "Privacy"
+  url = "/privacy"
+  weight = 10
+```
+
+The `search` identifier adds a search button to the navbar (requires `enableSearch: true`).
+
+## Markup Settings
+
+Configure in `markup.toml`:
+
+```toml
+[highlight]
+  noClasses = false
+  lineNos = false
+  lineNumbersInTable = true
+
+[goldmark.renderer]
+  unsafe = true
+
+[tableOfContents]
+  startLevel = 2
+  endLevel = 3
+  ordered = false
+```
+
+The `unsafe = true` setting allows raw HTML in markdown content.
