@@ -4,7 +4,6 @@ title = "Shiloh"
 theme = "shiloh"
 
 enableRobotsTXT = true
-summaryLength = 0
 
 [pagination]
   pagerSize = 10
