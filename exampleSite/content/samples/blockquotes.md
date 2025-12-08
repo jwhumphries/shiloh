@@ -17,7 +17,12 @@ tags: ["markdown", "quotes"]
 
 ## Blockquote with Attribution
 
-Use markdown attributes to add author attribution:
+Add author attribution using Hugo's [markdown attributes](https://gohugo.io/content-management/markdown-attributes/) syntax. Place the attribute block immediately after the blockquote with no blank line:
+
+```markdown
+> Your quote text here.
+{author="Author Name"}
+```
 
 > Any sufficiently advanced technology is indistinguishable from magic.
 {author="Arthur C. Clarke"}
