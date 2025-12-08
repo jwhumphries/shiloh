@@ -2,6 +2,6 @@
   src="{{ .Destination | safeURL }}"
   alt="{{ .Text }}"
   {{ with .Title }}title="{{ . }}"{{ end }}
-  {{ if .Pagesite.Params.enableImageLazyLoading | default true }}loading="lazy"{{ end }}
+  {{ if .Page.Site.Params.enableImageLazyLoading | default true }}loading="lazy"{{ end }}
   class="mx-auto rounded-lg"
 />
