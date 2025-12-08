@@ -8,11 +8,11 @@ Shiloh was heavily inspired by the [Congo](https://github.com/jpanther/congo) th
 
 ## Features
 
-- **Dark mode** with system preference detection
-- **Search** powered by Fuse.js
-- **Responsive** mobile-first design
-- **Table of contents** for long articles
-- **Code highlighting** with copy button
-- **Image optimization** with WebP and lazy loading
-- **Fast navigation** with Quicklink prefetching
-- **OKLCH colors** for perceptually uniform theming
+**Dark mode** 🌕 with system preference detection  
+**Search** 🔎 powered by Fuse.js  
+**Responsive** 📱 mobile-first design  
+**Table of contents** 📕 for long articles  
+**Code highlighting** 💻 with copy button  
+**Image optimization** 🌄 with WebP and lazy loading  
+**Fast navigation** ⚡️ with Quicklink prefetching  
+**OKLCH colors** 🎨 for perceptually uniform theming  
