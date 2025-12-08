@@ -185,14 +185,6 @@
     line-height: 1.65;
   }
 
-  & ul {
-    list-style-type: disc;
-  }
-
-  & ol {
-    list-style-type: decimal;
-  }
-
   & li::marker {
     color: var(--color-primary);
   }
