@@ -1,7 +1,9 @@
 <!doctype html>
+{{- $font := site.Params.font | default "fira" -}}
+{{- $fontClass := cond (eq $font "prata") "font-[Prata]" "font-[Fira_Code]" -}}
 <html lang="{{ site.Language.LanguageCode | default "en" }}" dir="{{ site.Language.LanguageDirection | default "ltr" }}">
   {{- partial "head.html" . -}}
-  <body class="flex min-h-screen flex-col bg-base-100 text-base-content antialiased">
+  <body class="flex min-h-screen flex-col bg-base-100 text-base-content antialiased {{ $fontClass }}">
     {{- partial "theme-init.html" . -}}
 
     <a href="#main-content" class="btn btn-primary sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50">

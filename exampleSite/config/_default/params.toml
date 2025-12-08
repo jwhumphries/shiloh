@@ -1,0 +1,18 @@
+[author]
+  name = "Shiloh Theme"
+  links = [
+    { github = "https://github.com/jwhumphries/shiloh" },
+  ]
+
+[footer]
+  # Show copyright notice (default: true)
+  showCopyright = true
+
+  # Show attribution "Powered by Hugo & Shiloh" (default: true)
+  showAttribution = true
+
+  # Show author social links (default: true)
+  showLinks = true
+
+  # Show appearance switcher / theme toggle (default: true)
+  showAppearanceSwitcher = true

@@ -34,10 +34,10 @@
   --color-error: oklch(55% 0.14 25);
   --color-error-content: oklch(0.0% 0.020 25.000);
   --radius-selector: 1rem;
-  --radius-field: 0.25rem;
-  --radius-box: 0.5rem;
-  --size-selector: 0.21875rem;
-  --size-field: 0.28125rem;
+  --radius-field: 1rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
   --border: 1px;
   --depth: 1;
   --noise: 1;
@@ -69,10 +69,10 @@
   --color-error: oklch(65% 0.16 25);
   --color-error-content: oklch(18% 0.01 25);
   --radius-selector: 1rem;
-  --radius-field: 0.25rem;
-  --radius-box: 0.5rem;
-  --size-selector: 0.21875rem;
-  --size-field: 0.28125rem;
+  --radius-field: 1rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
   --border: 1px;
   --depth: 1;
   --noise: 1;
@@ -129,47 +129,53 @@
   & h5,
   & h6 {
     font-weight: 600;
-    line-height: 1.25;
-    margin-top: 1.75em;
-    margin-bottom: 0.75em;
     scroll-margin-top: 6rem;
   }
 
   & h1 {
-    font-size: 2.25rem;
+    font-size: 2.25em;
+    margin-top: 0;
+    margin-bottom: 0.9em;
+    line-height: 1.1;
   }
 
   & h2 {
-    font-size: 1.875rem;
+    font-size: 1.5em;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    line-height: 1.33;
   }
 
   & h3 {
-    font-size: 1.5rem;
+    font-size: 1.25em;
+    margin-top: 1.6em;
+    margin-bottom: 0.6em;
+    line-height: 1.6;
   }
 
   & h4 {
-    font-size: 1.25rem;
+    font-size: 1em;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.5;
   }
 
   & h5 {
-    font-size: 1.125rem;
+    font-size: 1em;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.5;
   }
 
   & h6 {
-    font-size: 1rem;
+    font-size: 1em;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.5;
   }
 
-  & a {
-    color: oklch(from var(--color-primary) calc(l - 0.1) c h);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
-    transition: color 0.2s ease;
-
-    &:hover {
-      color: var(--color-primary);
-      text-decoration-thickness: 2px;
-    }
+  & strong {
+    color: var(--color-secondary);
   }
 
   & ul {
@@ -218,7 +224,7 @@
     list-style: none;
   }
 
-  & li > input[type="checkbox"] {
+  & li>input[type="checkbox"] {
     appearance: none;
     width: 1.125em;
     height: 1.125em;
