@@ -1,0 +1,5 @@
+[author]
+  name = "Shiloh Theme"
+  links = [
+    { github = "https://github.com/jwhumphries/shiloh" },
+  ]

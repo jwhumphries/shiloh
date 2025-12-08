@@ -15,26 +15,27 @@
       {{- /* Author Social Links */ -}}
       {{- with site.Params.author.links }}
         {{- $socialPlatforms := dict
-          "email" (dict "icon" "tabler:mail" "label" "Email")
-          "github" (dict "icon" "tabler:brand-github" "label" "GitHub")
-          "twitter" (dict "icon" "tabler:brand-x" "label" "Twitter")
-          "x-twitter" (dict "icon" "tabler:brand-x" "label" "X (Twitter)")
-          "linkedin" (dict "icon" "tabler:brand-linkedin" "label" "LinkedIn")
-          "mastodon" (dict "icon" "tabler:brand-mastodon" "label" "Mastodon")
-          "bluesky" (dict "icon" "tabler:brand-bluesky" "label" "Bluesky")
+          "email" (dict "icon" "icon-[tabler--mail]" "label" "Email")
+          "github" (dict "icon" "icon-[tabler--brand-github]" "label" "GitHub")
+          "twitter" (dict "icon" "icon-[tabler--brand-x]" "label" "Twitter")
+          "x-twitter" (dict "icon" "icon-[tabler--brand-x]" "label" "X (Twitter)")
+          "linkedin" (dict "icon" "icon-[tabler--brand-linkedin]" "label" "LinkedIn")
+          "mastodon" (dict "icon" "icon-[tabler--brand-mastodon]" "label" "Mastodon")
+          "bluesky" (dict "icon" "icon-[tabler--brand-bluesky]" "label" "Bluesky")
         }}
         <nav class="flex gap-4">
           {{- range . }}
+            {{- $link := . }}
             {{- range $platform, $config := $socialPlatforms }}
-              {{- $url := index $ $platform }}
+              {{- $url := index $link $platform }}
               {{- if $url }}
                 <a
                   href="{{ $url }}"
-                  class="btn btn-ghost btn-circle btn-sm hover:text-primary transition-colors"
+                  class="btn btn-circle btn-sm bg-base-100 text-secondary hover:text-primary transition-colors"
                   aria-label="{{ $config.label }}"
                   {{- if not (hasPrefix $url "mailto:") }} target="_blank" rel="noopener noreferrer"{{ end }}
                 >
-                  <span class="iconify text-xl" data-icon="{{ $config.icon }}"></span>
+                  <span class="{{ $config.icon }} text-xl"></span>
                 </a>
               {{- end }}
             {{- end }}
@@ -53,15 +54,17 @@
         </aside>
       {{- end }}
 
-      {{- /* Powered by Hugo */ -}}
-      <aside class="text-base-content/50 text-xs">
-        <p>
-          {{ i18n "footer.powered_by" | default "Powered by" }}
-          <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" class="link link-hover text-primary">Hugo</a>
-          {{ i18n "footer.and" | default "&" }}
-          <a href="https://github.com/{{ site.Params.github }}/shiloh" target="_blank" rel="noopener noreferrer" class="link link-hover text-primary">Shiloh</a>
-        </p>
-      </aside>
+      {{- /* Powered by Hugo & Shiloh */ -}}
+      {{- if site.Params.footer.showAttribution | default true }}
+        <aside class="text-base-content/50 text-xs">
+          <p>
+            {{ i18n "footer.powered_by" | default "Powered by" }}
+            <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" class="link link-hover text-primary">Hugo</a>
+            {{ i18n "footer.and" | default "&" }}
+            <a href="https://shiloh.johnhumphries.dev" target="_blank" rel="noopener noreferrer" class="link link-hover text-primary">Shiloh</a>
+          </p>
+        </aside>
+      {{- end }}
     </div>
   </div>
 </footer>
