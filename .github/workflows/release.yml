@@ -1,0 +1,59 @@
+name: Release Pipeline
+on:
+  push:
+    branches:
+      - release
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build_and_update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v6
+
+      - name: Install Task
+        run: |
+          curl -1sLf 'https://dl.cloudsmith.io/public/task/task/setup.deb.sh' | sudo -E bash
+          sudo apt-get install task
+
+      - name: Build And Release
+        run: task docs
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'exampleSite/public/'
+
+      - name: Commit and Push CSS
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if [[ -n $(git status --porcelain assets/css/compiled/main.css) ]]; then
+            echo "CSS changes detected. Committing..."
+            git add assets/css/compiled/main.css
+            git commit -m "chore(release): update compiled css [skip ci]"
+            git push origin release
+          else
+            echo "No changes to 'assets/css/compiled/main.css'."
+          fi
+
+  deploy_docs:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build_and_update
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
