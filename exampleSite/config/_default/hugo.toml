@@ -1,4 +1,4 @@
-baseURL = "https://example.org/"
+baseURL = "https://shiloh.johnhumphries.dev/"
 languageCode = "en-us"
 title = "Shiloh"
 theme = "shiloh"
