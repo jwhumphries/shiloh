@@ -54,8 +54,10 @@ tasks:
     desc: Start development container and mount files
     cmds:
       - echo "🎨 Starting Shiloh development environment in Docker..."
+      - echo "🛠️ Building dev image.."
       - task: build-dev
       - defer: { task: clean-js-files }
+      - echo "💻 Starting dev image.."
       - docker run --rm -it -p 1313:1313 -v "{{.USER_WORKING_DIR}}:/{{.NAME}}" {{.DEV_IMAGE}}
     silent: true
   build-releaser:
@@ -69,9 +71,11 @@ tasks:
     desc: Build the theme
     cmds:
       - echo "🏭 Building Shiloh theme..."
+      - echo "🛠️ Building releaser image.."
       - task: build-releaser
+      - echo "📦 Running releaser image..."
       - docker run --rm -v "{{.USER_WORKING_DIR}}:/{{.NAME}}" {{.RELEASE_IMAGE}}
-      - echo "CSS compiled!"
+      - echo "💄 CSS compiled!"
     silent: true
   build-docs:
     internal: true
@@ -84,7 +88,9 @@ tasks:
     desc: Build the documentation exampleSite
     cmds:
       - echo "🏭 Building the docs site..."
+      - echo "🛠️ Building docs image.."
       - task: build-docs
+      - echo "📦 Running docs image..."
       - docker run --rm -v "{{.USER_WORKING_DIR}}:/{{.NAME}}" {{.DOCS_IMAGE}}
       - echo "All done! Site is generated in public/"
     silent: true

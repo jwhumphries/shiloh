@@ -41,6 +41,7 @@ ENTRYPOINT ["/release.sh"]
 FROM hugo AS docs
 ARG THEME_NAME=shiloh
 ENV THEME_NAME=${THEME_NAME}
+USER root:root
 COPY --from=builder /release/assets/css/compiled /release/assets/css/compiled
 WORKDIR /${THEME_NAME}
 COPY --chmod=755 scripts/docker/docs.sh /docs.sh
