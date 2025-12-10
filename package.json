@@ -1,7 +1,7 @@
 {
-  "name": "shiloh-theme",
+  "name": "shiloh",
   "version": "0.1.0",
-  "description": "A custom Hugo theme built with Tailwind CSS v4 and FlyonUI",
+  "description": "A custom Hugo theme built with Tailwind CSS v4, daisyUI, and FlyonUI",
   "private": true,
   "scripts": {
     "init": "tailwindcss -i ./assets/css/main.css -o ./assets/css/compiled/main.css",

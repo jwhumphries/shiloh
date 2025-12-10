@@ -38,7 +38,7 @@ Shiloh prioritizes:
 
 ## Inspiration
 
-This theme was heavily inspired by [Congo](https://github.com/jpanther/congo), an excellent Hugo theme by James Panther. Shiloh shares many of Congo's configuration patterns while updating the underlying CSS framework to Tailwind v4, daisyUI v5, and adding enhanced accessibility features.
+This theme was heavily inspired by [Congo](https://github.com/jpanther/congo), an excellent Hugo theme by James Panther. Shiloh shares many of Congo's configuration patterns while updating the underlying CSS framework to Tailwind v4, daisyUI v5, FlyonUI, and adding enhanced accessibility features.
 
 ## License
 

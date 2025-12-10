@@ -77,22 +77,6 @@ Shiloh uses OKLCH color space for perceptually uniform colors. This means:
 - Lightness values are visually accurate
 - Easier to create harmonious color schemes
 
-### Color Palette
-
-Each theme includes:
-
-| Color | Usage |
-|-------|-------|
-| `primary` | Links, active states, primary buttons |
-| `secondary` | Supporting UI elements |
-| `accent` | Highlights, decorations |
-| `neutral` | Text on colored backgrounds |
-| `base-100/200/300` | Background layers |
-| `info` | Informational elements |
-| `success` | Success states |
-| `warning` | Warning states |
-| `error` | Error states |
-
 ## Syntax Highlighting
 
 Code blocks automatically adapt to the current theme. The syntax highlighting colors are defined to work with daisyUI color variables:

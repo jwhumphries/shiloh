@@ -10,15 +10,13 @@ A modern [Hugo](https://gohugo.io/) theme built with [Tailwind CSS v4](https://t
 
 - **Dark mode** with automatic system preference detection and manual toggle
 - **OKLCH color space** for perceptually uniform, modern color handling
-- **Two custom themes** (shiloh light and shiloh-dark) with full color palette
+- **Two custom themes** with full color palette
 - **Configurable fonts** supporting Fira Code and Prata typefaces
-- **Responsive design** with mobile-first approach
 
 ### Content & Navigation
 
 - **Full-text search** powered by Fuse.js with weighted results
 - **Table of contents** with scroll spy highlighting for long articles
-- **Breadcrumb navigation** on list and taxonomy pages
 - **Pagination** with smart ellipsis and configurable window size
 - **Taxonomy support** for tags and categories with term counts
 - **Previous/Next article** navigation on single pages
@@ -46,10 +44,3 @@ A modern [Hugo](https://gohugo.io/) theme built with [Tailwind CSS v4](https://t
 - **Semantic HTML** with proper landmarks and ARIA labels
 - **Skip-to-content link** for keyboard navigation
 - **Focus indicators** on all interactive elements
-
-### Developer Experience
-
-- **Docker-based development** with hot reloading
-- **Taskfile commands** for build automation
-- **Page-level overrides** for all theme parameters
-- **Modular configuration** split across multiple files
