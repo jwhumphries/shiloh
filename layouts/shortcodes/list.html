@@ -1,0 +1,12 @@
+{{- $align := .Get 0 | default "left" -}}
+{{- $justifyClass := "justify-start" -}}
+{{- if eq $align "center" }}
+  {{- $justifyClass = "justify-center" -}}
+{{- else if eq $align "right" }}
+  {{- $justifyClass = "justify-end" -}}
+{{- end -}}
+<div class="flex {{ $justifyClass }}">
+  <div class="text-left">
+    {{- .Inner | .Page.RenderString -}}
+  </div>
+</div>

@@ -14,39 +14,49 @@ Shiloh was named after a dog
 
 ### Appearance
 
+{{< list center >}}
 - **Dark mode** with automatic system preference detection and manual toggle
 - **OKLCH color space** for perceptually uniform, modern color handling
 - **Two custom themes** with full color palette
 - **Configurable fonts** supporting Fira Code and Prata typefaces
+{{< /list >}}
 
 ### Content & Navigation
 
+{{< list center >}}
 - **Full-text search** powered by Fuse.js with weighted results
 - **Table of contents** with scroll spy highlighting for long articles
 - **Pagination** with smart ellipsis and configurable window size
 - **Taxonomy support** for tags and categories with term counts
 - **Previous/Next article** navigation on single pages
+{{< /list >}}
 
 ### Code & Typography
 
+{{< list center >}}
 - **Syntax highlighting** via Chroma with theme-aware colors
 - **Code copy button** on all fenced code blocks
 - **Custom typography** system with article prose styling
 - **Heading anchors** for deep linking to sections
 - **Blockquote attribution** support via markdown attributes
+{{< /list >}}
 
 ### Media & Performance
 
+{{< list center >}}
 - **Image optimization** with WebP conversion and lazy loading
 - **Quicklink prefetching** for instant page loads
 - **Responsive images** with proper aspect ratios
 - **Featured images** on article cards
+{{< /list >}}
 
 ### SEO & Accessibility
 
+{{< list center >}}
 - **Open Graph and Twitter Cards** for social sharing
 - **JSON-LD structured data** for rich search results
 - **Search engine verification** (Google, Bing, Pinterest, Yandex)
 - **Semantic HTML** with proper landmarks and ARIA labels
 - **Skip-to-content link** for keyboard navigation
 - **Focus indicators** on all interactive elements
+{{< /list >}}
