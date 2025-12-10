@@ -1,7 +1,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="{{ site.Params.defaultThemeColor | default " #ffffff" }}" />
+  <meta name="theme-color" content="{{ site.Params.defaultThemeColor | default "#ffffff" }}" />
 
   {{- /* Title */ -}}
   {{- if .IsHome -}}
@@ -23,7 +23,7 @@
 
   {{- /* Keywords */ -}}
   {{- with site.Params.keywords }}
-  <meta name="keywords" content="{{ delimit . " , " }}" />
+  <meta name="keywords" content="{{ delimit . ", " }}" />
   {{- end }}
 
   {{- /* Author */ -}}
@@ -41,8 +41,8 @@
   {{- end }}
 
   {{- /* Favicon */ -}}
-  <link rel="icon" type="image/x-icon" href="{{ " favicon.ico" | relURL }}" />
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ " apple-touch-icon.png" | relURL }}" />
+  <link rel="icon" type="image/x-icon" href="{{ "favicon.ico" | relURL }}" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ "apple-touch-icon.png" | relURL }}" />
 
   {{- /* Google Fonts */ -}}
   {{- $font := site.Params.font | default "fira" }}
@@ -76,10 +76,10 @@
   {{- if .IsPage }}
   <meta property="og:type" content="article" />
   {{- with .PublishDate }}
-  <meta property="article:published_time" content="{{ .Format " 2006-01-02T15:04:05Z07:00" }}" />
+  <meta property="article:published_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}" />
   {{- end }}
   {{- with .Lastmod }}
-  <meta property="article:modified_time" content="{{ .Format " 2006-01-02T15:04:05Z07:00" }}" />
+  <meta property="article:modified_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}" />
   {{- end }}
   {{- with site.Params.author.name }}
   <meta property="article:author" content="{{ . }}" />
