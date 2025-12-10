@@ -7,17 +7,17 @@ Browse these samples to see how Shiloh renders different content types and markd
 
 ## Typography & Formatting
 
-- [Markdown Basics]({{< ref "markdown-basics" >}}) - Headings, paragraphs, emphasis, and links
-- [Tables and Lists]({{< ref "tables-and-lists" >}}) - Tables, ordered/unordered lists, and task lists
-- [Blockquotes]({{< ref "blockquotes" >}}) - Blockquote styling with attribution support
+- [Markdown Basics](markdown-basics) - Headings, paragraphs, emphasis, and links
+- [Tables and Lists](tables-and-lists) - Tables, ordered/unordered lists, and task lists
+- [Blockquotes](blockquotes) - Blockquote styling with attribution support
 
 ## Code & Media
 
-- [Code Blocks]({{< ref "code-blocks" >}}) - Syntax highlighting for multiple languages
-- [Images]({{< ref "images" >}}) - Image rendering, lazy loading, and featured images
+- [Code Blocks](code-blocks) - Syntax highlighting for multiple languages
+- [Images](images) - Image rendering, lazy loading, and featured images
 
 ## Theme Features
 
-- [Table of Contents]({{< ref "table-of-contents" >}}) - TOC sidebar with scroll spy
-- [Page Options]({{< ref "page-options" >}}) - Front matter options demo
-- [Draft Post]({{< ref "draft-post" >}}) - Draft article behavior
+- [Table of Contents](table-of-contents) - TOC sidebar with scroll spy
+- [Page Options](page-options) - Front matter options demo
+- [Draft Post](draft-post) - Draft article behavior
