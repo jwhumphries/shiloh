@@ -3,6 +3,8 @@ title: "Documentation"
 description: "Learn how to install, configure, and customize the Shiloh theme."
 ---
 
+![Library](library.png)
+
 Complete reference for all theme features and configuration options.
 
 ## Getting Started

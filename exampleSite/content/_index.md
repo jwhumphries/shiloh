@@ -4,6 +4,12 @@ title: "Shiloh"
 
 A modern [Hugo](https://gohugo.io/) theme built with [Tailwind CSS v4](https://tailwindcss.com/), [daisyUI v5](https://daisyui.com/), and [FlyonUI v2](https://flyonui.com/). Shiloh was heavily inspired by the [Congo](https://github.com/jpanther/congo) theme and shares many of its configuration patterns.
 
+{{< lead >}}
+Shiloh was named after a dog
+{{< /lead >}}
+
+![Shiloh](shiloh.png)
+
 ## Core Features
 
 ### Appearance

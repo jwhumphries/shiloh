@@ -13,11 +13,15 @@ Standard markdown image syntax:
 ![Alt text](image.jpg)
 ```
 
+![Desert landscape](desert.png)
+
 ## Image with Title
 
 ```markdown
 ![Alt text](image.jpg "Image title")
 ```
+
+![Forest scene](forest.png "A lush forest")
 
 The title appears on hover.
 
