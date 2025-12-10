@@ -4,7 +4,7 @@
       {{- /* Logo / Site Title */ -}}
       <div class="navbar-start">
         <a href="{{ "/" | relURL }}"
-          class="flex items-center gap-3 text-xl font-bold hover:text-primary transition-colors">
+          class="flex items-center gap-3 text-xl font-bold text-primary hover:text-secondary transition-colors">
           {{- if site.Params.header.logo }}
           <img src="{{ site.Params.header.logo | relURL }}" alt="{{ site.Title }}" class="h-8 w-auto dark:hidden" />
           {{- end }}
@@ -24,7 +24,7 @@
           {{- range site.Menus.main }}
           {{- if not (eq .Params.type "search") }}
           <li>
-            <a href="{{ .URL | relURL }}" class="rounded-btn {{ if $.IsMenuCurrent " main" . }}text-primary
+            <a href="{{ .URL | relURL }}" class="rounded-btn {{ if $.IsMenuCurrent " main" . }}text-secondary
               font-semibold{{ end }}">
               {{ .Name }}
             </a>
@@ -62,7 +62,7 @@
             {{- range site.Menus.main }}
             {{- if not (eq .Params.type "search") }}
             <li>
-              <a href="{{ .URL | relURL }}" class="{{ if $.IsMenuCurrent " main" . }}text-primary font-semibold{{ end
+              <a href="{{ .URL | relURL }}" class="{{ if $.IsMenuCurrent " main" . }}text-secondary font-semibold{{ end
                 }}">
                 {{ .Name }}
               </a>
