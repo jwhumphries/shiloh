@@ -17,10 +17,10 @@
         <p class="text-base-content/50 text-xs">
           {{ i18n "footer.powered_by" | default "Powered by" }}
           <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer"
-            class="link link-animated text-primary">Hugo</a>
+            class="link link-animated text-primary hover:text-secondary transition-colors">Hugo</a>
           {{ i18n "footer.and" | default "&" }}
           <a href="https://shiloh.johnhumphries.dev" target="_blank" rel="noopener noreferrer"
-            class="link link-animated text-primary">Shiloh</a>
+            class="link link-animated text-primary hover:text-secondary transition-colors">Shiloh</a>
         </p>
         {{- end }}
         {{- if site.Params.footer.showCopyright | default true }}
