@@ -4,7 +4,7 @@
       {{- /* Logo / Site Title */ -}}
       <div class="navbar-start">
         <a href="{{ "/" | relURL }}"
-          class="flex items-center gap-3 text-xl font-bold text-primary hover:text-secondary transition-colors">
+          class="flex items-center gap-3 text-xl font-bold">
           {{- if site.Params.header.logo }}
           <img src="{{ site.Params.header.logo | relURL }}" alt="{{ site.Title }}" class="h-8 w-auto dark:hidden" />
           {{- end }}
@@ -13,7 +13,7 @@
             class="h-8 w-auto hidden dark:block" />
           {{- end }}
           {{- if not site.Params.header.logo }}
-          <span>{{ site.Title }}</span>
+          <button class="btn btn-outline btn-primary waves waves-primary hover:text-secondary transition-colors">{{ site.Title }}</button>
           {{- end }}
         </a>
       </div>
@@ -34,7 +34,7 @@
         </ul>
       </div>
 
-      {{- /* Actions: Search + Theme Toggle + Mobile Menu */ -}}
+      {{- /* Actions: Search + Mobile Menu */ -}}
       <div class="navbar-end gap-2">
         {{- /* Search Button */ -}}
         {{- if site.Params.enableSearch | default true }}
