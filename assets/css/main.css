@@ -118,9 +118,9 @@
   default: false;
   prefersdark: false;
   color-scheme: "dark";
-  --color-base-100: oklch(19% 0.02 265);
-  --color-base-200: oklch(14% 0.02 265);
-  --color-base-300: oklch(39.3% 0.053 281.100);
+  --color-base-100: oklch(22% 0.02 265);
+  --color-base-200: oklch(25% 0.02 265);
+  --color-base-300: oklch(35% 0.03 265);
   --color-base-content: oklch(96% 0.010 265);
   --color-primary: oklch(45% 0.16 275);
   --color-primary-content: oklch(98% 0.01 275);
@@ -265,24 +265,17 @@
 
   & ul {
     list-style-type: disc;
-    list-style-position: outside;
-    margin-top: 1.25em;
-    margin-bottom: 1.25em;
-    padding-left: 1.5em;
+    list-style-position: inside;
   }
 
   & ol {
     list-style-type: decimal;
-    list-style-position: outside;
-    margin-top: 1.25em;
-    margin-bottom: 1.25em;
-    padding-left: 1.5em;
+    list-style-position: inside;
   }
 
   & li {
     margin-bottom: 0.5rem;
     line-height: 1.65;
-    padding-left: 0.25em;
   }
 
   & li::marker {
@@ -295,6 +288,7 @@
   & ol ol {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
+    padding-left: 1.5em;
   }
 
   & :is(ul, ol) ul {
