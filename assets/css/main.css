@@ -178,6 +178,21 @@
    CUSTOM UTILITIES
    ============================================================================ */
 
+/* Prose font mode: Fraunces for headings, Lora for body text */
+@utility font-prose {
+  font-family: "Lora", serif;
+
+  & h1,
+  & h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6,
+  & .navbar a {
+    font-family: "Fraunces", serif;
+  }
+}
+
 @utility article-prose {
   max-width: 75ch;
 

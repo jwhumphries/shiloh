@@ -1,6 +1,6 @@
 <!doctype html>
-{{- $font := site.Params.font | default "fira" -}}
-{{- $fontClass := cond (eq $font "prata") "font-[Prata]" "font-[Fira_Code]" -}}
+{{- $font := site.Params.font | default "code" -}}
+{{- $fontClass := cond (eq $font "prose") "font-prose" "font-[Fira_Code]" -}}
 <html lang="{{ site.Language.LanguageCode | default "en" }}" dir="{{ site.Language.LanguageDirection | default "ltr" }}">
   {{- partial "head.html" . -}}
   <body class="flex min-h-screen flex-col bg-base-100 text-base-content antialiased {{ $fontClass }}">
