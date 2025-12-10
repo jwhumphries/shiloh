@@ -1,4 +1,4 @@
-<article class="card bg-base-100 dark:bg-base-200 shadow-md hover:shadow-xl dark:hover:bg-base-300 transition-all border border-base-300">
+<article class="card bg-card shadow-md hover:shadow-xl hover:bg-card-hover transition-all border border-base-300 group">
   <a href="{{ .RelPermalink }}" class="block h-full">
     {{- /* Featured Image */ -}}
     {{- with .Params.images }}
@@ -30,7 +30,7 @@
       {{- end }}
 
       {{- /* Title */ -}}
-      <h2 class="card-title text-lg hover:text-primary transition-colors">
+      <h2 class="card-title text-lg group-hover:text-primary transition-colors">
         {{ .Title | emojify }}
       </h2>
 
