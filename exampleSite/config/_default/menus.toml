@@ -1,0 +1,18 @@
+# ==============================================================================
+# NAVIGATION MENUS
+# ==============================================================================
+
+[[main]]
+  name = "Docs"
+  pageRef = "/docs"
+  weight = 10
+
+[[main]]
+  name = "Samples"
+  pageRef = "/samples"
+  weight = 20
+
+[[main]]
+  name = "About"
+  pageRef = "/about"
+  weight = 30

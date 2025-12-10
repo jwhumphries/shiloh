@@ -1,18 +1,102 @@
+# ==============================================================================
+# EXAMPLE SITE PARAMETERS
+# ==============================================================================
+# These override the theme defaults in config/_default/params.toml
+
+# ------------------------------------------------------------------------------
+# Appearance & Color Scheme
+# ------------------------------------------------------------------------------
+
+colorScheme = "shiloh"
+font = "code"
+defaultAppearance = "light"
+autoSwitchAppearance = true
+defaultThemeColor = "#ffffff"
+
+# ------------------------------------------------------------------------------
+# Feature Flags
+# ------------------------------------------------------------------------------
+
+enableSearch = true
+enableCodeCopy = true
+enableImageLazyLoading = true
+enableImageWebp = true
+enableQuicklink = true
+
+# ------------------------------------------------------------------------------
+# Site Metadata
+# ------------------------------------------------------------------------------
+
+description = "A modern Hugo theme built with Tailwind CSS v4, daisyUI, and FlyonUI"
+keywords = ["hugo", "theme", "shiloh", "tailwindcss", "daisyui", "flyonui"]
+mainSections = ["samples"]
+
+# ------------------------------------------------------------------------------
+# Author Configuration
+# ------------------------------------------------------------------------------
+
 [author]
   name = "Shiloh Theme"
+  headline = "Modern Hugo Theming"
+  bio = "Built with Tailwind CSS v4, daisyUI v5, and FlyonUI v2"
   links = [
     { github = "https://github.com/jwhumphries/shiloh" },
   ]
 
+# ------------------------------------------------------------------------------
+# Header Configuration
+# ------------------------------------------------------------------------------
+
+[header]
+
+# ------------------------------------------------------------------------------
+# Footer Configuration
+# ------------------------------------------------------------------------------
+
 [footer]
-  # Show copyright notice (default: true)
   showCopyright = true
-
-  # Show attribution "Powered by Hugo & Shiloh" (default: true)
   showAttribution = true
-
-  # Show author social links (default: true)
   showLinks = true
-
-  # Show appearance switcher / theme toggle (default: true)
   showAppearanceSwitcher = true
+  showScrollToTop = true
+
+# ------------------------------------------------------------------------------
+# Homepage Configuration
+# ------------------------------------------------------------------------------
+
+[homepage]
+  showRecent = true
+  recentLimit = 6
+
+# ------------------------------------------------------------------------------
+# Article Configuration
+# ------------------------------------------------------------------------------
+
+[article]
+  showDate = true
+  showDateUpdated = false
+  showAuthor = true
+  showDraftLabel = true
+  showHeadingAnchors = true
+  showPagination = true
+  showReadingTime = true
+  showTableOfContents = true
+  showTaxonomies = true
+  showWordCount = false
+
+# ------------------------------------------------------------------------------
+# List Configuration
+# ------------------------------------------------------------------------------
+
+[list]
+  showBreadcrumbs = false
+  showSummary = true
+  groupByYear = false
+  paginationWidth = 1
+
+# ------------------------------------------------------------------------------
+# Taxonomy Configuration
+# ------------------------------------------------------------------------------
+
+[taxonomy]
+  showTermCount = true
