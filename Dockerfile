@@ -1,13 +1,10 @@
-FROM ghcr.io/jwhumphries/tailwindcss:latest AS tailwind
 FROM golang:1.25-alpine AS gorun
 FROM ghcr.io/gohugoio/hugo:latest AS hugo
-FROM oven/bun:alpine AS bun
 
-FROM bun AS frontend
+FROM ghcr.io/jwhumphries/frontend:latest AS frontend
 ARG THEME_NAME=shiloh
 ENV THEME_NAME=${THEME_NAME}
 WORKDIR /${THEME_NAME}
-COPY --from=tailwind /usr/local/bin/tailwindcss /usr/local/bin/
 
 # This stage requires the project directory to be mounted to /${THEME_NAME}
 FROM frontend AS develop
