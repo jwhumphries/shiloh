@@ -5,7 +5,7 @@ A custom [Hugo](https://gohugo.io) theme built with Tailwind CSS v4, daisyUI, an
 💻 [Demo](https://shiloh.johnhumphries.dev/)
 📕 [Documentation](https://shiloh.johnhumphries.dev/docs/)
 
-![Screenshot](https://raw.githubusercontent.com/jwhumphries/shiloh/release/images/screenshot.png)
+![Shiloh](https://raw.githubusercontent.com/jwhumphries/shiloh/release/images/shiloh.png)
 
 ## Features
 
