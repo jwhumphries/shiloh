@@ -32,24 +32,21 @@ This places a search icon button in the header navigation.
 
 ### Search Index Generation
 
-During the build process, a search index is generated at `static/lunr-index.json`. This index contains all content from your site including:
+Hugo automatically generates a search index at `/index.json` during the build process. This index contains all content from pages in your configured `mainSections` including:
 
 - Page titles
 - Page content
 - Tags
 - Categories
+- Date
 
-Generate the index manually with:
-
-```bash
-bun run index
-```
+The index is generated using Hugo's native JSON output format defined in `layouts/_default/index.json`.
 
 ### Search Execution
 
 When a user opens the search modal and types a query:
 
-1. The search index is loaded (lazy-loaded on first search)
+1. The search index is lazy-loaded on first search
 2. Fuse.js performs fuzzy matching against the index
 3. Results are ranked and displayed in the modal
 
@@ -68,7 +65,7 @@ The search uses Fuse.js with the following configuration:
   threshold: 0.3,
   includeScore: true,
   includeMatches: true,
-  minMatchCharLength: 2
+  minMatchCharLength: 3
 }
 ```
 
@@ -95,7 +92,7 @@ The search modal provides:
 - Real-time results as you type
 - Minimum 3 characters required to search
 - Result cards showing title, preview, and tags
-- Click or keyboard navigation to results
+- Click navigation to results
 
 ### Keyboard Shortcuts
 
@@ -109,7 +106,7 @@ Search results display:
 
 1. **Title**: The page title (linked)
 2. **Preview**: A snippet of content around the match
-3. **Tags**: Any tags associated with the page
+3. **Tags**: Up to 3 tags associated with the page
 
 The preview extracts context around matched terms, showing approximately 150 characters of surrounding text.
 
@@ -121,17 +118,16 @@ The Fuse.js library and search index are only loaded when the search modal is op
 
 ### Index Size
 
-The search index contains the full text content of all pages. For large sites, consider:
+The search index contains the full text content of all pages in your `mainSections`. For large sites, consider:
 
-- Using summaries instead of full content
-- Excluding certain sections from indexing
-- Increasing the minMatchCharLength
+- Using summaries instead of full content in the index template
+- Limiting which sections are indexed via `mainSections` parameter
 
 ## Styling
 
 The search modal uses daisyUI's modal component with custom styling:
 
-- Full-screen overlay with backdrop blur
+- Full-screen overlay with backdrop
 - Centered modal card
 - Responsive sizing (max-width on larger screens)
 - Theme-aware colors
@@ -141,20 +137,18 @@ The search modal uses daisyUI's modal component with custom styling:
 ### Search not working
 
 1. Ensure `enableSearch = true` in params
-2. Check that `lunr-index.json` exists in `static/`
-3. Run `bun run index` to regenerate the index
-4. Check browser console for JavaScript errors
+2. Verify `/index.json` is being generated (check browser network tab)
+3. Ensure Fuse.js is loading (check browser console for errors)
 
 ### Empty results
 
 - Minimum query length is 3 characters
-- Check that your content pages have the expected fields
-- Verify the search index contains your content
+- Check that your content pages are in a section listed in `mainSections`
+- Verify the search index contains your content by visiting `/index.json`
 
 ### Slow search
 
 For very large sites (1000+ pages), search may feel slow. Consider:
 
-- Reducing content indexed (use summaries)
+- Reducing content indexed (modify `index.json` template to use summaries)
 - Increasing the threshold for faster matching
-- Pre-loading the index on page load (trade-off: slower initial load)
