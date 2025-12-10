@@ -78,6 +78,76 @@
   --noise: 1;
 }
 
+@plugin "daisyui/theme" {
+  name: "brodie";
+  default: false;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-base-100: oklch(98.9% 0.005 97.2);
+  --color-base-200: oklch(98% 0.009 95);
+  --color-base-300: oklch(92% 0.012 94);
+  --color-base-content: oklch(22% 0.02 90);
+  --color-primary: oklch(78% 0.10 85);
+  --color-primary-content: oklch(22% 0.02 90);
+  --color-secondary: oklch(60% 0.11 30);
+  --color-secondary-content: oklch(22% 0.02 90);
+  --color-accent: oklch(65% 0.10 260);
+  --color-accent-content: oklch(22.0% 0.076 247.700);
+  --color-neutral: oklch(35% 0.04 85);
+  --color-neutral-content: oklch(98.5% 0.006 97);
+  --color-info: oklch(75% 0.07 240);
+  --color-info-content: oklch(34.9% 0.070 240.000);
+  --color-success: oklch(70% 0.09 145);
+  --color-success-content: oklch(32.2% 0.090 145.000);
+  --color-warning: oklch(82% 0.10 70);
+  --color-warning-content: oklch(40.0% 0.100 70.000);
+  --color-error: oklch(68% 0.13 25);
+  --color-error-content: oklch(33.9% 0.130 25.000);
+  --radius-selector: 0.25rem;
+  --radius-field: 0.25rem;
+  --radius-box: 2rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.3125rem;
+  --border: 2px;
+  --depth: 1;
+  --noise: 0;
+}
+
+@plugin "daisyui/theme" {
+  name: "brodie-dark";
+  default: false;
+  prefersdark: false;
+  color-scheme: "dark";
+  --color-base-100: oklch(18% 0.015 95);
+  --color-base-200: oklch(21% 0.018 95);
+  --color-base-300: oklch(24% 0.020 95);
+  --color-base-content: oklch(90% 0.02 95);
+  --color-primary: oklch(75% 0.14 85);
+  --color-primary-content: oklch(18% 0.02 95);
+  --color-secondary: oklch(65% 0.15 30);
+  --color-secondary-content: oklch(15% 0.02 95);
+  --color-accent: oklch(60% 0.12 260);
+  --color-accent-content: oklch(95% 0.01 260);
+  --color-neutral: oklch(30% 0.03 95);
+  --color-neutral-content: oklch(92% 0.01 95);
+  --color-info: oklch(70% 0.09 240);
+  --color-info-content: oklch(15% 0.03 240);
+  --color-success: oklch(65% 0.11 145);
+  --color-success-content: oklch(15% 0.03 145);
+  --color-warning: oklch(80% 0.12 70);
+  --color-warning-content: oklch(20% 0.04 70);
+  --color-error: oklch(65% 0.15 25);
+  --color-error-content: oklch(15% 0.02 25);
+  --radius-selector: 0.25rem;
+  --radius-field: 0.25rem;
+  --radius-box: 2rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.3125rem;
+  --border: 2px;
+  --depth: 1;
+  --noise: 1;
+}
+
 /* ============================================================================
    KEYFRAME ANIMATIONS
    ============================================================================ */
