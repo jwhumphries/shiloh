@@ -1,0 +1,48 @@
+{{- /*
+  Timeline Shortcode
+
+  Usage:
+  {{< timeline >}}
+  1984: Macintosh PC
+  1998: iMac
+  2001: iPod
+  2007: iPhone
+  2015: Apple Watch
+  2024: Vision Pro
+  {{< /timeline >}}
+*/ -}}
+<div class="not-prose my-8">
+  <ul class="timeline overflow-x-auto">
+    {{- $lines := split .Inner "\n" }}
+    {{- $events := slice }}
+    {{- range $lines }}
+      {{- $line := trim . " \t\r" }}
+      {{- if and $line (findRE ":" $line) }}
+        {{- $parts := split $line ":" }}
+        {{- $key := trim (index $parts 0) " " }}
+        {{- $value := trim (strings.TrimPrefix (printf "%s:" $key) $line) " " }}
+        {{- $events = $events | append (dict "key" $key "value" $value) }}
+      {{- end }}
+    {{- end }}
+    {{- $total := len $events }}
+    {{- range $index, $event := $events }}
+      {{- $isFirst := eq $index 0 }}
+      {{- $isLast := eq $index (sub $total 1) }}
+    <li>
+      {{- if not $isFirst }}
+      <hr />
+      {{- end }}
+      <div class="timeline-start text-base-content font-medium">{{ $event.key }}</div>
+      <div class="timeline-middle">
+        <span class="bg-primary/20 flex size-4.5 items-center justify-center rounded-full">
+          <span class="badge badge-primary size-3 rounded-full p-0"></span>
+        </span>
+      </div>
+      <div class="timeline-end timeline-box">{{ $event.value }}</div>
+      {{- if not $isLast }}
+      <hr />
+      {{- end }}
+    </li>
+    {{- end }}
+  </ul>
+</div>
