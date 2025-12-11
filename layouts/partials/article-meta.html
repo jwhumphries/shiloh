@@ -1,7 +1,11 @@
 <div class="flex flex-wrap items-center gap-4 text-sm text-base-content/70">
-  {{- /* Author */ -}}
+  {{- /* Author - check page-level override first, then fall back to site config */ -}}
   {{- if .Params.showAuthor | default (site.Params.article.showAuthor | default true) }}
-    {{- with site.Params.author }}
+    {{- $author := site.Params.author }}
+    {{- with .Params.author }}
+      {{- $author = . }}
+    {{- end }}
+    {{- with $author }}
       <div class="flex items-center gap-2">
         {{- if .image }}
           <div class="avatar">
