@@ -1,8 +1,8 @@
 <footer class="bg-base-200 border-t border-base-300 mt-auto py-6">
-  <div class="page-container footer sm:daisy-footer-horizontal">
+  <div class="page-container daisy-footer sm:daisy-footer-horizontal">
     <div class="flex w-full flex-wrap items-center justify-between">
-      {{- /* Left Section: Menu Links, Attribution, Copyright */ -}}
-      <nav class="flex-1">
+      {{- /* Left Section: Menu Links, Attribution */ -}}
+      <nav class="flex flex-1">
         {{- if site.Menus.footer }}
         <div class="flex gap-4">
           {{- range site.Menus.footer }}
@@ -21,16 +21,6 @@
           {{ i18n "footer.and" | default "&" }}
           <a href="https://shiloh.johnhumphries.dev" target="_blank" rel="noopener noreferrer"
             class="link link-animated text-primary hover:text-secondary transition-colors">Shiloh</a>
-        </p>
-        {{- end }}
-        {{- if site.Params.footer.showCopyright | default true }}
-        <p class="text-base-content/60 text-sm">
-          {{- with site.Copyright }}
-          {{ . | markdownify }}
-          {{- else }}
-          &copy; {{ now.Year }} {{ site.Title }}. {{ i18n "footer.all_rights_reserved" | default "All rights reserved."
-          }}
-          {{- end }}
         </p>
         {{- end }}
       </nav>
@@ -88,3 +78,19 @@
     </div>
   </div>
 </footer>
+{{- if site.Params.footer.showCopyright | default true }}
+<footer class="bg-base-200 border-t border-base-300 mt-auto p-4">
+  <div class="page-container daisy-footer sm:daisy-footer-horizontal">
+    <aside>
+      <p class="text-base-content/60 text-sm">
+        {{- with site.Copyright }}
+        {{ . | markdownify }}
+        {{- else }}
+        &copy; {{ now.Year }} {{ site.Title }}. {{ i18n "footer.all_rights_reserved" | default "All rights reserved."
+        }}
+        {{- end }}
+      </p>
+    </aside>
+  </div>
+</footer>
+{{- end }}

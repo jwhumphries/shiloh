@@ -1,8 +1,8 @@
 <header class="bg-base-100 border-b border-base-300">
   <div class="page-container">
-    <nav class="navbar px-0" role="navigation" aria-label="{{ i18n " nav.main" | default "Main navigation" }}">
+    <nav class="daisy-navbar px-0" role="navigation" aria-label="{{ i18n " nav.main" | default "Main navigation" }}">
       {{- /* Logo / Site Title */ -}}
-      <div class="navbar-start">
+      <div class="daisy-navbar-start">
         <a href="{{ "/" | relURL }}"
           class="flex items-center gap-3 text-xl font-bold">
           {{- if site.Params.header.logo }}
@@ -19,8 +19,8 @@
       </div>
 
       {{- /* Desktop Menu */ -}}
-      <div class="navbar-center hidden lg:flex">
-        <ul class="menu menu-horizontal px-1 gap-1">
+      <div class="daisy-navbar-center hidden lg:flex">
+        <ul class="daisy-menu daisy-menu-horizontal px-1 gap-1">
           {{- range site.Menus.main }}
           {{- if not (eq .Params.type "search") }}
           <li>
@@ -35,7 +35,7 @@
       </div>
 
       {{- /* Actions: Search + Mobile Menu */ -}}
-      <div class="navbar-end gap-2">
+      <div class="daisy-navbar-end gap-2">
         {{- /* Search Button */ -}}
         {{- if site.Params.enableSearch | default true }}
         <button id="search-toggle" class="btn btn-text btn-circle bg-base-300" aria-label="{{ i18n " ui.search" |
@@ -49,7 +49,7 @@
         {{- end }}
 
         {{- /* Mobile Menu Toggle */ -}}
-        <div class="dropdown dropdown-end lg:hidden">
+        <div class="daisy-dropdown daisy-dropdown-end lg:hidden">
           <div tabindex="0" role="button" class="btn daisy-btn-ghost btn-circle" aria-label="{{ i18n " ui.menu" |
             default "Menu" }}">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
@@ -58,7 +58,7 @@
             </svg>
           </div>
           <ul tabindex="0"
-            class="menu dropdown-content menu-sm z-50 mt-3 w-52 rounded-box bg-base-100 p-2 shadow-lg border border-base-300">
+            class="daisy-menu daisy-dropdown-content daisy-menu-sm z-50 mt-3 w-52 rounded-box bg-base-100 p-2 shadow-lg border border-base-300">
             {{- range site.Menus.main }}
             {{- if not (eq .Params.type "search") }}
             <li>
