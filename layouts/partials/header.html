@@ -9,14 +9,14 @@
           <img src="{{ site.Params.header.logo | relURL }}" alt="{{ site.Title }}" class="h-8 w-auto" />
           {{- end }}
           {{- if site.Params.header.showTitle }}
-          <button class="btn btn-outline btn-primary waves waves-primary hover:text-secondary transition-colors">{{ site.Title }}</button>
+          <button class="btn btn-lg btn-soft btn-primary waves waves-primary text-xl">{{ site.Title }}</button>
           {{- end }}
         </a>
       </div>
 
       {{- /* Desktop Menu */ -}}
       <div class="daisy-navbar-center hidden lg:flex">
-        <ul class="daisy-menu daisy-menu-horizontal px-1 gap-1">
+        <ul class="daisy-menu daisy-menu-horizontal px-1 gap-1 text-lg">
           {{- range site.Menus.main }}
           {{- if not (eq .Params.type "search") }}
           <li>

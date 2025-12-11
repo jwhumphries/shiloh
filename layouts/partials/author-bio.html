@@ -40,12 +40,8 @@
     <div class="flex gap-2 mt-2">
       {{- $socialPlatforms := dict
         "email" (dict "icon" "icon-[tabler--mail]" "label" "Email")
-        "github" (dict "icon" "icon-[tabler--brand-github]" "label" "GitHub")
-        "twitter" (dict "icon" "icon-[tabler--brand-x]" "label" "Twitter")
-        "x-twitter" (dict "icon" "icon-[tabler--brand-x]" "label" "X (Twitter)")
+        "github" (dict "icon" "icon-[line-md--github-loop]" "label" "GitHub")
         "linkedin" (dict "icon" "icon-[tabler--brand-linkedin]" "label" "LinkedIn")
-        "mastodon" (dict "icon" "icon-[tabler--brand-mastodon]" "label" "Mastodon")
-        "bluesky" (dict "icon" "icon-[tabler--brand-bluesky]" "label" "Bluesky")
       }}
       {{- range . }}
         {{- $link := . }}
