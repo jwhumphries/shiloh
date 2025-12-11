@@ -216,6 +216,10 @@
 @utility article-prose {
   max-width: 75ch;
 
+  &> :first-child {
+    margin-top: 1em;
+  }
+
   & p {
     margin-top: 1.25em;
     margin-bottom: 1.25em;
@@ -246,16 +250,16 @@
 
   & h2 {
     font-size: 1.5em;
-    margin-top: 2em;
+    margin-top: 1.5em;
     margin-bottom: 1em;
     line-height: 1.33;
   }
 
   & h3 {
     font-size: 1.25em;
-    margin-top: 1.6em;
-    margin-bottom: 0.6em;
-    line-height: 1.6;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.5;
   }
 
   & h4 {
@@ -352,7 +356,7 @@
   }
 
   & blockquote {
-    margin: 2em 0;
+    margin: 1.5em 0;
   }
 
   & code {
@@ -405,11 +409,11 @@
 
   & img {
     border-radius: 0.5rem;
-    margin: 2em auto;
+    margin: 1.5em auto;
   }
 
   & figure {
-    margin: 2em 0;
+    margin: 1.5em 0;
   }
 
   & figcaption {

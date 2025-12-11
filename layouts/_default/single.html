@@ -2,7 +2,7 @@
 {{- $showTOC := and (.Params.showTableOfContents | default (site.Params.article.showTableOfContents | default true)) (gt .WordCount 400) -}}
 <article class="page-container py-8 sm:py-12">
   {{- /* Article Header */ -}}
-  <header class="mb-8">
+  <header class="mb-6">
     {{- /* Draft Label */ -}}
     {{- if and .Draft (.Params.showDraftLabel | default (site.Params.article.showDraftLabel | default true)) }}
       <div class="badge badge-warning badge-lg mb-4">
