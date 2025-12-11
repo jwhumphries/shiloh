@@ -36,8 +36,9 @@ mainSections = ["samples"]
 # ------------------------------------------------------------------------------
 
 [author]
-  name = "Shiloh Theme"
-  headline = "Modern Hugo Theming"
+  name = "Shiloh"
+  image = "/shiloh-author.png"
+  headline = "A Happy Dog"
   bio = "Built with Tailwind CSS v4, daisyUI v5, and FlyonUI v2"
   links = [
     { github = "https://github.com/jwhumphries/shiloh" },
@@ -49,6 +50,7 @@ mainSections = ["samples"]
 
 [header]
   showTitle = true
+  logo = "/shiloh.png"
 
 # ------------------------------------------------------------------------------
 # Footer Configuration

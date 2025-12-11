@@ -3,6 +3,9 @@ title: "Front Matter"
 date: 2025-12-07
 weight: 30
 description: "Page-level configuration options."
+author:
+  name: "Guest Author"
+  headline: "Guest Writer"
 ---
 
 All theme parameters can be overridden per-page using front matter. This allows fine-grained control over how each page is displayed.

@@ -3,6 +3,7 @@ title: "Images"
 date: 2025-12-07
 description: "Image formatting and placement examples."
 tags: ["images", "media"]
+feature: "desert.png"
 ---
 
 ## Basic Image
