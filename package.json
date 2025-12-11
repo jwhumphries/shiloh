@@ -12,7 +12,7 @@
     "fuse.js": "^7.1.0"
   },
   "devDependencies": {
-    "daisyui": "^5.5.8",
+    "daisyui": "^5.5.13",
     "theme-change": "^2.5.0",
     "flyonui": "^2.4.1",
     "@iconify/tailwind4": "^1.2.0",
