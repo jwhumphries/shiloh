@@ -9,20 +9,20 @@ The sentence-rotate shortcode displays a sentence with rotating words appended t
 
 ## Basic Usage
 
-Use the `sentence-rotate` shortcode with a `sentence` parameter and a list of words with optional color classes:
+Use the `sentence-rotate` shortcode with a `sentence` parameter and a list of words with optional color classes. Use daisyUI theme colors for consistent styling:
 
 ```
 {{</* sentence-rotate sentence="Providing AI Agents for" */>}}
-Designers | bg-teal-400 text-teal-800
-Developers | bg-red-400 text-red-800
-Managers | bg-blue-400 text-blue-800
+Designers | bg-primary text-primary-content
+Developers | bg-secondary text-secondary-content
+Managers | bg-accent text-accent-content
 {{</* /sentence-rotate */>}}
 ```
 
 {{< sentence-rotate sentence="Providing AI Agents for" >}}
-Designers | bg-teal-400 text-teal-800
-Developers | bg-red-400 text-red-800
-Managers | bg-blue-400 text-blue-800
+Designers | bg-primary text-primary-content
+Developers | bg-secondary text-secondary-content
+Managers | bg-accent text-accent-content
 {{< /sentence-rotate >}}
 
 ## Custom Size
@@ -31,34 +31,34 @@ Use the `size` parameter to change the text size:
 
 ```
 {{</* sentence-rotate sentence="We build tools for" size="text-3xl" */>}}
-Creators | bg-purple-400 text-purple-800
-Builders | bg-orange-400 text-orange-800
-Dreamers | bg-pink-400 text-pink-800
+Creators | bg-success text-success-content
+Builders | bg-warning text-warning-content
+Dreamers | bg-error text-error-content
 {{</* /sentence-rotate */>}}
 ```
 
 {{< sentence-rotate sentence="We build tools for" size="text-3xl" >}}
-Creators | bg-purple-400 text-purple-800
-Builders | bg-orange-400 text-orange-800
-Dreamers | bg-pink-400 text-pink-800
+Creators | bg-success text-success-content
+Builders | bg-warning text-warning-content
+Dreamers | bg-error text-error-content
 {{< /sentence-rotate >}}
 
-## Using Theme Colors
+## Status Colors
 
-You can use daisyUI theme colors for consistent styling:
+Use status colors for different contexts:
 
 ```
 {{</* sentence-rotate sentence="This platform is" size="text-2xl" */>}}
-Fast | bg-primary text-primary-content
-Reliable | bg-secondary text-secondary-content
-Scalable | bg-accent text-accent-content
+Fast | bg-success text-success-content
+Reliable | bg-info text-info-content
+Scalable | bg-warning text-warning-content
 {{</* /sentence-rotate */>}}
 ```
 
 {{< sentence-rotate sentence="This platform is" size="text-2xl" >}}
-Fast | bg-primary text-primary-content
-Reliable | bg-secondary text-secondary-content
-Scalable | bg-accent text-accent-content
+Fast | bg-success text-success-content
+Reliable | bg-info text-info-content
+Scalable | bg-warning text-warning-content
 {{< /sentence-rotate >}}
 
 ## Without Colors
