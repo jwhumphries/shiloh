@@ -6,11 +6,7 @@
         <a href="{{ "/" | relURL }}"
           class="flex items-center gap-3 text-xl font-bold">
           {{- if site.Params.header.logo }}
-          <img src="{{ site.Params.header.logo | relURL }}" alt="{{ site.Title }}" class="h-8 w-auto dark:hidden" />
-          {{- end }}
-          {{- if site.Params.header.logoDark }}
-          <img src="{{ site.Params.header.logoDark | relURL }}" alt="{{ site.Title }}"
-            class="h-8 w-auto hidden dark:block" />
+          <img src="{{ site.Params.header.logo | relURL }}" alt="{{ site.Title }}" class="h-8 w-auto" />
           {{- end }}
           {{- if site.Params.header.showTitle }}
           <button class="btn btn-outline btn-primary waves waves-primary hover:text-secondary transition-colors">{{ site.Title }}</button>
