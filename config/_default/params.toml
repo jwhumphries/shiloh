@@ -137,8 +137,11 @@ fingerprintAlgorithm = "sha256"
   # Show last updated date
   showDateUpdated = false
 
-  # Show author information
-  showAuthor = true
+  # Show author information in article header
+  showAuthorHeader = true
+
+  # Show author bio section at end of article
+  showAuthorFooter = true
 
   # Show draft label on draft posts
   showDraftLabel = true

@@ -4,7 +4,7 @@ date: 2025-12-07
 description: "Demonstrating various front matter options."
 tags: ["features", "front matter"]
 showDate: true
-showAuthor: true
+showAuthorHeader: true
 showReadingTime: true
 showWordCount: true
 showTaxonomies: true
@@ -21,7 +21,7 @@ This page has these options explicitly enabled:
 
 ```yaml
 showDate: true
-showAuthor: true
+showAuthorHeader: true
 showReadingTime: true
 showWordCount: true
 showTaxonomies: true
@@ -37,7 +37,7 @@ To hide any element, set it to `false`:
 ```yaml
 ---
 showDate: false
-showAuthor: false
+showAuthorHeader: false
 showReadingTime: false
 ---
 ```

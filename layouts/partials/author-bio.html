@@ -1,0 +1,68 @@
+{{- /* Author Bio Section */ -}}
+{{- $author := site.Params.author }}
+{{- with .Params.author }}
+  {{- $author = . }}
+{{- end }}
+
+{{- with $author }}
+<div class="flex items-start gap-6 p-6">
+  {{- /* Avatar */ -}}
+  {{- with .image }}
+  <div class="avatar">
+    <div class="w-24 rounded-full ring ring-base-300">
+      <img src="{{ . | relURL }}" alt="{{ $author.name }}" />
+    </div>
+  </div>
+  {{- end }}
+
+  {{- /* Author Info */ -}}
+  <div class="flex flex-col gap-1">
+    {{- /* Row 1: Label */ -}}
+    <span class="text-sm italic text-base-content">
+      {{ i18n "author.label" | default "Author" }}
+    </span>
+
+    {{- /* Row 2: Name and Headline */ -}}
+    <div class="text-lg">
+      <span class="font-bold text-primary">{{ .name }}</span>
+      {{- with .headline }}
+        <span class="italic text-secondary"> - {{ . }}</span>
+      {{- end }}
+    </div>
+
+    {{- /* Row 3: Bio */ -}}
+    {{- with .bio }}
+    <p class="text-base-content/70">{{ . }}</p>
+    {{- end }}
+
+    {{- /* Row 4: Social Links */ -}}
+    {{- with .links }}
+    <div class="flex gap-2 mt-2">
+      {{- $socialPlatforms := dict
+        "email" (dict "icon" "icon-[tabler--mail]" "label" "Email")
+        "github" (dict "icon" "icon-[tabler--brand-github]" "label" "GitHub")
+        "twitter" (dict "icon" "icon-[tabler--brand-x]" "label" "Twitter")
+        "x-twitter" (dict "icon" "icon-[tabler--brand-x]" "label" "X (Twitter)")
+        "linkedin" (dict "icon" "icon-[tabler--brand-linkedin]" "label" "LinkedIn")
+        "mastodon" (dict "icon" "icon-[tabler--brand-mastodon]" "label" "Mastodon")
+        "bluesky" (dict "icon" "icon-[tabler--brand-bluesky]" "label" "Bluesky")
+      }}
+      {{- range . }}
+        {{- $link := . }}
+        {{- range $platform, $config := $socialPlatforms }}
+          {{- $url := index $link $platform }}
+          {{- if $url }}
+          <a href="{{ $url }}"
+            class="btn btn-circle btn-soft btn-sm [--btn-color:oklch(var(--color-neutral))]"
+            aria-label="{{ $config.label }}"
+            {{- if not (hasPrefix $url "mailto:") }} target="_blank" rel="noopener noreferrer"{{ end }}>
+            <span class="{{ $config.icon }} text-xl text-neutral"></span>
+          </a>
+          {{- end }}
+        {{- end }}
+      {{- end }}
+    </div>
+    {{- end }}
+  </div>
+</div>
+{{- end }}

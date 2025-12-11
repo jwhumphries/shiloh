@@ -48,7 +48,8 @@ title: "My Article"
 showTableOfContents: false
 showReadingTime: false
 showDate: false
-showAuthor: false
+showAuthorHeader: false
+showAuthorFooter: false
 showWordCount: true
 showTaxonomies: true
 showPagination: false
@@ -181,7 +182,8 @@ showTableOfContents: true
 showReadingTime: true
 showWordCount: true
 showTaxonomies: true
-showAuthor: true
+showAuthorHeader: true
+showAuthorFooter: true
 showDate: true
 showDateUpdated: true
 ---

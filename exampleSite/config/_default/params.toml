@@ -78,7 +78,8 @@ mainSections = ["samples"]
 [article]
   showDate = true
   showDateUpdated = false
-  showAuthor = true
+  showAuthorHeader = true
+  showAuthorFooter = true
   showDraftLabel = true
   showHeadingAnchors = true
   showPagination = true

@@ -32,6 +32,13 @@
     {{- end }}
   </div>
 
+  {{- /* Author Bio */ -}}
+  {{- if .Params.showAuthorFooter | default (site.Params.article.showAuthorFooter | default true) }}
+    <div class="mt-12">
+      {{- partial "author-bio.html" . -}}
+    </div>
+  {{- end }}
+
   {{- /* Taxonomies (Tags/Categories) */ -}}
   {{- if .Params.showTaxonomies | default (site.Params.article.showTaxonomies | default false) }}
     {{- partial "taxonomies.html" . -}}

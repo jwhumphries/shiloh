@@ -1,6 +1,6 @@
 <div class="flex flex-wrap items-center gap-4 text-sm text-base-content/70">
   {{- /* Author - check page-level override first, then fall back to site config */ -}}
-  {{- if .Params.showAuthor | default (site.Params.article.showAuthor | default true) }}
+  {{- if .Params.showAuthorHeader | default (site.Params.article.showAuthorHeader | default true) }}
     {{- $author := site.Params.author }}
     {{- with .Params.author }}
       {{- $author = . }}

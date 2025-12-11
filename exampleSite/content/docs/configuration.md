@@ -128,7 +128,8 @@ Configure in `params.article`:
 |-----------|------|---------|-------------|
 | `showDate` | boolean | `true` | Show publish date |
 | `showDateUpdated` | boolean | `false` | Show last updated date |
-| `showAuthor` | boolean | `true` | Show author info |
+| `showAuthorHeader` | boolean | `true` | Show author info in header |
+| `showAuthorFooter` | boolean | `true` | Show author bio at end of article |
 | `showDraftLabel` | boolean | `true` | Show draft indicator |
 | `showHeadingAnchors` | boolean | `true` | Show # links on headings |
 | `showPagination` | boolean | `true` | Show prev/next links |
