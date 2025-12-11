@@ -1,0 +1,29 @@
+{{- /*
+  Text Rotate Shortcode
+
+  Usage:
+  {{< text-rotate >}}
+  ONE
+  TWO
+  THREE
+  {{< /text-rotate >}}
+
+  With custom size:
+  {{< text-rotate size="text-7xl" >}}
+  DESIGN
+  DEVELOP
+  DEPLOY
+  {{< /text-rotate >}}
+*/ -}}
+{{- $size := .Get "size" | default "text-xl" }}
+<span class="text-rotate {{ $size }}">
+  <span class="justify-items-center">
+    {{- $lines := split .Inner "\n" }}
+    {{- range $lines }}
+      {{- $line := trim . " \t\r" }}
+      {{- if $line }}
+    <span>{{ $line }}</span>
+      {{- end }}
+    {{- end }}
+  </span>
+</span>
