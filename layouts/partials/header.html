@@ -9,19 +9,18 @@
           <img src="{{ site.Params.header.logo | relURL }}" alt="{{ site.Title }}" class="h-8 w-auto" />
           {{- end }}
           {{- if site.Params.header.showTitle }}
-          <button class="btn btn-lg btn-soft btn-primary waves waves-primary text-xl">{{ site.Title }}</button>
+          <button class="btn btn-lg btn-soft btn-primary waves waves-primary text-2xl">{{ site.Title }}</button>
           {{- end }}
         </a>
       </div>
 
       {{- /* Desktop Menu */ -}}
       <div class="daisy-navbar-center hidden lg:flex">
-        <ul class="daisy-menu daisy-menu-horizontal px-1 gap-1 text-lg">
+        <ul class="daisy-menu daisy-menu-horizontal px-1 gap-4 text-xl">
           {{- range site.Menus.main }}
           {{- if not (eq .Params.type "search") }}
           <li>
-            <a href="{{ .URL | relURL }}" class="rounded-btn {{ if $.IsMenuCurrent " main" . }}text-secondary
-              font-semibold{{ end }}">
+            <a href="{{ .URL | relURL }}" class="btn btn-text">
               {{ .Name }}
             </a>
           </li>
