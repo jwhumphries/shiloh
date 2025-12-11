@@ -1,0 +1,38 @@
+{{- /*
+  Sentence Rotate Shortcode
+
+  Usage:
+  {{< sentence-rotate sentence="Providing AI Agents for" >}}
+  Designers | bg-teal-400 text-teal-800
+  Developers | bg-red-400 text-red-800
+  Managers | bg-blue-400 text-blue-800
+  {{< /sentence-rotate >}}
+
+  With custom size:
+  {{< sentence-rotate sentence="We build tools for" size="text-3xl" >}}
+  Creators | bg-purple-400 text-purple-800
+  Builders | bg-orange-400 text-orange-800
+  {{< /sentence-rotate >}}
+*/ -}}
+{{- $sentence := .Get "sentence" }}
+{{- $size := .Get "size" }}
+<span class="{{ $size }}">
+  {{ $sentence }}
+  <span class="daisy-text-rotate">
+    <span>
+      {{- $lines := split .Inner "\n" }}
+      {{- range $lines }}
+        {{- $line := trim . " \t\r" }}
+        {{- if $line }}
+          {{- $parts := split $line "|" }}
+          {{- $word := trim (index $parts 0) " " }}
+          {{- $classes := "" }}
+          {{- if gt (len $parts) 1 }}
+            {{- $classes = trim (index $parts 1) " " }}
+          {{- end }}
+      <span class="{{ $classes }} px-2">{{ $word }}</span>
+        {{- end }}
+      {{- end }}
+    </span>
+  </span>
+</span>

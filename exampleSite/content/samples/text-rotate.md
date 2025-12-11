@@ -87,20 +87,45 @@ MAINTAIN
 REPEAT
 {{< /text-rotate >}}
 
-## Small Text
+## Custom Color
 
-Use smaller sizes for inline effects:
+Use the `color` parameter to apply a text color class:
 
 ```
-{{</* text-rotate size="text-sm" */>}}
-fast
-simple
-reliable
+{{</* text-rotate size="text-4xl" color="text-primary" */>}}
+PRIMARY
+COLORED
+TEXT
 {{</* /text-rotate */>}}
 ```
 
-This tool is {{< text-rotate size="text-sm" >}}
-fast
-simple
-reliable
-{{< /text-rotate >}} to use.
+{{< text-rotate size="text-4xl" color="text-primary" >}}
+PRIMARY
+COLORED
+TEXT
+{{< /text-rotate >}}
+
+## Color Variants
+
+Different color options:
+
+{{< text-rotate size="text-3xl" color="text-secondary" >}}
+SECONDARY
+COLOR
+{{< /text-rotate >}}
+
+{{< text-rotate size="text-3xl" color="text-accent" >}}
+ACCENT
+COLOR
+{{< /text-rotate >}}
+
+{{< text-rotate size="text-3xl" color="text-success" >}}
+SUCCESS
+COLOR
+{{< /text-rotate >}}
+
+{{< text-rotate size="text-3xl" color="text-error" >}}
+ERROR
+COLOR
+{{< /text-rotate >}}
+
