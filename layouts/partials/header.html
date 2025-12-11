@@ -12,7 +12,7 @@
           <img src="{{ site.Params.header.logoDark | relURL }}" alt="{{ site.Title }}"
             class="h-8 w-auto hidden dark:block" />
           {{- end }}
-          {{- if not site.Params.header.logo }}
+          {{- if site.Params.header.showTitle }}
           <button class="btn btn-outline btn-primary waves waves-primary hover:text-secondary transition-colors">{{ site.Title }}</button>
           {{- end }}
         </a>

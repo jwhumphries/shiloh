@@ -87,6 +87,8 @@ fingerprintAlgorithm = "sha256"
 # ------------------------------------------------------------------------------
 
 [header]
+  # Show title button
+  showTitle = true
   # Logo image path (relative to assets/ or static/)
   # logo = "img/logo.jpg"
 
@@ -164,9 +166,6 @@ fingerprintAlgorithm = "sha256"
 
   # Show word count
   showWordCount = false
-
-  # Show comments section
-  showComments = false
 
   # Sharing links (available: facebook, x-twitter, mastodon, pinterest, reddit,
   # linkedin, email, threads, telegram, line, weibo, xing, bluesky)
