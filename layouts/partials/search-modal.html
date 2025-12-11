@@ -1,20 +1,20 @@
-<dialog id="search-modal" class="modal items-start pt-16 sm:pt-24" aria-labelledby="search-modal-title" aria-modal="true" data-search-index="{{ "index.json" | relURL }}">
-  <div class="modal-box max-w-3xl max-h-[calc(100vh-8rem)] sm:max-h-[calc(100vh-12rem)] flex flex-col">
+<dialog id="search-modal" class="daisy-modal items-start pt-16 sm:pt-24" aria-labelledby="search-modal-title" aria-modal="true" data-search-index="{{ "index.json" | relURL }}">
+  <div class="daisy-modal-box max-w-3xl max-h-[calc(100vh-8rem)] sm:max-h-[calc(100vh-12rem)] flex flex-col">
     <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="{{ i18n "ui.close" | default "Close" }}">✕</button>
+      <button class="btn btn-sm btn-circle daisy-btn-ghost absolute right-2 top-2" aria-label="{{ i18n "ui.close" | default "Close" }}">✕</button>
     </form>
 
     <h3 id="search-modal-title" class="font-bold text-lg mb-4 flex-shrink-0">
       {{ i18n "search.title" | default "Search" }}
     </h3>
 
-    <div class="form-control flex-shrink-0">
+    <div class="daisy-form-control flex-shrink-0">
       <label for="search-input" class="sr-only">{{ i18n "search.placeholder" | default "Search articles..." }}</label>
       <input
         type="text"
         id="search-input"
         placeholder="{{ i18n "search.placeholder" | default "Search articles..." }}"
-        class="input input-bordered w-full"
+        class="input daisy-input-bordered w-full"
         autocomplete="off"
         aria-describedby="search-results"
       />
@@ -33,7 +33,7 @@
       </div>
     </div>
   </div>
-  <form method="dialog" class="modal-backdrop">
+  <form method="dialog" class="daisy-modal-backdrop">
     <button>{{ i18n "ui.close" | default "Close" }}</button>
   </form>
 </dialog>
