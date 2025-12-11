@@ -3,6 +3,7 @@
 
 @plugin "daisyui" {
   themes: shiloh --default, shiloh-dark;
+  prefix: daisy-;
 }
 
 @plugin "flyonui";
