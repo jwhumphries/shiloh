@@ -21,7 +21,7 @@
       </p>
     </header>
     {{- if .Pages }}
-      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 items-start">
         {{- range (.Paginate .Pages).Pages }}
           {{- partial "article-card.html" . }}
         {{- end }}

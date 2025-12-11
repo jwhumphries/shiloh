@@ -1,4 +1,4 @@
-<article class="card bg-card shadow-md hover:shadow-xl hover:bg-card-hover transition-all border border-base-300 group">
+<article class="card bg-card shadow-md hover:shadow-xl hover:bg-card-hover transition-all border border-base-300 group overflow-hidden">
   <a href="{{ .RelPermalink }}" class="block h-full">
     {{- /* Featured Image */ -}}
     {{- with .Params.images }}
@@ -12,9 +12,16 @@
       </figure>
     {{- else }}
       {{- with $.Params.feature }}
+        {{- $featureSrc := . }}
+        {{- $resource := $.Resources.GetMatch . }}
+        {{- if $resource }}
+          {{- $featureSrc = $resource.RelPermalink }}
+        {{- else }}
+          {{- $featureSrc = . | relURL }}
+        {{- end }}
         <figure class="aspect-video overflow-hidden bg-gradient-to-br from-primary/20 to-secondary/20">
           <img
-            src="{{ . | relURL }}"
+            src="{{ $featureSrc }}"
             alt="{{ $.Title }}"
             class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
             {{- if site.Params.enableImageLazyLoading | default true }} loading="lazy"{{- end }}
