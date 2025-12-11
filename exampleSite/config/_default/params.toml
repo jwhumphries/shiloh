@@ -59,7 +59,6 @@ mainSections = ["samples"]
 [footer]
   showCopyright = true
   showAttribution = true
-  showLinks = true
   showAppearanceSwitcher = true
   showScrollToTop = true
 

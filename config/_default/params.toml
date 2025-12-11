@@ -92,9 +92,6 @@ fingerprintAlgorithm = "sha256"
   # Logo image path (relative to assets/ or static/)
   # logo = "img/logo.jpg"
 
-  # Dark mode logo image path
-  # logoDark = "img/logo-dark.jpg"
-
 # ------------------------------------------------------------------------------
 # Footer Configuration
 # ------------------------------------------------------------------------------
@@ -105,9 +102,6 @@ fingerprintAlgorithm = "sha256"
 
   # Show attribution (Powered by Hugo & Shiloh)
   showAttribution = true
-
-  # Show author social links
-  showLinks = true
 
   # Show appearance switcher (light/dark toggle)
   showAppearanceSwitcher = true

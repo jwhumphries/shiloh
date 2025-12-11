@@ -109,7 +109,6 @@ Configure in `params.footer`:
 | `showCopyright` | boolean | `true` | Show copyright notice |
 | `showAppearanceSwitcher` | boolean | `true` | Show theme toggle in header |
 | `showScrollToTop` | boolean | `true` | Show scroll-to-top button |
-| `showSocialLinks` | boolean | `true` | Show author social links |
 
 ## Homepage
 
