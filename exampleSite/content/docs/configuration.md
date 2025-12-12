@@ -144,7 +144,7 @@ Configure in `params.article`:
 
 ### Sharing Links
 
-Available options: `facebook`, `x-twitter`, `linkedin`, `email`, `reddit`, `pinterest`, `mastodon`, `telegram`, `whatsapp`
+Available options: `facebook`, `x-twitter`, `linkedin`, `email`, `reddit`, `pinterest`, `mastodon`, `telegram`
 
 ```yaml
 article:
