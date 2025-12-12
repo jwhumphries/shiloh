@@ -12,16 +12,6 @@
         {{- end }}
       </div>
       {{- end }}
-      {{- if site.Params.footer.showAttribution | default true }}
-      <p class="text-base-content/50 text-xs">
-        {{ i18n "footer.powered_by" | default "Powered by" }}
-        <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer"
-          class="link link-animated text-primary hover:text-secondary transition-colors">Hugo</a>
-        {{ i18n "footer.and" | default "&" }}
-        <a href="https://shiloh.johnhumphries.dev" target="_blank" rel="noopener noreferrer"
-          class="link link-animated text-primary hover:text-secondary transition-colors">Shiloh</a>
-      </p>
-      {{- end }}
     </nav>
     {{- /* Right Section: Appearance Switcher */ -}}
     {{- if site.Params.footer.showAppearanceSwitcher | default true }}
@@ -40,6 +30,16 @@
 <footer class="bg-base-200 border-t border-base-300 mt-auto p-4">
   <div class="page-container daisy-footer sm:daisy-footer-horizontal">
     <aside>
+      {{- if site.Params.footer.showAttribution | default true }}
+      <p class="text-base-content/50 text-xs">
+        {{ i18n "footer.powered_by" | default "Powered by" }}
+        <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer"
+          class="link link-animated text-primary hover:text-secondary transition-colors">Hugo</a>
+        {{ i18n "footer.and" | default "&" }}
+        <a href="https://shiloh.johnhumphries.dev" target="_blank" rel="noopener noreferrer"
+          class="link link-animated text-primary hover:text-secondary transition-colors">Shiloh</a>
+      </p>
+      {{- end }}
       <p class="text-base-content/60 text-sm">
         {{- with site.Copyright }}
         {{ . | markdownify }}
