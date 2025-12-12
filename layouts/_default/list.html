@@ -21,6 +21,7 @@
 
   {{- /* Articles List */ -}}
   {{- if .Pages }}
+    <div id="articles">
     {{- /* Group by Year Option */ -}}
     {{- if .Params.groupByYear | default (site.Params.list.groupByYear | default true) }}
       {{- range (.Paginate (.Pages.GroupByDate "2006")).PageGroups }}
@@ -43,6 +44,7 @@
         {{- end }}
       </div>
     {{- end }}
+    </div>
 
     {{- /* Pagination */ -}}
     {{- partial "pagination.html" . -}}
