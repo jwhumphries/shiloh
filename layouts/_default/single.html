@@ -32,9 +32,6 @@
     {{- end }}
   </div>
 
-  {{- /* Sharing Links */ -}}
-  {{- partial "sharing-links.html" . -}}
-
   {{- /* Author Bio */ -}}
   {{- if .Params.showAuthorFooter | default (site.Params.article.showAuthorFooter | default true) }}
     <div class="mt-12">

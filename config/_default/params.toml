@@ -173,7 +173,7 @@ fingerprintAlgorithm = "sha256"
   showWordCount = false
 
   # Sharing links (available: facebook, x-twitter, mastodon, pinterest, reddit,
-  # linkedin, email, telegram)
+  # linkedin, email, threads, telegram, line, weibo, xing, bluesky)
   # sharingLinks = ["x-twitter", "linkedin", "email"]
 
 # ------------------------------------------------------------------------------
