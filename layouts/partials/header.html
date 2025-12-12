@@ -5,8 +5,14 @@
       <div class="daisy-navbar-start">
         <a href="{{ "/" | relURL }}"
           class="flex items-center gap-3 text-xl font-bold">
-          {{- if site.Params.header.logo }}
-          <img src="{{ site.Params.header.logo | relURL }}" alt="{{ site.Title }}" class="h-8 w-auto" />
+          {{- with site.Params.header.logo }}
+            {{- if strings.HasSuffix . ".svg" }}
+              {{- with resources.Get . }}
+          <span class="h-8 w-auto text-base-content [&>svg]:h-8 [&>svg]:w-auto">{{ .Content | safeHTML }}</span>
+              {{- end }}
+            {{- else }}
+          <img src="{{ . | relURL }}" alt="{{ site.Title }}" class="h-8 w-auto" />
+            {{- end }}
           {{- end }}
           {{- if site.Params.header.showTitle }}
           <button class="btn btn-lg btn-soft btn-primary waves waves-primary text-2xl">{{ site.Title }}</button>

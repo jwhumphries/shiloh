@@ -89,8 +89,11 @@ fingerprintAlgorithm = "sha256"
 [header]
   # Show title button
   showTitle = true
-  # Logo image path (relative to assets/ or static/)
-  # logo = "img/logo.jpg"
+  # Logo image path
+  # - For standard images (PNG, JPG, WebP): path relative to static/ (e.g., "/img/logo.png")
+  # - For inline SVG (supports theming): path relative to assets/ (e.g., "images/logo.svg")
+  #   SVG files are inlined and styled with text-base-content for theme support
+  # logo = "img/logo.svg"
 
 # ------------------------------------------------------------------------------
 # Footer Configuration
