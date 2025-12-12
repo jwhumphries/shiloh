@@ -13,7 +13,6 @@ author:
   links:
     - x-twitter: "https://twitter.com/janedoe"
     - linkedin: "https://linkedin.com/in/janedoe"
-sharingLinks: ["x-twitter", "linkedin", "email", "reddit"]
 showDate: true
 showDateUpdated: true
 showAuthorHeader: true
@@ -44,20 +43,6 @@ Headings are automatically anchored. You can click the # symbol next to them to 
 2.  With numbers.
 
 ## Social Features
-
-### Sharing Links
-
-At the bottom of this article (before the author bio), you'll see sharing buttons. These are configured via the `sharingLinks` parameter in the front matter or site config.
-
-Supported platforms include:
-*   Facebook
-*   X (Twitter)
-*   LinkedIn
-*   Email
-*   Reddit
-*   Pinterest
-*   Mastodon
-*   Telegram
 
 ### Author Bio
 

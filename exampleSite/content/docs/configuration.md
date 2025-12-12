@@ -140,11 +140,6 @@ Configure in `params.article`:
 | `showTableOfContents` | boolean | `true` | Show TOC sidebar |
 | `showTaxonomies` | boolean | `false` | Show tags/categories |
 | `showWordCount` | boolean | `false` | Show word count |
-| `sharingLinks` | array | `[]` | Social sharing buttons |
-
-### Sharing Links
-
-Available options: `facebook`, `x-twitter`, `linkedin`, `email`, `reddit`, `pinterest`, `mastodon`, `telegram`
 
 ```yaml
 article:
