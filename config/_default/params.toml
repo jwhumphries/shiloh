@@ -39,9 +39,6 @@ enableCodeCopy = true
 # Enable lazy loading for images
 enableImageLazyLoading = true
 
-# Enable WebP image format
-enableImageWebp = true
-
 # Enable Quicklink for faster navigation
 enableQuicklink = true
 
@@ -128,6 +125,9 @@ fingerprintAlgorithm = "sha256"
 # ------------------------------------------------------------------------------
 
 [article]
+  # Date format (Go layout string)
+  dateFormat = "January 2, 2006"
+
   # Show publication date
   showDate = true
 
@@ -173,7 +173,7 @@ fingerprintAlgorithm = "sha256"
   showWordCount = false
 
   # Sharing links (available: facebook, x-twitter, mastodon, pinterest, reddit,
-  # linkedin, email, threads, telegram, line, weibo, xing, bluesky)
+  # linkedin, email, telegram, whatsapp)
   # sharingLinks = ["x-twitter", "linkedin", "email"]
 
 # ------------------------------------------------------------------------------

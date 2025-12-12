@@ -46,7 +46,6 @@ For images with captions, use Hugo's figure shortcode:
 
 Shiloh automatically:
 
-- Converts images to WebP format (if `enableImageWebp: true`)
 - Lazy loads images (if `enableImageLazyLoading: true`)
 - Adds responsive sizing
 
