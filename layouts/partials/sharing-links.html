@@ -1,0 +1,41 @@
+{{- $sharingLinks := .Params.sharingLinks | default site.Params.article.sharingLinks }}
+{{- if $sharingLinks }}
+<div class="flex flex-wrap gap-2 mt-8">
+  <span class="text-sm font-semibold text-base-content/60 self-center mr-2">{{ i18n "article.share" | default "Share" }}:</span>
+  {{- $url := .Permalink }}
+  {{- $title := .Title }}
+  {{- $platforms := dict
+    "facebook" (dict "icon" "icon-[tabler--brand-facebook]" "url" "https://www.facebook.com/sharer/sharer.php?u=" "label" "Facebook")
+    "x-twitter" (dict "icon" "icon-[tabler--brand-twitter]" "url" "https://twitter.com/intent/tweet?url=" "label" "X (Twitter)")
+    "linkedin" (dict "icon" "icon-[tabler--brand-linkedin]" "url" "https://www.linkedin.com/sharing/share-offsite/?url=" "label" "LinkedIn")
+    "email" (dict "icon" "icon-[tabler--mail]" "url" "mailto:?subject=" "label" "Email")
+    "reddit" (dict "icon" "icon-[tabler--brand-reddit]" "url" "https://www.reddit.com/submit?url=" "label" "Reddit")
+    "pinterest" (dict "icon" "icon-[tabler--brand-pinterest]" "url" "https://pinterest.com/pin/create/button/?url=" "label" "Pinterest")
+    "mastodon" (dict "icon" "icon-[tabler--brand-mastodon]" "url" "https://mastodon.social/share?text=" "label" "Mastodon")
+    "telegram" (dict "icon" "icon-[tabler--brand-telegram]" "url" "https://t.me/share/url?url=" "label" "Telegram")
+    "whatsapp" (dict "icon" "icon-[tabler--brand-whatsapp]" "url" "https://wa.me/?text=" "label" "WhatsApp")
+  }}
+
+  {{- range $sharingLinks }}
+    {{- $platform := . }}
+    {{- $config := index $platforms $platform }}
+    {{- if $config }}
+      {{- $shareURL := "" }}
+      {{- if eq $platform "email" }}
+        {{- $shareURL = printf "%s%s&body=%s" $config.url $title $url }}
+      {{- else if eq $platform "x-twitter" }}
+        {{- $shareURL = printf "%s%s&text=%s" $config.url $url $title }}
+      {{- else if eq $platform "mastodon" }}
+        {{- $shareURL = printf "%s%s %s" $config.url $title $url }}
+      {{- else if eq $platform "whatsapp" }}
+        {{- $shareURL = printf "%s%s %s" $config.url $title $url }}
+      {{- else }}
+        {{- $shareURL = printf "%s%s" $config.url $url }}
+      {{- end }}
+      <a href="{{ $shareURL }}" target="_blank" rel="noopener noreferrer" class="btn btn-circle btn-sm btn-ghost" aria-label="{{ $config.label }}">
+        <span class="{{ $config.icon }} text-lg"></span>
+      </a>
+    {{- end }}
+  {{- end }}
+</div>
+{{- end }}

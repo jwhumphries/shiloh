@@ -20,7 +20,6 @@ defaultThemeColor = "#ffffff"
 enableSearch = true
 enableCodeCopy = true
 enableImageLazyLoading = true
-enableImageWebp = true
 enableQuicklink = true
 
 # ------------------------------------------------------------------------------
@@ -75,6 +74,7 @@ mainSections = ["samples"]
 # ------------------------------------------------------------------------------
 
 [article]
+  dateFormat = "January 2, 2006"
   showDate = true
   showDateUpdated = false
   showAuthorHeader = true
