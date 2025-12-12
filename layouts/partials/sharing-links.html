@@ -13,7 +13,6 @@
     "pinterest" (dict "icon" "icon-[tabler--brand-pinterest]" "url" "https://pinterest.com/pin/create/button/?url=" "label" "Pinterest")
     "mastodon" (dict "icon" "icon-[tabler--brand-mastodon]" "url" "https://mastodon.social/share?text=" "label" "Mastodon")
     "telegram" (dict "icon" "icon-[tabler--brand-telegram]" "url" "https://t.me/share/url?url=" "label" "Telegram")
-    "whatsapp" (dict "icon" "icon-[tabler--brand-whatsapp]" "url" "https://wa.me/?text=" "label" "WhatsApp")
   }}
 
   {{- range $sharingLinks }}
@@ -26,8 +25,6 @@
       {{- else if eq $platform "x-twitter" }}
         {{- $shareURL = printf "%s%s&text=%s" $config.url $url $title }}
       {{- else if eq $platform "mastodon" }}
-        {{- $shareURL = printf "%s%s %s" $config.url $title $url }}
-      {{- else if eq $platform "whatsapp" }}
         {{- $shareURL = printf "%s%s %s" $config.url $title $url }}
       {{- else }}
         {{- $shareURL = printf "%s%s" $config.url $url }}

@@ -13,7 +13,7 @@ author:
   links:
     - x-twitter: "https://twitter.com/janedoe"
     - linkedin: "https://linkedin.com/in/janedoe"
-sharingLinks: ["x-twitter", "linkedin", "email", "whatsapp", "reddit"]
+sharingLinks: ["x-twitter", "linkedin", "email", "reddit"]
 showDate: true
 showDateUpdated: true
 showAuthorHeader: true
@@ -58,7 +58,6 @@ Supported platforms include:
 *   Pinterest
 *   Mastodon
 *   Telegram
-*   WhatsApp
 
 ### Author Bio
 
