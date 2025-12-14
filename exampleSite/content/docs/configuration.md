@@ -26,6 +26,7 @@ All parameters go in `params` section of your site configuration. Shiloh uses a 
 | `defaultAppearance` | string | `"light"` | Initial theme: `"light"` or `"dark"` |
 | `autoSwitchAppearance` | boolean | `true` | Respect system preference |
 | `defaultThemeColor` | string | `"#ffffff"` | Browser chrome color |
+| `font` | string | `"code"` | Font family: `"code"` or `"prose"` |
 
 ### Theme Colors
 
@@ -43,7 +44,6 @@ Both themes use OKLCH color space for perceptually uniform colors. The color pal
 | `enableSearch` | boolean | `true` | Enable Fuse.js search |
 | `enableCodeCopy` | boolean | `true` | Show copy button on code blocks |
 | `enableImageLazyLoading` | boolean | `true` | Lazy load images |
-| `enableImageWebp` | boolean | `true` | Convert images to WebP |
 | `enableQuicklink` | boolean | `true` | Prefetch links on hover |
 
 ## Metadata
@@ -89,8 +89,8 @@ Configure in `params.header`:
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
+| `showTitle` | boolean | Show site title |
 | `logo` | string | Logo image path |
-| `logoDark` | string | Dark mode logo path |
 
 The header includes:
 
@@ -107,6 +107,7 @@ Configure in `params.footer`:
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `showCopyright` | boolean | `true` | Show copyright notice |
+| `showAttribution` | boolean | `true` | Show attribution |
 | `showAppearanceSwitcher` | boolean | `true` | Show theme toggle in header |
 | `showScrollToTop` | boolean | `true` | Show scroll-to-top button |
 
@@ -125,11 +126,13 @@ Configure in `params.article`:
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
+| `dateFormat` | string | `"January 2, 2006"` | Date format (Go layout) |
 | `showDate` | boolean | `true` | Show publish date |
 | `showDateUpdated` | boolean | `false` | Show last updated date |
 | `showAuthorHeader` | boolean | `true` | Show author info in header |
 | `showAuthorFooter` | boolean | `true` | Show author bio at end of article |
 | `showDraftLabel` | boolean | `true` | Show draft indicator |
+| `editAppendPath` | boolean | `true` | Append path to edit URL |
 | `showHeadingAnchors` | boolean | `true` | Show # links on headings |
 | `showPagination` | boolean | `true` | Show prev/next links |
 | `invertPagination` | boolean | `false` | Reverse pagination order |
@@ -137,12 +140,6 @@ Configure in `params.article`:
 | `showTableOfContents` | boolean | `true` | Show TOC sidebar |
 | `showTaxonomies` | boolean | `false` | Show tags/categories |
 | `showWordCount` | boolean | `false` | Show word count |
-| `showComments` | boolean | `false` | Show comments section |
-| `sharingLinks` | array | `[]` | Social sharing buttons |
-
-### Sharing Links
-
-Available options: `facebook`, `x-twitter`, `mastodon`, `pinterest`, `reddit`, `linkedin`, `email`, `threads`, `telegram`, `line`, `weibo`, `xing`, `bluesky`
 
 ```yaml
 article:
