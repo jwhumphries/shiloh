@@ -164,6 +164,11 @@ fingerprintAlgorithm = "sha256"
   # Show taxonomies (tags, categories, etc.)
   showTaxonomies = false
 
+  # Which taxonomies to display (defaults to ["tags", "categories"])
+  # Set to empty array [] to hide all taxonomies even if showTaxonomies is true
+  # Examples: ["tags", "categories", "topics", "subjects"]
+  displayTaxonomies = ["tags", "categories"]
+
   # Show word count
   showWordCount = false
 

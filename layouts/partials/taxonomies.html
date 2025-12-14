@@ -1,13 +1,15 @@
 {{- $showTaxonomies := .Params.showTaxonomies | default (site.Params.article.showTaxonomies | default false) }}
 {{- if $showTaxonomies }}
+  {{- $displayTaxonomies := .Params.displayTaxonomies | default (site.Params.article.displayTaxonomies | default (slice "tags" "categories")) }}
   {{- $taxonomies := slice }}
 
-  {{- with .GetTerms "tags" }}
-    {{- $taxonomies = $taxonomies | append (dict "title" (i18n "taxonomy.tags" | default "Tags") "terms" .) }}
-  {{- end }}
-
-  {{- with .GetTerms "categories" }}
-    {{- $taxonomies = $taxonomies | append (dict "title" (i18n "taxonomy.categories" | default "Categories") "terms" .) }}
+  {{- range $displayTaxonomies }}
+    {{- $taxonomyName := . }}
+    {{- with $.GetTerms $taxonomyName }}
+      {{- $i18nKey := printf "taxonomy.%s" $taxonomyName }}
+      {{- $title := i18n $i18nKey | default ($taxonomyName | humanize | title) }}
+      {{- $taxonomies = $taxonomies | append (dict "title" $title "terms" .) }}
+    {{- end }}
   {{- end }}
 
   {{- if $taxonomies }}
