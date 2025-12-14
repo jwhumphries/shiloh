@@ -2,49 +2,39 @@
 title: "Front Matter"
 date: 2025-12-07
 weight: 30
-description: "Page-level configuration options."
+description: "Customize individual pages with front matter overrides."
 author:
   name: "Guest Author"
   headline: "Guest Writer"
 ---
 
-All theme parameters can be overridden per-page using front matter. This allows fine-grained control over how each page is displayed.
+All theme parameters can be overridden per-page using front matter. This allows fine-grained control over how each page is displayed, independently of the global configuration.
 
-## Basic Parameters
+## Standard Hugo Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `title` | string | Page title (used in browser tab and headings) |
-| `date` | date | Publish date |
-| `lastmod` | date | Last modified date |
-| `draft` | boolean | Mark as draft (hidden in production) |
-| `description` | string | Page description (meta tag and social cards) |
-| `summary` | string | Custom summary for article cards |
-| `tags` | array | Page tags |
-| `categories` | array | Page categories |
-| `keywords` | array | SEO keywords |
-| `weight` | integer | Sort order for list pages |
-
-## Layout Parameters
+Shiloh supports all standard Hugo front matter variables.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `layout` | string | Override layout template |
-| `type` | string | Content type (determines lookup path) |
+| `title` | string | The title of the page. |
+| `date` | date | The publication date. |
+| `lastmod` | date | The date the content was last modified. |
+| `draft` | boolean | If `true`, the content will not be rendered unless the `--buildDrafts` flag is passed to Hugo. |
+| `description` | string | A description used in meta tags and social cards. |
+| `summary` | string | A custom summary displayed on list pages. |
+| `tags` | array | A list of tags associated with the content. |
+| `categories` | array | A list of categories associated with the content. |
+| `keywords` | array | Keywords for SEO. |
+| `weight` | integer | Used for sorting content in list pages. |
+| `layout` | string | Specify a custom layout template (e.g., `single`, `list`, `about`). |
 
-### Available Layouts
+## Theme Display Overrides
 
-- `single` - Default article layout with optional TOC sidebar
-- `list` - Archive/list page with article cards
-- `about` - About page layout
-
-## Display Overrides
-
-Override any `params.article` setting per-page:
+You can toggle almost any feature defined in `params.article` for a specific page.
 
 ```yaml
 ---
-title: "My Article"
+title: "Customized Article"
 showTableOfContents: false
 showReadingTime: false
 showDate: false
@@ -56,135 +46,69 @@ showPagination: false
 showHeadingAnchors: false
 showDraftLabel: true
 showDateUpdated: true
+invertPagination: true
 ---
 ```
 
 ## Featured Images
 
-Add featured images that appear on article cards:
+Add a featured image to appear at the top of the article and in social media cards.
 
 ```yaml
 ---
-title: "My Article"
-featureImage: "image.jpg"
-featureImageAlt: "Description of image"
+featureImage: "images/cover.jpg"
+featureImageAlt: "A beautiful landscape showing the mountains"
 ---
 ```
 
-Place the image in the same directory as your content file (page bundle) or reference a path in `static/`.
+*   **`featureImage`**: Path to the image. Can be a local path relative to the page bundle, a path in `static/`, or an external URL.
+*   **`featureImageAlt`**: Alt text for accessibility.
 
-## Table of Contents
+## Section Configuration (Cascade)
 
-The TOC appears automatically for articles over 400 words when `showTableOfContents: true` (the default). The TOC displays as a sticky sidebar on larger screens and is hidden on mobile.
-
-To disable for a specific page:
+To apply settings to an entire section (e.g., all posts in `/blog/`), use the `cascade` parameter in the section's `_index.md` file.
 
 ```yaml
 ---
-showTableOfContents: false
+title: "Blog"
+cascade:
+  showReadingTime: true
+  showAuthorFooter: false
+  showDateUpdated: true
 ---
 ```
 
-## Draft Posts
-
-Draft posts are hidden in production but visible during development:
-
-```yaml
----
-draft: true
----
-```
-
-Build with drafts using:
-
-```bash
-hugo --buildDrafts
-hugo server --buildDrafts
-```
-
-When displayed, draft posts show a "Draft" badge (controlled by `showDraftLabel`).
+This ensures that every page within that section inherits these settings.
 
 ## Author Override
 
-Override the site-wide author for a specific page:
+You can credit a different author for a specific post without changing the global site config.
 
 ```yaml
 ---
 author:
-  name: "Guest Author"
-  headline: "Guest Writer"
-  image: "guest-avatar.jpg"
+  name: "Jane Doe"
+  image: "/images/jane.jpg"
+  headline: "Guest Contributor"
+  bio: "Jane is a software engineer who loves open source."
+  links:
+    - x-twitter: "https://x.com/janedoe"
+    - github: "https://github.com/janedoe"
 ---
 ```
 
-## SEO Parameters
+## SEO & Open Graph
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `description` | string | Meta description |
-| `keywords` | array | Meta keywords |
-| `robots` | string | Robots meta directive |
+Override specific SEO metadata for a page.
 
 ```yaml
 ---
-description: "A detailed guide to configuring Shiloh"
-keywords: ["hugo", "theme", "configuration"]
+description: "A comprehensive guide to Shiloh theme configuration."
+keywords: ["hugo", "shiloh", "theme", "guide"]
 robots: "noindex, nofollow"
----
-```
-
-## Open Graph Overrides
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `images` | array | Open Graph images (up to 6) |
-
-```yaml
----
 images:
-  - "og-image.jpg"
-  - "og-image-2.jpg"
+  - "images/og-custom.jpg"
 ---
 ```
 
-## Section Index Pages
-
-For `_index.md` files, additional options control section listing behavior:
-
-```yaml
----
-title: "Blog Posts"
-description: "All articles and tutorials"
-cascade:
-  showReadingTime: true
-  showDate: true
----
-```
-
-The `cascade` option applies settings to all pages in the section.
-
-## Complete Example
-
-```yaml
----
-title: "Getting Started with Shiloh"
-date: 2024-01-15
-lastmod: 2024-01-20
-draft: false
-description: "Learn how to set up and customize the Shiloh Hugo theme"
-summary: "A beginner's guide to the Shiloh theme"
-tags: ["tutorial", "hugo", "themes"]
-categories: ["Documentation"]
-keywords: ["hugo theme", "shiloh", "getting started"]
-featureImage: "cover.jpg"
-featureImageAlt: "Shiloh theme screenshot"
-showTableOfContents: true
-showReadingTime: true
-showWordCount: true
-showTaxonomies: true
-showAuthorHeader: true
-showAuthorFooter: true
-showDate: true
-showDateUpdated: true
----
-```
+*   **`images`**: An array of image paths to use for Open Graph (Facebook, LinkedIn, etc.) and Twitter Cards.

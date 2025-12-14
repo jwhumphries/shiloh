@@ -2,17 +2,17 @@
 title: "Rich Content Demonstration"
 date: 2025-05-15
 lastmod: 2025-05-20
-description: "A comprehensive demonstration of Shiloh's rich content features including social sharing, author bio, taxonomies, and more."
+description: "Exploring the visual capabilities of the Shiloh theme, including typography, media, and shortcodes."
 tags: ["demo", "rich content", "features"]
 categories: ["samples"]
 author:
-  name: "Jane Doe"
-  image: "https://i.pravatar.cc/150?u=jane"
-  headline: "Tech Enthusiast"
-  bio: "Jane loves exploring new technologies and writing about them."
+  name: "Creative Team"
+  image: "https://picsum.photos/id/1025/200/200"
+  headline: "Visual Storytellers"
+  bio: "We bring content to life with code and design."
   links:
-    - x-twitter: "https://twitter.com/janedoe"
-    - linkedin: "https://linkedin.com/in/janedoe"
+    - github: "https://github.com"
+    - x-twitter: "https://x.com"
 showDate: true
 showDateUpdated: true
 showAuthorHeader: true
@@ -21,56 +21,90 @@ showReadingTime: true
 showWordCount: true
 showTableOfContents: true
 showTaxonomies: true
+featureImage: "https://picsum.photos/id/16/1200/600"
+featureImageAlt: "A scenic view of a river and mountains"
 ---
 
-This article demonstrates the rich content capabilities of the Shiloh theme. Below you'll find examples of various features in action.
+{{< lead >}}
+Content is not just text. It's about presentation, structure, and visual appeal. Shiloh provides a suite of tools to make your content stand out.
+{{< /lead >}}
 
-## Typography
+## Typography & Prose
 
-Shiloh uses the `article-prose` class to ensure optimal readability.
+Shiloh utilizes the `article-prose` class, optimizing line length, font size, and spacing for a comfortable reading experience.
 
-### Headings
+### Blockquotes
 
-Headings are automatically anchored. You can click the # symbol next to them to get a direct link.
+> "Design is not just what it looks like and feels like. Design is how it works."
+> {author="Steve Jobs"}
+
+Standard blockquotes are enhanced with optional author attribution.
 
 ### Lists
 
-*   Unordered lists look like this.
-*   They have nice bullets.
-    *   And nested items.
+Lists are styled for clarity.
 
-1.  Ordered lists are also supported.
-2.  With numbers.
+*   **Unordered lists** use clear bullets.
+*   **Nested items** are indented properly.
+    *   Like this one.
+*   **Spacing** is consistent.
 
-## Social Features
+1.  **Ordered lists** help with steps.
+2.  They auto-increment.
+3.  Great for tutorials.
 
-### Author Bio
+## Media Integration
 
-The author bio section at the bottom displays the author's information, including their avatar, name, headline, bio, and social links. This can be configured globally or overridden per page.
+### Images & Captions
 
-## Metadata
+Images are responsive and lazy-loaded. Use the `figure` shortcode for enhanced presentation.
 
-This article displays:
-*   **Publication Date**: {{< param date >}}
-*   **Last Updated**: {{< param lastmod >}}
-*   **Reading Time**: Calculated automatically.
-*   **Word Count**: Calculated automatically.
-*   **Taxonomies**: Tags and Categories listed at the bottom.
+{{< figure src="https://picsum.photos/id/10/800/400" title="Nature" alt="A forest path" caption="The path less traveled." >}}
 
-## Code Blocks
+### Video Embeds
 
-```javascript
-function hello() {
-  console.log("Hello, world!");
+Seamlessly embed content from YouTube or Vimeo.
+
+{{< youtube id="dQw4w9WgXcQ" title="A Classic Video" >}}
+
+## Syntax Highlighting
+
+Code blocks are automatically highlighted and include a copy button.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, Shiloh!")
 }
 ```
 
-## Images
+## Advanced Shortcodes
 
-![Sample Image](https://picsum.photos/id/1018/800/400 "A beautiful landscape")
+Shiloh includes custom shortcodes for specific visual needs.
 
-Images are lazy-loaded by default.
+### Timeline
+
+Great for roadmaps or changelogs.
+
+{{< timeline >}}
+2023: Project Inception
+2024: Alpha Release
+2025: Public Launch
+{{< /timeline >}}
+
+### Rotating Text
+
+Add dynamic movement to your headings.
+
+### We are {{< text-rotate color="text-primary" >}}
+Designers
+Developers
+Creators
+{{< /text-rotate >}}
 
 ## Conclusion
 
-This theme is designed to be flexible and feature-rich, providing a great experience for both writers and readers.
+By combining these elements, you can create rich, engaging narratives that keep your readers interested.
