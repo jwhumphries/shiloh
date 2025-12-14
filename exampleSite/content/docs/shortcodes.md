@@ -2,195 +2,147 @@
 title: "Shortcodes"
 date: 2025-12-07
 weight: 80
-description: "Available shortcodes in Shiloh."
+description: "Documentation for built-in and theme-specific shortcodes."
 ---
 
-Shortcodes extend markdown with reusable components. Shiloh includes custom shortcodes and supports all Hugo built-ins.
+Shortcodes are special snippets inside your content files that Hugo renders into HTML. They allow you to create rich content that Markdown alone cannot support.
 
-## Lead
+## Theme Shortcodes
 
-Creates a larger, muted paragraph for introductory text. Useful for article summaries or key points.
+Shiloh includes several custom shortcodes to enhance your content.
 
-```
+### Lead
+
+The `lead` shortcode is used for the first paragraph of an article to make it stand out.
+
+```html
 {{</* lead */>}}
-This is lead text that introduces the article.
+This is a lead paragraph. It has a larger font size and lighter color.
 {{</* /lead */>}}
 ```
 
 {{< lead >}}
-This is lead text that introduces the article.
+This is a lead paragraph. It has a larger font size and lighter color.
 {{< /lead >}}
 
-The lead shortcode applies:
+### Timeline
 
-- Larger font size
-- Lighter text color
-- Increased line height
+Create a vertical timeline of events. Useful for roadmaps, history, or changelogs.
+
+**Usage:**
+Provide a list of lines in the format `Label: Description`.
+
+```html
+{{</* timeline */>}}
+2020: Foundation
+2021: First Release
+2023: Global Expansion
+{{</* /timeline */>}}
+```
+
+**Output:**
+
+{{< timeline >}}
+2020: Foundation
+2021: First Release
+2023: Global Expansion
+{{< /timeline >}}
+
+### Text Rotate
+
+An animated component that cycles through a list of words. Great for hero sections or emphasizing multiple qualities.
+
+**Parameters:**
+*   `size`: Tailwind text size class (default: `text-xl`).
+*   `color`: Tailwind text color class.
+
+```html
+We are {{</* text-rotate color="text-primary" */>}}
+Fast
+Reliable
+Secure
+{{</* /text-rotate */>}}
+```
+
+**Output:**
+
+We are {{< text-rotate color="text-primary" >}}
+Fast
+Reliable
+Secure
+{{< /text-rotate >}}
+
+### Sentence Rotate
+
+Similar to `text-rotate`, but formats a sentence with a dynamic ending, allowing for different background/text colors for each item.
+
+**Parameters:**
+*   `sentence`: The static prefix text.
+*   `size`: Text size class.
+
+**Format:**
+`Word | classes`
+
+```html
+{{</* sentence-rotate sentence="Build for" */>}}
+Mobile | bg-primary text-primary-content
+Desktop | bg-secondary text-secondary-content
+Web | bg-accent text-accent-content
+{{</* /sentence-rotate */>}}
+```
+
+**Output:**
+
+{{< sentence-rotate sentence="Build for" >}}
+Mobile | bg-primary text-primary-content
+Desktop | bg-secondary text-secondary-content
+Web | bg-accent text-accent-content
+{{< /sentence-rotate >}}
 
 ## Hugo Built-in Shortcodes
 
-Shiloh supports all Hugo built-in shortcodes with theme-aware styling.
+Shiloh fully supports Hugo's internal shortcodes.
 
 ### Figure
 
-Enhanced image display with captions:
+Extends standard markdown images with captions, titles, and classes.
 
+```html
+{{</* figure src="/image.jpg" title="Image Title" caption="Image Caption" */>}}
 ```
-{{</* figure src="/images/photo.jpg" alt="Photo" caption="A descriptive caption" */>}}
+
+### YouTube
+
+Embed a YouTube video.
+
+```html
+{{</* youtube dQw4w9WgXcQ */>}}
 ```
 
-Parameters:
+### Gist
 
-| Parameter | Description |
-|-----------|-------------|
-| `src` | Image path (required) |
-| `alt` | Alt text for accessibility |
-| `caption` | Caption text below image |
-| `title` | Image title (hover text) |
-| `class` | Additional CSS classes |
-| `link` | URL to link the image |
+Embed a GitHub Gist.
+
+```html
+{{</* gist username gist_id */>}}
+```
+
+### Tweet
+
+Embed a tweet (requires X/Twitter API access configuration).
+
+```html
+{{</* tweet user="username" id="tweet_id" */>}}
+```
 
 ### Highlight
 
-Code blocks with syntax highlighting:
+Highlight code snippets.
 
-```
-{{</* highlight go "linenos=table,hl_lines=2" */>}}
+```html
+{{</* highlight go */>}}
 func main() {
     fmt.Println("Hello")
 }
 {{</* /highlight */>}}
 ```
-
-Options (second parameter):
-
-| Option | Description |
-|--------|-------------|
-| `linenos` | Show line numbers (`true`, `false`, `table`, `inline`) |
-| `hl_lines` | Highlight specific lines (e.g., `"1-3 5"`) |
-| `linenostart` | Starting line number |
-
-For simple code blocks, fenced markdown is usually preferred:
-
-````markdown
-```go
-func main() {
-    fmt.Println("Hello")
-}
-```
-````
-
-### YouTube
-
-Embed YouTube videos:
-
-```
-{{</* youtube dQw4w9WgXcQ */>}}
-```
-
-Or with full URL:
-
-```
-{{</* youtube id="dQw4w9WgXcQ" title="Video Title" */>}}
-```
-
-### Vimeo
-
-Embed Vimeo videos:
-
-```
-{{</* vimeo 146022717 */>}}
-```
-
-### Tweet
-
-Embed tweets (requires Twitter API):
-
-```
-{{</* tweet user="GoHugoIO" id="877500564405444608" */>}}
-```
-
-### Gist
-
-Embed GitHub Gists:
-
-```
-{{</* gist spf13 7896402 */>}}
-```
-
-Or a specific file from a gist:
-
-```
-{{</* gist spf13 7896402 "img.html" */>}}
-```
-
-### Param
-
-Output a site parameter:
-
-```
-{{</* param description */>}}
-```
-
-### Ref and Relref
-
-Create links to other pages:
-
-```
-[Link text]({{</* ref "docs/configuration" */>}})
-[Relative link]({{</* relref "configuration" */>}})
-```
-
-## Render Hooks
-
-Shiloh customizes how markdown elements render through hooks in `layouts/_markup/`:
-
-### Images
-
-Images automatically get:
-
-- Lazy loading (if enabled)
-- Rounded corners
-- Center alignment
-- Responsive sizing
-
-### Headings
-
-Headings include anchor links for deep linking. Hover over any heading to see the `#` symbol.
-
-### Links
-
-External links are styled with an underline animation effect.
-
-### Blockquotes
-
-Blockquotes support author attribution using markdown attributes:
-
-```markdown
-> Your quote text here.
-{author="Author Name"}
-```
-
-### Tables
-
-Tables are wrapped in scrollable containers for responsive display.
-
-## Creating Custom Shortcodes
-
-Add custom shortcodes in `layouts/shortcodes/`. For example, create `layouts/shortcodes/alert.html`:
-
-```html
-<div class="alert alert-{{ .Get "type" | default "info" }}">
-  {{ .Inner | markdownify }}
-</div>
-```
-
-Use it:
-
-```
-{{</* alert type="warning" */>}}
-This is a warning message.
-{{</* /alert */>}}
-```
-
-See [Hugo Shortcodes](https://gohugo.io/content-management/shortcodes/) for the complete documentation.

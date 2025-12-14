@@ -1,7 +1,7 @@
 ---
 title: "Page Options Demo"
 date: 2025-12-07
-description: "Demonstrating various front matter options."
+description: "See how front matter parameters change the look of a page."
 tags: ["features", "front matter"]
 showDate: true
 showAuthorHeader: true
@@ -12,68 +12,65 @@ showTableOfContents: false
 ---
 
 {{< lead >}}
-This page demonstrates various front matter options that control article display.
+This page serves as a live demonstration of various front matter options. You can verify the behavior by checking the front matter source of this file.
 {{< /lead >}}
 
-## Options Enabled on This Page
+## Active Settings
 
-This page has these options explicitly enabled:
+This page uses the following configuration overrides:
 
 ```yaml
+---
 showDate: true
 showAuthorHeader: true
 showReadingTime: true
 showWordCount: true
 showTaxonomies: true
 showTableOfContents: false
+---
 ```
 
-Notice the word count appears in the article meta, and tags are shown.
+**Observations:**
+1.  **No Table of Contents**: Even though there are headings, the sidebar TOC is missing because `showTableOfContents` is `false`.
+2.  **Word Count**: You can see the word count near the top (e.g., "150 words").
+3.  **Taxonomies**: Tags are displayed at the bottom of the content.
 
-## Hiding Elements
+## Conceptual Examples
 
-To hide any element, set it to `false`:
+While we can't toggle settings dynamically on a static page, here is how other settings behave:
+
+### Hiding Dates
+
+If you are writing a timeless "About" page or documentation that shouldn't feel dated, disable the date display:
 
 ```yaml
----
 showDate: false
-showAuthorHeader: false
+showDateUpdated: false
+```
+
+### Clean Layout
+
+For a minimal look, perhaps for a landing page or a visual gallery, you might disable most metadata:
+
+```yaml
 showReadingTime: false
----
+showWordCount: false
+showAuthorHeader: false
+showAuthorFooter: false
+showPagination: false
 ```
 
-## Date Options
+### Guest Authors
 
-### Publish Date
-
-```yaml
-date: 2024-01-08
-showDate: true
-```
-
-### Updated Date
-
-```yaml
-date: 2024-01-01
-lastmod: 2024-01-08
-showDateUpdated: true
-```
-
-## Pagination
-
-Control prev/next links:
-
-```yaml
-showPagination: true
-invertPagination: false
-```
-
-## Author Override
-
-Override the site author for a specific page:
+The author block below is overridden for this page. Instead of the site-wide default author, it displays "Guest Author".
 
 ```yaml
 author:
   name: "Guest Author"
   headline: "Guest Writer"
+  bio: "This bio is unique to this specific page."
 ```
+
+## Pagination Control
+
+This page has `showPagination: true` (default), so you should see links to the previous and next articles at the bottom. To create a standalone page (orphan), set it to `false`.
