@@ -11,9 +11,18 @@
     {{ end }}
     <div>
       <h1 class="text-4xl font-bold text-base-content">{{ .Title }}</h1>
-      {{ if .Params.author }}
-      <p class="text-base-content/60 mt-2">{{ .Params.author }}</p>
-      {{ end }}
+      {{- /* Author - check page-level override first, then fall back to site config */ -}}
+      {{- $author := site.Params.author }}
+      {{- with .Params.author }}
+        {{- $author = . }}
+      {{- end }}
+      {{- with $author }}
+        {{- with .name }}
+        <p class="text-base-content/60 mt-2">
+          {{ . }}{{ with $author.headline }} - {{ . }}{{ end }}
+        </p>
+        {{- end }}
+      {{- end }}
     </div>
   </div>
 
