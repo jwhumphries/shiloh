@@ -4,7 +4,7 @@
     "config:best-practices"
   ],
   "baseBranchPatterns": [
-    "main"
+    "dev"
   ],
   "labels": [
     "dependencies"
