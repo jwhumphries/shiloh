@@ -1,7 +1,7 @@
 FROM golang:1.25-alpine@sha256:ac09a5f469f307e5da71e766b0bd59c9c49ea460a528cc3e6686513d64a6f1fb AS gorun
 FROM ghcr.io/gohugoio/hugo:latest@sha256:ebffb1654ef0bc1cc96611ed11f6b5e142c90dc4d384e7716a6b31f20ae0e2fb AS hugo
 
-FROM ghcr.io/jwhumphries/frontend:latest@sha256:b82f93cf562a5e66b63de57506da104519e1162a63ff26b42ccbc30c89aca423 AS frontend
+FROM ghcr.io/jwhumphries/frontend:latest@sha256:d3720e6781c3139393de5b8e68fd23249314fe14138e1820d8ab51acdeafbb02 AS frontend
 ARG THEME_NAME=shiloh
 ENV THEME_NAME=${THEME_NAME}
 WORKDIR /${THEME_NAME}
