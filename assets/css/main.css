@@ -507,7 +507,6 @@
   }
 }
 
-/* Fix modal visibility conflict between daisyUI and FlyonUI */
 dialog.modal[open] {
   opacity: 1;
   pointer-events: auto;
