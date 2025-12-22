@@ -2,31 +2,25 @@
 title: "Front Matter"
 date: 2025-12-07
 weight: 30
-description: "Customize individual pages with front matter overrides."
-author:
-  name: "Guest Author"
-  headline: "Guest Writer"
+description: "Page-level configuration and overrides."
 ---
 
-All theme parameters can be overridden per-page using front matter. This allows fine-grained control over how each page is displayed, independently of the global configuration.
+Front matter allows you to configure settings for individual pages. Shiloh supports standard Hugo front matter parameters as well as theme-specific overrides.
 
-## Standard Hugo Parameters
-
-Shiloh supports all standard Hugo front matter variables.
+## Standard Parameters
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `title` | string | The title of the page. |
-| `date` | date | The publication date. |
-| `lastmod` | date | The date the content was last modified. |
-| `draft` | boolean | If `true`, the content will not be rendered unless the `--buildDrafts` flag is passed to Hugo. |
-| `description` | string | A description used in meta tags and social cards. |
+| `title` | string | The title of the content. |
+| `date` | string | Publication date (ISO 8601 format). |
+| `description` | string | Description used in meta tags and social cards. |
 | `summary` | string | A custom summary displayed on list pages. |
 | `tags` | array | A list of tags associated with the content. |
 | `categories` | array | A list of categories associated with the content. |
 | `keywords` | array | Keywords for SEO. |
 | `weight` | integer | Used for sorting content in list pages. |
 | `layout` | string | Specify a custom layout template (e.g., `single`, `list`, `about`). |
+| `draft` | boolean | If true, the content will not be rendered unless built with `-D`. |
 
 ## Theme Display Overrides
 
@@ -49,6 +43,21 @@ showDateUpdated: true
 invertPagination: true
 ---
 ```
+
+### Available Overrides
+
+*   **`showDate`**: Show/hide publication date.
+*   **`showDateUpdated`**: Show/hide last updated date.
+*   **`showAuthorHeader`**: Show/hide author info at the top.
+*   **`showAuthorFooter`**: Show/hide author bio at the bottom.
+*   **`showDraftLabel`**: Show/hide "Draft" label.
+*   **`showHeadingAnchors`**: Show/hide links next to headings.
+*   **`showPagination`**: Show/hide next/prev links.
+*   **`invertPagination`**: Reverse direction of next/prev links.
+*   **`showReadingTime`**: Show/hide estimated reading time.
+*   **`showTableOfContents`**: Show/hide table of contents.
+*   **`showTaxonomies`**: Show/hide tags and categories.
+*   **`showWordCount`**: Show/hide word count.
 
 ## Featured Images
 

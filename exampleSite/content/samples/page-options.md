@@ -9,6 +9,10 @@ showReadingTime: true
 showWordCount: true
 showTaxonomies: true
 showTableOfContents: false
+author:
+  name: "Guest Author"
+  headline: "Guest Writer"
+  bio: "This bio is unique to this specific page."
 ---
 
 {{< lead >}}

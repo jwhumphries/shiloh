@@ -2,223 +2,244 @@
 title: "Configuration"
 date: 2025-12-07
 weight: 20
-description: "Detailed guide to all available theme parameters and configuration options."
+description: "Detailed guide to theme configuration parameters."
 ---
 
-Shiloh uses a modular configuration structure. While you can put everything in `hugo.toml`, it is recommended to use the `config/_default/params.toml` file for theme-specific settings to keep things organized.
+Shiloh is highly configurable through the `params.toml` file (or `hugo.toml` `[params]` section). Below is a comprehensive reference of all available options.
 
-## Configuration Files
+## Appearance & Color Scheme
 
-| File | Purpose |
-|------|---------|
-| `hugo.toml` | Core Hugo settings (outputs, pagination, privacy, build options) |
-| `params.toml` | Theme-specific parameters (appearance, features, author, etc.) |
-| `languages.en.toml` | Language-specific settings and site title |
-| `menus.en.toml` | Navigation menu definitions |
-| `markup.toml` | Markdown rendering and syntax highlighting options |
-| `module.toml` | Hugo module configuration (if applicable) |
+Control the visual style of your site.
 
-## Appearance
+```toml
+[params]
+  # Color scheme name (currently supports "shiloh")
+  colorScheme = "shiloh"
 
-Control the look and feel of your site in `params.toml`.
+  # Default appearance: "light" or "dark"
+  defaultAppearance = "light"
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `colorScheme` | string | `"shiloh"` | The daisyUI theme name to use. |
-| `defaultAppearance` | string | `"light"` | Initial appearance mode: `"light"` or `"dark"`. |
-| `autoSwitchAppearance` | boolean | `true` | Automatically switch mode based on system preference. |
-| `defaultThemeColor` | string | `"#ffffff"` | The color used for the browser chrome/address bar. |
-| `font` | string | `"code"` | Font family style. Options: `"code"` (Fira Code) or `"prose"` (Fraunces + Lora). |
+  # Auto-switch appearance based on system preference
+  autoSwitchAppearance = true
 
-### Theme Colors
+  # Default theme color for browser chrome (mobile address bar)
+  defaultThemeColor = "#ffffff"
 
-Shiloh comes with two built-in daisyUI themes defined in the CSS:
+  # Font family: "code" (Fira Code) or "prose" (Fraunces + Lora)
+  font = "code"
+```
 
-- **shiloh**: A light theme with carefully selected colors.
-- **shiloh-dark**: A dark theme utilizing the OKLCH color space for perceptually uniform contrast.
+## Feature Flags
 
-## Features
+Toggle major features on or off.
 
-Toggle specific functionality on or off.
+```toml
+[params]
+  # Enable site search (powered by Fuse.js)
+  enableSearch = true
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `enableSearch` | boolean | `true` | Enables the built-in Fuse.js search engine. |
-| `enableCodeCopy` | boolean | `true` | Shows a copy button on all code blocks. |
-| `enableImageLazyLoading` | boolean | `true` | Enables native lazy loading for images to improve performance. |
-| `enableQuicklink` | boolean | `true` | Prefetches links in the viewport for faster subsequent navigation. |
+  # Enable code copy button
+  enableCodeCopy = true
+
+  # Enable lazy loading for images
+  enableImageLazyLoading = true
+
+  # Enable Quicklink for faster navigation pre-fetching
+  enableQuicklink = true
+```
 
 ## Site Metadata
 
-These settings control SEO and meta tags.
+Global metadata settings for SEO and social sharing.
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `description` | string | `""` | The default site description used in meta tags. |
-| `keywords` | array | `[]` | A list of default keywords for the site. |
-| `mainSections` | array | `["posts"]` | Content types to display in the "Recent" section on the homepage. |
-| `robots` | string | `""` | Custom value for the `robots` meta tag. |
-| `fingerprintAlgorithm` | string | `"sha256"` | Algorithm used for SRI (Subresource Integrity) hashing. |
+```toml
+[params]
+  # Site description (used in meta tags)
+  description = "A modern Hugo theme"
+
+  # Site keywords (used in meta tags)
+  keywords = ["hugo", "blog"]
+
+  # Main content sections (for homepage recent posts and search index)
+  mainSections = ["posts"]
+
+  # Fingerprint algorithm for asset integrity
+  fingerprintAlgorithm = "sha256"
+```
 
 ## Author Configuration
 
-Define the default author for the site. This can be overridden per page.
+Configure the default author profile. This appears in the article header and footer.
 
 ```toml
-[author]
-  name = "Shiloh"
+[params.author]
+  name = "Your Name"
   image = "/images/author.jpg"
-  headline = "Theme Developer"
-  bio = "A short bio displayed at the end of articles."
+  headline = "Software Engineer"
+  bio = "A short bio about yourself."
+
+  # Social links
   links = [
+    { email = "mailto:your@email.com" },
+    { x-twitter = "https://twitter.com/username" },
     { github = "https://github.com/username" },
-    { x-twitter = "https://x.com/username" }
+    { linkedin = "https://linkedin.com/in/username" },
   ]
 ```
 
-### Social Links
+## Header Configuration
 
-The `links` array supports the following platforms. The icon is automatically selected based on the key.
+Settings for the top navigation bar.
 
-*   `bluesky`
-*   `discord`
-*   `email`
-*   `facebook`
-*   `github`
-*   `instagram`
-*   `linkedin`
-*   `line`
-*   `mastodon`
-*   `pinterest`
-*   `reddit`
-*   `rss`
-*   `telegram`
-*   `threads`
-*   `weibo`
-*   `whatsapp`
-*   `x-twitter`
-*   `xing`
-*   `youtube`
+```toml
+[params.header]
+  # Show title button (home link)
+  showTitle = true
 
-## Header
+  # Logo image path
+  # - Standard images: path relative to static/ (e.g., "/img/logo.png")
+  # - Inline SVG: path relative to assets/ (e.g., "images/logo.svg")
+  logo = "img/logo.svg"
+```
 
-Configure the top navigation bar.
+## Footer Configuration
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `showTitle` | boolean | Display the site title text. |
-| `logo` | string | Path to a logo image. If set, this replaces the title text. |
+Settings for the site footer.
 
-## Footer
+```toml
+[params.footer]
+  # Show copyright notice
+  showCopyright = true
 
-Customize the site footer.
+  # Show attribution (Powered by Hugo & Shiloh)
+  showAttribution = true
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `showCopyright` | boolean | `true` | Display the copyright year and site title. |
-| `showAttribution` | boolean | `true` | Display "Powered by Hugo & Shiloh". |
-| `showAppearanceSwitcher` | boolean | `true` | Show the light/dark mode toggle. |
-| `showScrollToTop` | boolean | `true` | Show the "Scroll to Top" button. |
+  # Show appearance switcher (light/dark toggle)
+  showAppearanceSwitcher = true
 
-## Homepage
+  # Show scroll to top button
+  showScrollToTop = true
+```
+
+## Homepage Configuration
 
 Settings specific to the homepage.
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `showRecent` | boolean | `true` | Show a list of recent articles. |
-| `recentLimit` | integer | `5` | The number of recent articles to display. |
-
-## Article
-
-Control the display of single article pages. These defaults can be overridden in front matter.
-
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `dateFormat` | string | `"January 2, 2006"` | Date format string (Go layout). |
-| `showDate` | boolean | `true` | Display the publication date. |
-| `showDateUpdated` | boolean | `false` | Display the "Last Updated" date. |
-| `showAuthorHeader` | boolean | `true` | Show the author's name and image in the header. |
-| `showAuthorFooter` | boolean | `true` | Show the author's bio box at the end of the article. |
-| `showDraftLabel` | boolean | `true` | Show a "Draft" badge on non-production builds. |
-| `editAppendPath` | boolean | `true` | Append the file path to the "Edit this page" link. |
-| `showHeadingAnchors` | boolean | `true` | Show link anchors (`#`) on headings on hover. |
-| `showPagination` | boolean | `true` | Show "Previous" and "Next" article links. |
-| `invertPagination` | boolean | `false` | Reverse the order of previous/next links. |
-| `showReadingTime` | boolean | `true` | Display the estimated reading time. |
-| `showTableOfContents` | boolean | `true` | Show the Table of Contents sidebar. |
-| `showTaxonomies` | boolean | `false` | Show tags and categories at the bottom of the article. |
-| `showWordCount` | boolean | `false` | Display the word count. |
-
-### Sharing Links
-
-Enable social sharing buttons at the bottom of articles by listing the platforms:
-
 ```toml
-[article]
-  sharingLinks = [
-    "x-twitter",
-    "linkedin",
-    "email",
-    "facebook",
-    "reddit",
-    "whatsapp",
-    "telegram"
-  ]
+[params.homepage]
+  # Show recent articles on homepage
+  showRecent = true
+
+  # Number of recent articles to show
+  recentLimit = 5
 ```
 
-## List Pages
+## Article Configuration
 
-Configuration for archive and list pages.
+Defaults for article pages. Most of these can be overridden in front matter.
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `showBreadcrumbs` | boolean | `false` | Display breadcrumb navigation. |
-| `showSummary` | boolean | `false` | Show the article summary/description in the card. |
-| `showTableOfContents` | boolean | `false` | Show a Table of Contents on list pages (if applicable). |
-| `showTaxonomies` | boolean | `false` | Show tags/categories on the article cards. |
-| `groupByYear` | boolean | `true` | Group articles by year in the archive list. |
-| `paginationWidth` | integer | `1` | Number of pagination links to show around the current page. |
+```toml
+[params.article]
+  # Date format (Go layout string)
+  dateFormat = "January 2, 2006"
 
-## Taxonomy
+  # Show publication date
+  showDate = true
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `showTermCount` | boolean | `true` | Show the number of articles associated with each term. |
+  # Show last updated date
+  showDateUpdated = false
 
-## Sitemap
+  # Show author information in article header
+  showAuthorHeader = true
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `excludedKinds` | array | `["taxonomy", "term"]` | Page types to exclude from `sitemap.xml`. |
+  # Show author bio section at end of article
+  showAuthorFooter = true
+
+  # Show draft label on draft posts
+  showDraftLabel = true
+
+  # Append article path to edit URL (for "Edit this page" links)
+  editAppendPath = true
+
+  # Show heading anchors (links next to headers)
+  showHeadingAnchors = true
+
+  # Show article pagination (prev/next links)
+  showPagination = true
+
+  # Invert pagination order
+  invertPagination = false
+
+  # Show reading time
+  showReadingTime = true
+
+  # Show table of contents
+  showTableOfContents = true
+
+  # Show taxonomies (tags, categories, etc.)
+  showTaxonomies = false
+
+  # Which taxonomies to display (defaults to ["tags", "categories"])
+  displayTaxonomies = ["tags", "categories"]
+
+  # Show word count
+  showWordCount = false
+
+  # Sharing links to display
+  # Available: facebook, x-twitter, mastodon, pinterest, reddit, linkedin,
+  # email, threads, telegram, line, weibo, xing, bluesky
+  sharingLinks = ["x-twitter", "linkedin", "email"]
+```
+
+## List Configuration
+
+Settings for list pages (archives, section pages).
+
+```toml
+[params.list]
+  # Show breadcrumb navigation
+  showBreadcrumbs = false
+
+  # Show article summary
+  showSummary = false
+
+  # Show table of contents on list pages
+  showTableOfContents = false
+
+  # Show taxonomies on list pages
+  showTaxonomies = false
+
+  # Group articles by year
+  groupByYear = true
+
+  # Pagination width (number of page links to show)
+  paginationWidth = 1
+```
+
+## Taxonomy Configuration
+
+```toml
+[params.taxonomy]
+  # Show term count on taxonomy pages (e.g. "Tags (5)")
+  showTermCount = true
+```
+
+## Sitemap Configuration
+
+```toml
+[params.sitemap]
+  # Exclude these kinds from sitemap
+  excludedKinds = ["taxonomy", "term"]
+```
 
 ## Search Engine Verification
 
-Add your verification codes here to output the respective meta tags.
+Add your verification codes here.
 
 ```toml
-[verification]
-  google = "your-google-code"
-  bing = "your-bing-code"
-  pinterest = "your-pinterest-code"
-  yandex = "your-yandex-code"
+[params.verification]
+  google = ""
+  bing = ""
+  pinterest = ""
+  yandex = ""
 ```
-
-## Menus
-
-Define your navigation menus in `menus.en.toml`.
-
-```toml
-[[main]]
-  name = "Docs"
-  pageRef = "/docs"
-  weight = 10
-
-[[main]]
-  identifier = "search"
-  weight = 100
-```
-
-*   **`main`**: The top navigation bar.
-*   **`footer`**: Links in the footer (e.g., Privacy Policy).
-*   **`search` identifier**: Special identifier to render the search trigger button.
