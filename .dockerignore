@@ -5,6 +5,8 @@
 # Hugo
 public/
 resources/
+exampleSite/public/
+assets/css/compiled/
 
 # Node/Bun
 node_modules/

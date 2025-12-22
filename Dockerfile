@@ -20,11 +20,11 @@ ENTRYPOINT ["/develop.sh"]
 
 FROM frontend AS builder
 WORKDIR /release
+COPY package.json .
+RUN bun install
 COPY assets ./assets
 COPY layouts ./layouts
-COPY package.json .
-RUN bun install \
-    && bun run build
+RUN bun run build
 
 # This stage requires the project directory to be mounted to /${THEME_NAME}
 FROM builder AS releaser

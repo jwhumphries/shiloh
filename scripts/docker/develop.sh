@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 TARGET_DIR="${THEME_NAME:-/}"
 cd /"${TARGET_DIR}"
