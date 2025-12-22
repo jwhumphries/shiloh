@@ -25,3 +25,18 @@ jobs:
             echo "You are trying to merge from '$SOURCE_BRANCH'."
             exit 1
           fi
+
+  verify_build:
+    runs-on: ubuntu-latest
+    needs: check_source_branch
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+
+      - name: Install Task
+        run: |
+          curl -1sLf 'https://dl.cloudsmith.io/public/task/task/setup.deb.sh' | sudo -E bash
+          sudo apt-get install task
+
+      - name: Build Docs
+        run: task docs

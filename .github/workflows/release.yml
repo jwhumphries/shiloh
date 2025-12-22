@@ -28,6 +28,14 @@ jobs:
       - name: Build And Release
         run: task docs
 
+      - name: Verify Build Artifact
+        run: |
+          if [ ! -f "exampleSite/public/index.html" ]; then
+            echo "Error: Build failed. exampleSite/public/index.html not found."
+            ls -R exampleSite/public || echo "exampleSite/public does not exist"
+            exit 1
+          fi
+
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
         with:
