@@ -1,5 +1,5 @@
 FROM golang:1.25-alpine@sha256:ac09a5f469f307e5da71e766b0bd59c9c49ea460a528cc3e6686513d64a6f1fb AS gorun
-FROM ghcr.io/gohugoio/hugo:latest@sha256:1d24d09e334e983a47dda9d6706833f73b2ab8ce68f32ec4353439a1d35a9b06 AS hugo
+FROM ghcr.io/gohugoio/hugo:latest@sha256:6d9a7719f697ca782a5f5bdac3f2a8b0f0162948cd182d776b9b6cef49f5f6d0 AS hugo
 
 FROM ghcr.io/jwhumphries/frontend:latest@sha256:d3720e6781c3139393de5b8e68fd23249314fe14138e1820d8ab51acdeafbb02 AS frontend
 ARG THEME_NAME=shiloh
