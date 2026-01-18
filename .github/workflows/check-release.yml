@@ -40,3 +40,12 @@ jobs:
 
       - name: Build Docs
         run: task docs
+
+      - name: Verify Build Artifact
+        run: |
+          if [ ! -f "exampleSite/public/index.html" ]; then
+            echo "Error: Build failed. exampleSite/public/index.html not found."
+            ls -R exampleSite/public || echo "exampleSite/public does not exist"
+            exit 1
+          fi
+          echo "Build verification passed."
