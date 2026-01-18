@@ -9,12 +9,11 @@ npm install
 echo "🔄 Syncing Hugo module dependencies..."
 hugo mod npm pack
 
-echo "🏗️ Building documentation site..."
-hugo \
-    --minify \
+echo "🚀 Starting Hugo development server..."
+hugo server \
+    --bind 0.0.0.0 \
     --buildDrafts \
     --theme "${THEME_NAME}" \
     --themesDir ../.. \
-    -s ./exampleSite
-
-echo "✅ Site built to exampleSite/public/"
+    -s ./exampleSite \
+    --disableFastRender

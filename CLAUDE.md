@@ -8,72 +8,84 @@ Shiloh is a Hugo theme based on Congo v2, built with Tailwind CSS v4 (Oxide engi
 
 ## Commands
 
-All commands use the Taskfile (requires [go-task](https://taskfile.dev/)). The build system uses Docker with multi-stage builds for different workflows.
+All commands use the Taskfile (requires [go-task](https://taskfile.dev/)). The build system uses Docker with Hugo's built-in Tailwind CSS integration (Hugo Pipes).
 
 ### Development
 ```bash
 task dev
 ```
 Starts the development environment in Docker:
-- Builds the `develop` target image with Hugo, Bun, and Tailwind CLI
+- Builds the `dev` target image with Hugo, npm, and Tailwind CLI
 - Mounts project directory to `/shiloh`
-- Runs `bun install`, initializes CSS (`bun run init`)
-- Starts Tailwind watcher in background (`bun run dev`)
+- Runs `npm install` and `hugo mod npm pack`
 - Launches Hugo server on http://localhost:1313 with `exampleSite` as content source
-- Auto-cleans `node_modules` and `bun.lock` on exit
+- Hugo Pipes compiles Tailwind CSS on-the-fly with live reload
+- Auto-cleans `node_modules` on exit
 
-### Building for Release
+### Sync Dependencies
 ```bash
 task release
 ```
-Compiles CSS for distribution:
-- Runs Tailwind build with minification inside Docker
-- Copies compiled CSS from builder stage to `assets/css/compiled/`
+Syncs Hugo module dependencies to package.json:
+- Runs `hugo mod npm pack` to update package.json with all required npm dependencies
 
 ### Building Documentation Site
 ```bash
 task docs
 ```
 Builds the exampleSite as static HTML:
-- Copies pre-compiled CSS from builder stage
+- Runs `npm install` and `hugo mod npm pack`
 - Runs Hugo build with `--minify --buildDrafts`
-- Outputs to `public/` directory
+- Outputs to `exampleSite/public/` directory
+- Auto-cleans `node_modules` on exit
 
 ### Cleaning
 ```bash
-task clean-docker
+task clean
 ```
-Removes all Docker images (dev, releaser, docs) created by the build system.
+Removes all Docker images and generated files (node_modules, public, resources).
 
 ### Local Development (without Docker)
 ```bash
-bun run init      # One-time CSS compilation
-bun run dev       # Watch mode for development
-bun run build     # Minified production build
+npm install           # Install dependencies
+hugo server           # Start dev server (Hugo Pipes handles CSS)
+hugo                  # Build site
+hugo mod npm pack     # Sync Hugo module deps to package.json
 ```
 
 ## Architecture
 
 ### Build System
 Docker multi-stage builds with three targets:
-- **`develop`** - Full dev environment (Hugo + Bun + Tailwind + Go)
-- **`releaser`** - CSS compilation only
+- **`dev`** - Development server with live reload
+- **`release`** - Syncs Hugo module dependencies
 - **`docs`** - Static site builder
 
-All stages inherit from a `frontend` base with Bun and Tailwind CLI. Entrypoint scripts are in `scripts/docker/`.
+All stages use the Hugo image with Tailwind CLI binary. Entrypoint scripts are in `scripts/docker/`.
 
-### CSS Build Pipeline
+### CSS Build Pipeline (Hugo Pipes)
 - **Source**: `assets/css/main.css` - Tailwind v4's `@import "tailwindcss"` syntax
-- **Content source**: `@source "../../layouts"` scans all layout files for classes
-- **Output**: `assets/css/compiled/main.css`
+- **Processing**: Hugo's `css.TailwindCSS` pipe compiles CSS during build
+- **Class Detection**: `@source "hugo_stats.json"` - Hugo's buildStats tracks used classes
+- **Output**: Fingerprinted CSS in `public/css/`
 - **Plugins** (via `@plugin` directives): daisyui, flyonui, @iconify/tailwind4 (tabler icons)
-- **Themes**: `shiloh` (light, default) and `shiloh-dark` defined inline using OKLCH colors
+- **Themes**: `shiloh`, `shiloh-dark`, `brodie`, `brodie-dark` defined inline using OKLCH colors
+
+### Self-Hosted Fonts (Fontsource)
+Fonts are self-hosted via Hugo module mounts:
+- `node_modules/@fontsource-variable/fira-code/files` → `static/fonts/fira-code`
+- `node_modules/@fontsource-variable/lora/files` → `static/fonts/lora`
+- `node_modules/@fontsource-variable/fraunces/files` → `static/fonts/fraunces`
+
+Font modes controlled by `site.Params.font`:
+- `code` (default): Fira Code Variable
+- `prose`: Lora Variable (body) + Fraunces Variable (headings)
 
 ### Hugo Layout Structure
 - **Base**: `layouts/_default/baseof.html`
 - **Pages**: `index.html`, `_default/single.html`, `_default/list.html`, `_default/taxonomy.html`, `_default/term.html`, `about/single.html`, `404.html`
 - **Render hooks** (`layouts/_markup/`): render-image, render-heading, render-blockquote, render-link, render-table
-- **Key partials**: head, header, footer, article-card, toc, search-modal, scripts
+- **Key partials**: head, header, footer, article-card, toc, search-modal, scripts, css
 
 ### Configuration
 Hugo config split across `config/_default/`:
@@ -81,23 +93,29 @@ Hugo config split across `config/_default/`:
 - `params.toml` - Theme parameters (overridable via front matter)
 - `menus.en.toml` - Navigation
 - `markup.toml` - Markdown rendering
+- `build.toml` - Build stats for Tailwind class detection
+- `module.toml` - Hugo mounts for assets and fonts
 
 ### Custom CSS Utilities
 Defined in `assets/css/main.css`:
 - `article-prose` - Typography system for article content
 - `page-container` - Responsive container with breakpoint-based padding
+- `font-prose` - Serif font mode (Lora + Fraunces)
+- `bg-card` / `bg-card-hover` - Theme-aware card backgrounds
 - Chroma syntax highlighting using daisyUI color variables
 
 ## Important Notes
 
 ### Version Requirements
-- **Hugo**: 0.151.0+
-- **Bun**: Latest version
+- **Hugo**: 0.152.0+ (required for css.TailwindCSS)
+- **npm**: Included in Hugo Docker image
 - **Docker**: Required for standard development
 - **go-task**: Required for Taskfile commands
 
-### CSS Compilation Requirement
-CSS **must** be pre-compiled before Hugo can render pages. Hugo templates reference `assets/css/compiled/main.css`. Run `bun run init` or `task dev` to generate it.
+### Hugo Pipes CSS
+CSS is compiled by Hugo Pipes during build - no pre-compilation step needed. The `css.html` partial handles:
+- Development: Direct CSS link for fast rebuilds
+- Production: Minified and fingerprinted CSS with integrity hash
 
 ### ExampleSite Structure
 The `exampleSite/` directory serves as:

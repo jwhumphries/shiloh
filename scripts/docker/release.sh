@@ -1,6 +1,9 @@
 #!/bin/sh
 set -e
 
-TARGET_DIR="${THEME_NAME:-/}"
-cd /"${TARGET_DIR}"
-cp /release/assets/css/compiled/* ./assets/css/compiled/
+cd /"${THEME_NAME}"
+
+echo "🔄 Syncing Hugo module dependencies to package.json..."
+hugo mod npm pack
+
+echo "✅ package.json updated with Hugo module dependencies"

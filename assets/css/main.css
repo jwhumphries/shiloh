@@ -1,51 +1,103 @@
 @import "tailwindcss";
-@source "../../layouts";
+@source "hugo_stats.json";
 
-/* Safelist utilities for shortcodes
-   These classes are specified in content files (not layouts) so Tailwind
-   can't detect them during the build. We explicitly include them here. */
+/* ============================================================================
+   SELF-HOSTED FONTS (Fontsource)
+   Font files are mounted from node_modules via Hugo module mounts
+   ============================================================================ */
 
-/* Background colors for sentence-rotate shortcode */
-@source inline("bg-{primary,secondary,accent,neutral,info,success,warning,error}");
-@source inline("text-{primary,secondary,accent,neutral,info,success,warning,error}-content");
+/* Fira Code Variable - Monospace font for code mode */
+@font-face {
+  font-family: 'Fira Code Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 700;
+  src: url('/fonts/fira-code/fira-code-latin-ext-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
 
-/* Text colors for text-rotate shortcode */
-@source inline("text-{primary,secondary,accent,neutral,info,success,warning,error}");
+@font-face {
+  font-family: 'Fira Code Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 700;
+  src: url('/fonts/fira-code/fira-code-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
 
-/* Text sizes for text-rotate and sentence-rotate shortcodes */
-@source inline("text-{xl,2xl,3xl,4xl,5xl,6xl,7xl}");
+/* Lora Variable - Serif body font for prose mode */
+@font-face {
+  font-family: 'Lora Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400 700;
+  src: url('/fonts/lora/lora-latin-ext-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
 
-/* daisyUI component color modifiers for preview shortcode and content
-   Covers all component-{color} patterns commonly used in content */
-@source inline("btn-{primary,secondary,accent,neutral,info,success,warning,error}");
-@source inline("badge-{primary,secondary,accent,neutral,info,success,warning,error}");
-@source inline("alert-{primary,secondary,accent,neutral,info,success,warning,error}");
-@source inline("link-{primary,secondary,accent,neutral,info,success,warning,error}");
-@source inline("input-{primary,secondary,accent,neutral,info,success,warning,error}");
-@source inline("textarea-{primary,secondary,accent,neutral,info,success,warning,error}");
-@source inline("select-{primary,secondary,accent,neutral,info,success,warning,error}");
-@source inline("checkbox-{primary,secondary,accent,neutral,info,success,warning,error}");
-@source inline("radio-{primary,secondary,accent,neutral,info,success,warning,error}");
-@source inline("toggle-{primary,secondary,accent,neutral,info,success,warning,error}");
-@source inline("kbd-{primary,secondary,accent,neutral,info,success,warning,error}");
-@source inline("progress-{primary,secondary,accent,neutral,info,success,warning,error}");
-@source inline("stat-{primary,secondary,accent,neutral,info,success,warning,error}");
-@source inline("toast-{primary,secondary,accent,neutral,info,success,warning,error}");
-@source inline("card-{primary,secondary,accent,neutral,info,success,warning,error}");
-@source inline("dropdown-{primary,secondary,accent,neutral,info,success,warning,error}");
-@source inline("menu-{primary,secondary,accent,neutral,info,success,warning,error}");
+@font-face {
+  font-family: 'Lora Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400 700;
+  src: url('/fonts/lora/lora-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
 
-/* Outline and glass variants with colors */
-@source inline("btn-outline");
-@source inline("badge-outline");
-@source inline("btn-glass");
+@font-face {
+  font-family: 'Lora Variable';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 400 700;
+  src: url('/fonts/lora/lora-latin-ext-wght-italic.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
 
-/* Common size and state modifiers */
-@source inline("btn-{xs,sm,md,lg}");
-@source inline("badge-{xs,sm,md,lg}");
-@source inline("input-{xs,sm,md,lg}");
-@source inline("btn-{wide,block,circle,square}");
-@source inline("btn-{ghost,link,active,disabled}");
+@font-face {
+  font-family: 'Lora Variable';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 400 700;
+  src: url('/fonts/lora/lora-latin-wght-italic.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+/* Fraunces Variable - Display serif font for prose mode headings */
+@font-face {
+  font-family: 'Fraunces Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/fraunces/fraunces-latin-ext-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Fraunces Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/fraunces/fraunces-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+@font-face {
+  font-family: 'Fraunces Variable';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/fraunces/fraunces-latin-ext-wght-italic.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Fraunces Variable';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/fraunces/fraunces-latin-wght-italic.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
 
 @plugin "daisyui" {
   themes: shiloh --default, shiloh-dark, brodie, brodie-dark;
@@ -247,7 +299,7 @@
 
 /* Prose font mode: Fraunces for headings, Lora for body text */
 @utility font-prose {
-  font-family: "Lora", serif;
+  font-family: "Lora Variable", serif;
 
   & h1,
   & h2,
@@ -256,7 +308,7 @@
   & h5,
   & h6,
   & .navbar a {
-    font-family: "Fraunces", serif;
+    font-family: "Fraunces Variable", serif;
   }
 }
 

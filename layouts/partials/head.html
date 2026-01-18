@@ -44,22 +44,7 @@
   <link rel="icon" type="image/x-icon" href="{{ "favicon.ico" | relURL }}" />
   <link rel="apple-touch-icon" sizes="180x180" href="{{ "apple-touch-icon.png" | relURL }}" />
 
-  {{- /* Google Fonts */ -}}
-  {{- $font := site.Params.font | default "code" }}
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  {{- if eq $font "code" }}
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
-  {{- else if eq $font "prose" }}
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-  {{- end }}
-
-  {{- /* CSS */ -}}
-  {{- $css := resources.Get "css/compiled/main.css" }}
-  {{- if not $css }}
-  {{- errorf "CSS file not found at assets/css/compiled/main.css. Run 'bun run build' to generate CSS." }}
-  {{- end }}
-  <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
+  {{- with (templates.Defer (dict "key" "global")) }}{{ partial "css.html" . }}{{ end }}
 
   {{- /* Preload search index if enabled */ -}}
   {{- if site.Params.enableSearch | default true }}
