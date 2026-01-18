@@ -1,14 +1,27 @@
 {
-  "name": "shiloh",
-  "version": "0.1.0",
-  "description": "A custom Hugo theme built with Tailwind CSS v4, daisyUI, and FlyonUI",
-  "private": true,
+  "comments": {
+    "dependencies": {
+      "@fontsource-variable/fira-code": "project",
+      "@fontsource-variable/fraunces": "project",
+      "@fontsource-variable/lora": "project",
+      "fuse.js": "project"
+    },
+    "devDependencies": {
+      "@iconify-json/line-md": "project",
+      "@iconify-json/tabler": "project",
+      "@iconify/tailwind4": "project",
+      "daisyui": "project",
+      "flyonui": "project",
+      "theme-change": "project"
+    }
+  },
   "dependencies": {
     "@fontsource-variable/fira-code": "5.2.7",
-    "@fontsource-variable/lora": "5.2.8",
     "@fontsource-variable/fraunces": "5.2.9",
+    "@fontsource-variable/lora": "5.2.8",
     "fuse.js": "^7.1.0"
   },
+  "description": "A custom Hugo theme built with Tailwind CSS v4, daisyUI, and FlyonUI",
   "devDependencies": {
     "@iconify-json/line-md": "1.2.13",
     "@iconify-json/tabler": "1.2.26",
@@ -16,5 +29,8 @@
     "daisyui": "5.5.14",
     "flyonui": "2.4.1",
     "theme-change": "2.5.0"
-  }
+  },
+  "name": "shiloh",
+  "private": true,
+  "version": "0.1.0"
 }

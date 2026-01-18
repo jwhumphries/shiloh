@@ -9,7 +9,6 @@ WORKDIR /${THEME_NAME}
 # Development target - runs Hugo dev server with live reload
 # Requires project directory to be mounted to /${THEME_NAME}
 FROM hugo AS dev
-RUN apk add --no-cache libc6-compat git
 EXPOSE 1313
 COPY --chmod=755 scripts/docker/dev.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
