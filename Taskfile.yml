@@ -4,94 +4,68 @@ version: '3'
 
 vars:
   NAME: shiloh
-  IMAGES:
-    [
-      dev,
-      releaser,
-      docs,
-    ]
-  DEV_IMAGE: '{{.NAME}}:{{index .IMAGES 0}}'
-  RELEASE_IMAGE: '{{.NAME}}:{{index .IMAGES 1}}'
-  DOCS_IMAGE: '{{.NAME}}:{{index .IMAGES 2}}'
 
 tasks:
-  docker-build-target:
+  # Internal tasks
+  docker-build:
     internal: true
     cmds:
-      - docker build --target {{.DOCKER_TARGET}} -t {{.DOCKER_IMAGE}} --build-arg THEME_NAME={{.NAME}} .
-  docker-clean-image:
+      - docker build --target {{.TARGET}} -t {{.NAME}}:{{.TARGET}} --build-arg THEME_NAME={{.NAME}} .
+
+  docker-run:
     internal: true
     cmds:
-      - docker rmi {{.DOCKER_IMAGE}}
-    silent: true
-    ignore_error: true
-  docker-clean-images:
-    internal: true
-    cmds:
-      - for: { var: IMAGES }
-        task: docker-clean-image
-        vars: { DOCKER_IMAGE: '{{.NAME}}:{{.ITEM}}' } 
-  clean-docker:
-    desc: Clean all images
-    cmds:
-      - echo "🧹 Cleaning Docker images..."
-      - task: docker-clean-images
-      - echo "✅ Cleaned Docker images"
-    silent: true
-  clean-js-files:
+      - docker run --rm {{.DOCKER_ARGS}} -v "{{.USER_WORKING_DIR}}:/{{.NAME}}" {{.NAME}}:{{.TARGET}}
+
+  clean-node-modules:
     internal: true
     cmds:
       - rm -rf node_modules
-      - rm -rf bun.lock
-  build-dev:
-    desc: Build development image
-    cmds:
-      - task: docker-build-target
-        vars:
-          DOCKER_TARGET: develop
-          DOCKER_IMAGE: '{{.DEV_IMAGE}}'
+
+  # Public tasks
   dev:
-    desc: Start development container and mount files
+    desc: Start development environment with live reload
     cmds:
-      - echo "🎨 Starting Shiloh development environment in Docker..."
-      - echo "🛠️ Building dev image.."
-      - task: build-dev
-      - defer: { task: clean-js-files }
-      - echo "💻 Starting dev image.."
-      - docker run --rm -it -p 1313:1313 -v "{{.USER_WORKING_DIR}}:/{{.NAME}}" {{.DEV_IMAGE}}
-    silent: true
-  build-releaser:
-    internal: true
-    cmds:
-      - task: docker-build-target
+      - echo "🎨 Starting Shiloh development environment..."
+      - task: docker-build
+        vars: { TARGET: dev }
+      - defer: { task: clean-node-modules }
+      - task: docker-run
         vars:
-          DOCKER_TARGET: releaser
-          DOCKER_IMAGE: '{{.RELEASE_IMAGE}}'
+          TARGET: dev
+          DOCKER_ARGS: -it -p 1313:1313
+    silent: true
+
   release:
-    desc: Build the theme
+    desc: Sync Hugo module dependencies to package.json
     cmds:
-      - echo "🏭 Building Shiloh theme..."
-      - echo "🛠️ Building releaser image.."
-      - task: build-releaser
-      - echo "📦 Running releaser image..."
-      - docker run --rm -v "{{.USER_WORKING_DIR}}:/{{.NAME}}" {{.RELEASE_IMAGE}}
-      - echo "💄 CSS compiled!"
+      - echo "📦 Syncing Hugo module dependencies..."
+      - task: docker-build
+        vars: { TARGET: release }
+      - task: docker-run
+        vars: { TARGET: release }
     silent: true
-  build-docs:
-    internal: true
-    cmds:
-      - task: docker-build-target
-        vars:
-          DOCKER_TARGET: docs
-          DOCKER_IMAGE: '{{.DOCS_IMAGE}}'
+
   docs:
-    desc: Build the documentation exampleSite
+    desc: Build the documentation site
     cmds:
-      - echo "🏭 Building the docs site..."
-      - echo "🛠️ Building docs image.."
-      - task: build-docs
-      - echo "📦 Running docs image..."
-      - docker run --rm -v "{{.USER_WORKING_DIR}}:/{{.NAME}}" {{.DOCS_IMAGE}}
-      - echo "All done! Site is generated in public/"
+      - echo "🏗️ Building documentation site..."
+      - task: docker-build
+        vars: { TARGET: docs }
+      - defer: { task: clean-node-modules }
+      - task: docker-run
+        vars: { TARGET: docs }
+      - echo "📄 Site generated in exampleSite/public/"
     silent: true
-    
+
+  clean:
+    desc: Clean all Docker images and generated files
+    cmds:
+      - echo "🧹 Cleaning up..."
+      - docker rmi {{.NAME}}:dev {{.NAME}}:release {{.NAME}}:docs 2>/dev/null || true
+      - rm -rf node_modules
+      - rm -rf public
+      - rm -rf exampleSite/public
+      - rm -rf resources
+      - echo "✅ Cleanup complete"
+    silent: true

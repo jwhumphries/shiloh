@@ -1,45 +1,27 @@
-FROM golang:1.25-alpine@sha256:ac09a5f469f307e5da71e766b0bd59c9c49ea460a528cc3e6686513d64a6f1fb AS gorun
+FROM ghcr.io/jwhumphries/tailwindcss:latest@sha256:a4fdf32e156f84f0221a77b2c5afc2448a6b143b088df5e2d3e3fa6ac31f4656 AS tailwind
 FROM ghcr.io/gohugoio/hugo:latest@sha256:53dc48ef4d550835b0e54b0f6b41e22e5160e27065d0691b220a713218eb059d AS hugo
 
-FROM ghcr.io/jwhumphries/frontend:latest@sha256:682cee3e8392ecaf2e6bfdf2d4f6886e95a3fdea7efe06398d924a50e9017690 AS frontend
 ARG THEME_NAME=shiloh
 ENV THEME_NAME=${THEME_NAME}
+COPY --from=tailwind /usr/local/bin/tailwindcss /usr/local/bin/
 WORKDIR /${THEME_NAME}
 
-# This stage requires the project directory to be mounted to /${THEME_NAME}
-FROM frontend AS develop
-RUN apk add --no-cache \
-    libc6-compat \
-    git
-COPY --from=gorun /usr/local/go /usr/local/go
-ENV PATH="/usr/local/go/bin:${PATH}"
-COPY --from=hugo /usr/bin/hugo /usr/local/bin/hugo
+# Development target - runs Hugo dev server with live reload
+# Requires project directory to be mounted to /${THEME_NAME}
+FROM hugo AS dev
+RUN apk add --no-cache libc6-compat git
 EXPOSE 1313
-COPY --chmod=755 scripts/docker/develop.sh /develop.sh
-ENTRYPOINT ["/develop.sh"]
+COPY --chmod=755 scripts/docker/dev.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 
-FROM frontend AS builder
-WORKDIR /release
-COPY package.json .
-RUN bun install
-COPY assets ./assets
-COPY layouts ./layouts
-RUN bun run build
+# Release target - updates package.json with Hugo module dependencies
+# Requires project directory to be mounted to /${THEME_NAME}
+FROM hugo AS release
+COPY --chmod=755 scripts/docker/release.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 
-# This stage requires the project directory to be mounted to /${THEME_NAME}
-FROM builder AS releaser
-ARG THEME_NAME=shiloh
-ENV THEME_NAME=${THEME_NAME}
-WORKDIR /${THEME_NAME}
-COPY --chmod=755 scripts/docker/release.sh /release.sh
-ENTRYPOINT ["/release.sh"]
-
-# This stage requires the project directory to be mounted to /${THEME_NAME}
+# Docs target - builds the documentation site
+# Requires project directory to be mounted to /${THEME_NAME}
 FROM hugo AS docs
-ARG THEME_NAME=shiloh
-ENV THEME_NAME=${THEME_NAME}
-USER root:root
-COPY --from=builder /release/assets/css/compiled /release/assets/css/compiled
-WORKDIR /${THEME_NAME}
-COPY --chmod=755 scripts/docker/docs.sh /docs.sh
-ENTRYPOINT ["/docs.sh"]
+COPY --chmod=755 scripts/docker/docs.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]

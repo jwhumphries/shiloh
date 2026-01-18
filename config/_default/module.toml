@@ -10,3 +10,21 @@
   disableWatch = true
   source = 'hugo_stats.json'
   target = 'assets/notwatching/hugo_stats.json'
+
+# Static mounts
+[[mounts]]
+  source = 'static'
+  target = 'static'
+
+# Fontsource font mounts - serve font files from /fonts/
+[[mounts]]
+  source = 'node_modules/@fontsource-variable/fira-code/files'
+  target = 'static/fonts/fira-code'
+
+[[mounts]]
+  source = 'node_modules/@fontsource-variable/lora/files'
+  target = 'static/fonts/lora'
+
+[[mounts]]
+  source = 'node_modules/@fontsource-variable/fraunces/files'
+  target = 'static/fonts/fraunces'
