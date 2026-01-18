@@ -1,3 +1,12 @@
 [hugoVersion]
   extended = true
   min = "0.152.0"
+
+[[mounts]]
+  source = 'assets'
+  target = 'assets'
+
+[[mounts]]
+  disableWatch = true
+  source = 'hugo_stats.json'
+  target = 'assets/notwatching/hugo_stats.json'

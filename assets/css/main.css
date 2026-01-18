@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@source "../../layouts";
+@source "hugo_stats.json";
 
 /* Safelist utilities for shortcodes
    These classes are specified in content files (not layouts) so Tailwind
