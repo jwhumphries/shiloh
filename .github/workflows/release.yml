@@ -41,20 +41,6 @@ jobs:
         with:
           path: 'exampleSite/public/'
 
-      - name: Commit and Push CSS
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          if [[ -n $(git status --porcelain assets/css/compiled/main.css) ]]; then
-            echo "CSS changes detected. Committing..."
-            git add assets/css/compiled/main.css
-            git commit -m "chore(release): update compiled css [skip ci]"
-            git push origin release
-          else
-            echo "No changes to 'assets/css/compiled/main.css'."
-          fi
-
   deploy_docs:
     environment:
       name: github-pages
