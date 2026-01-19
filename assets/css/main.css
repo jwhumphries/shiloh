@@ -243,6 +243,50 @@
 }
 
 /* ============================================================================
+   TARGET STYLING
+   Remove browser default blue box when navigating to anchors
+   ============================================================================ */
+
+:target {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none;
+  scroll-margin-top: 1rem;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-focus-ring-color: transparent;
+}
+
+/* Remove focus ring and borders on headings and their anchor links when targeted */
+h1, h2, h3, h4, h5, h6,
+h1:target,
+h2:target,
+h3:target,
+h4:target,
+h5:target,
+h6:target,
+:target .anchor-link,
+:target:focus,
+:target:focus-visible,
+.anchor-link,
+.anchor-link:focus,
+.anchor-link:focus-visible,
+.anchor-link:active {
+  outline: none !important;
+  outline-color: transparent !important;
+  outline-style: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-color: transparent !important;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-focus-ring-color: transparent;
+}
+
+/* Ensure headings themselves never get a border */
+h1, h2, h3, h4, h5, h6 {
+  border: none !important;
+}
+
+/* ============================================================================
    SWUP PAGE TRANSITIONS
    ============================================================================ */
 
@@ -384,7 +428,7 @@ html.is-changing {
   & h5,
   & h6 {
     font-weight: 600;
-    scroll-margin-top: 6rem;
+    scroll-margin-top: 1rem;
   }
 
   & h1 {

@@ -48,11 +48,13 @@ const swup = new Swup({
         samePageWithHash: true,
         samePage: true
       },
-      scrollFunction: (target, options) => {
-        const start = window.scrollY;
-        const end = typeof target === 'number' ? target : target.getBoundingClientRect().top + start - (options?.offset || 0);
+      offset: 16, // Small offset for visual breathing room
+      // Scroll function signature: (context, targetY, startY, animate, onStart, onEnd)
+      scrollFunction: (_ctx, targetY, startY, _animate, onStart, onEnd) => {
         const duration = 400; // milliseconds
         const startTime = performance.now();
+
+        if (onStart) onStart();
 
         return new Promise((resolve) => {
           function step(currentTime) {
@@ -60,11 +62,12 @@ const swup = new Swup({
             const progress = Math.min(elapsed / duration, 1);
             // Ease out cubic
             const eased = 1 - Math.pow(1 - progress, 3);
-            window.scrollTo(0, start + (end - start) * eased);
+            window.scrollTo(0, startY + (targetY - startY) * eased);
 
             if (progress < 1) {
               requestAnimationFrame(step);
             } else {
+              if (onEnd) onEnd();
               resolve();
             }
           }
@@ -101,3 +104,11 @@ swup.hooks.on('page:view', initPageScripts);
 
 // Cleanup before content replacement
 swup.hooks.on('content:replace', cleanupPageScripts);
+
+// Close search modal when navigation starts
+swup.hooks.on('visit:start', () => {
+  const searchModal = document.getElementById('search-modal');
+  if (searchModal && searchModal.open) {
+    searchModal.close();
+  }
+});
