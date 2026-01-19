@@ -13,17 +13,6 @@
       </div>
       {{- end }}
     </nav>
-    {{- /* Right Section: Appearance Switcher */ -}}
-    {{- if site.Params.footer.showAppearanceSwitcher | default true }}
-    <aside>
-      <label class="swap swap-rotate" aria-label="{{ i18n " ui.toggle_theme" | default "Toggle theme" }}">
-        <input type="checkbox" data-toggle-theme="{{ site.Params.colorScheme | default " shiloh" }},{{
-          site.Params.colorScheme | default "shiloh" }}-dark" data-act-class="swap-active" />
-        <span class="swap-on icon-[line-md--moon-rising-alt-loop] h-6 w-6" aria-hidden="true"></span>
-        <span class="swap-off icon-[line-md--sun-rising-loop] h-6 w-6" aria-hidden="true"></span>
-      </label>
-    </aside>
-    {{- end }}
   </div>
 </footer>
 {{- if site.Params.footer.showCopyright | default true }}

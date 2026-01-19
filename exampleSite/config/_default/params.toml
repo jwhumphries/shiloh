@@ -51,6 +51,7 @@ mainSections = ["samples"]
 [header]
   showTitle = true
   logo = "/shiloh.png"
+  showAppearanceSwitcher = true
 
 # ------------------------------------------------------------------------------
 # Footer Configuration
@@ -59,7 +60,6 @@ mainSections = ["samples"]
 [footer]
   showCopyright = true
   showAttribution = true
-  showAppearanceSwitcher = true
   showScrollToTop = true
 
 # ------------------------------------------------------------------------------

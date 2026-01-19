@@ -115,6 +115,10 @@ fingerprintAlgorithm = "sha256"
   # - For inline SVG (supports theming): path relative to assets/ (e.g., "images/logo.svg")
   #   SVG files are inlined and styled with text-base-content for theme support
   # logo = "img/logo.svg"
+ 
+  # Show appearance switcher (light/dark toggle)
+  showAppearanceSwitcher = true
+
 
 # ------------------------------------------------------------------------------
 # Footer Configuration
@@ -126,9 +130,6 @@ fingerprintAlgorithm = "sha256"
 
   # Show attribution (Powered by Hugo & Shiloh)
   showAttribution = true
-
-  # Show appearance switcher (light/dark toggle)
-  showAppearanceSwitcher = true
 
   # Show scroll to top button
   showScrollToTop = true
