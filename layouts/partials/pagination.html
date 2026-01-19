@@ -1,71 +1,59 @@
 {{- $paginator := .Paginator }}
-{{- $anchor := "#articles" }}
 {{- if gt $paginator.TotalPages 1 }}
-<nav class="mt-12 flex items-center justify-center gap-x-1" aria-label="{{ i18n "pagination.label" | default "Pagination" }}">
+{{- $currentPage := $paginator.PageNumber }}
+{{- $totalPages := $paginator.TotalPages }}
+{{- $windowSize := 3 }}
+
+{{- /* Calculate window bounds centered on current page */ -}}
+{{- $halfWindow := div (sub $windowSize 1) 2 }}
+{{- $windowStart := sub $currentPage $halfWindow }}
+{{- $windowEnd := add $currentPage $halfWindow }}
+
+{{- /* Adjust if window extends beyond bounds */ -}}
+{{- if lt $windowStart 1 }}
+  {{- $windowStart = 1 }}
+  {{- $windowEnd = math.Min $windowSize $totalPages }}
+{{- else if gt $windowEnd $totalPages }}
+  {{- $windowEnd = $totalPages }}
+  {{- $windowStart = math.Max 1 (add (sub $totalPages $windowSize) 1) }}
+{{- end }}
+
+<nav class="flex items-center justify-center gap-x-4" aria-label="{{ i18n "pagination.label" | default "Pagination" }}">
   {{- /* Previous Button */ -}}
   {{- if $paginator.HasPrev }}
-    <a href="{{ $paginator.Prev.URL }}{{ $anchor }}" class="btn btn-text" aria-label="{{ i18n "pagination.previous" | default "Previous page" }}">
-      <span class="icon-[tabler--arrow-badge-left] size-5" aria-hidden="true"></span>
-      {{ i18n "pagination.previous_short" | default "Previous" }}
+    <a href="{{ $paginator.Prev.URL }}" class="btn btn-ghost btn-circle btn-sm" aria-label="{{ i18n "pagination.previous" | default "Previous page" }}" data-pagination-direction="prev">
+      <span class="icon-[tabler--chevron-left] size-5" aria-hidden="true"></span>
     </a>
   {{- else }}
-    <button class="btn btn-text" aria-label="{{ i18n "pagination.previous" | default "Previous page" }}" disabled>
-      <span class="icon-[tabler--arrow-badge-left] size-5" aria-hidden="true"></span>
-      {{ i18n "pagination.previous_short" | default "Previous" }}
+    <button class="btn btn-ghost btn-circle btn-sm" aria-label="{{ i18n "pagination.previous" | default "Previous page" }}" disabled>
+      <span class="icon-[tabler--chevron-left] size-5" aria-hidden="true"></span>
     </button>
   {{- end }}
 
-  {{- /* Page Numbers */ -}}
-  {{- $paginationWidth := site.Params.list.paginationWidth | default 1 }}
-  {{- $currentPage := $paginator.PageNumber }}
-  {{- $totalPages := $paginator.TotalPages }}
-
-  <div class="flex items-center gap-x-1">
-    {{- if le $totalPages 7 }}
-      {{- range $paginator.Pagers }}
+  {{- /* Page Status Indicators (windowed) */ -}}
+  <div class="flex items-center gap-x-2">
+    {{- range $paginator.Pagers }}
+      {{- $pageNum := .PageNumber }}
+      {{- if and (ge $pageNum $windowStart) (le $pageNum $windowEnd) }}
         {{- if eq . $paginator }}
-          <button class="btn btn-text btn-square btn-primary" aria-current="page" aria-label="{{ i18n "pagination.page" | default "Page" }} {{ .PageNumber }}">{{ .PageNumber }}</button>
+          {{- /* Current page - bouncing primary status */ -}}
+          <span class="status status-primary animate-bounce" aria-current="page" aria-label="{{ i18n "pagination.page" | default "Page" }} {{ $pageNum }} ({{ i18n "pagination.current" | default "current" }})"></span>
         {{- else }}
-          <a href="{{ .URL }}{{ $anchor }}" class="btn btn-text btn-square" aria-label="{{ i18n "pagination.page" | default "Page" }} {{ .PageNumber }}">{{ .PageNumber }}</a>
+          {{- /* Other pages - clickable neutral status */ -}}
+          <a href="{{ .URL }}" class="status status-neutral hover:status-secondary transition-colors" aria-label="{{ i18n "pagination.page" | default "Page" }} {{ $pageNum }}" data-pagination-direction="{{ if lt $pageNum $currentPage }}prev{{ else }}next{{ end }}"></a>
         {{- end }}
-      {{- end }}
-    {{- else }}
-      {{- /* Show first page */ -}}
-      {{- if gt $currentPage (add $paginationWidth 2) }}
-        <a href="{{ $paginator.First.URL }}{{ $anchor }}" class="btn btn-text btn-square" aria-label="{{ i18n "pagination.page" | default "Page" }} 1">1</a>
-        <span class="px-1" aria-hidden="true">...</span>
-      {{- end }}
-
-      {{- /* Show surrounding pages */ -}}
-      {{- range $paginator.Pagers }}
-        {{- $pageNum := .PageNumber }}
-        {{- if and (ge $pageNum (sub $currentPage $paginationWidth)) (le $pageNum (add $currentPage $paginationWidth)) }}
-          {{- if eq . $paginator }}
-            <button class="btn btn-text btn-square btn-primary" aria-current="page" aria-label="{{ i18n "pagination.page" | default "Page" }} {{ $pageNum }}">{{ $pageNum }}</button>
-          {{- else }}
-            <a href="{{ .URL }}{{ $anchor }}" class="btn btn-text btn-square" aria-label="{{ i18n "pagination.page" | default "Page" }} {{ $pageNum }}">{{ $pageNum }}</a>
-          {{- end }}
-        {{- end }}
-      {{- end }}
-
-      {{- /* Show last page */ -}}
-      {{- if lt $currentPage (sub $totalPages (add $paginationWidth 1)) }}
-        <span class="px-1" aria-hidden="true">...</span>
-        <a href="{{ $paginator.Last.URL }}{{ $anchor }}" class="btn btn-text btn-square" aria-label="{{ i18n "pagination.page" | default "Page" }} {{ $totalPages }}">{{ $totalPages }}</a>
       {{- end }}
     {{- end }}
   </div>
 
   {{- /* Next Button */ -}}
   {{- if $paginator.HasNext }}
-    <a href="{{ $paginator.Next.URL }}{{ $anchor }}" class="btn btn-text" aria-label="{{ i18n "pagination.next" | default "Next page" }}">
-      {{ i18n "pagination.next_short" | default "Next" }}
-      <span class="icon-[tabler--arrow-badge-right] size-5" aria-hidden="true"></span>
+    <a href="{{ $paginator.Next.URL }}" class="btn btn-ghost btn-circle btn-sm" aria-label="{{ i18n "pagination.next" | default "Next page" }}" data-pagination-direction="next">
+      <span class="icon-[tabler--chevron-right] size-5" aria-hidden="true"></span>
     </a>
   {{- else }}
-    <button class="btn btn-text" aria-label="{{ i18n "pagination.next" | default "Next page" }}" disabled>
-      {{ i18n "pagination.next_short" | default "Next" }}
-      <span class="icon-[tabler--arrow-badge-right] size-5" aria-hidden="true"></span>
+    <button class="btn btn-ghost btn-circle btn-sm" aria-label="{{ i18n "pagination.next" | default "Next page" }}" disabled>
+      <span class="icon-[tabler--chevron-right] size-5" aria-hidden="true"></span>
     </button>
   {{- end }}
 </nav>

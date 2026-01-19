@@ -100,6 +100,8 @@
 
 @plugin "@iconify/tailwind4";
 
+@plugin "tailwindcss-motion";
+
 @plugin "daisyui/theme" {
   name: "shiloh";
   default: true;
@@ -300,7 +302,7 @@ h6 {
 
 /* Base transition setup */
 html.is-changing #swup {
-  transition: opacity 0.25s ease-out;
+  transition: opacity 0.15s ease-out;
 }
 
 /* Leave animation (current page fading out) */
@@ -310,7 +312,7 @@ html.is-animating #swup {
 
 /* Slide transition variant */
 html.is-changing .transition-slide {
-  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+  transition: opacity 0.15s ease-out, transform 0.15s ease-out;
 }
 
 html.is-animating.is-leaving .transition-slide {
@@ -851,22 +853,11 @@ dialog.modal[open] {
   color: var(--color-error);
 }
 
-/* Custom DaisyUI Styles */
-.link {
-  @apply inline-block cursor-pointer font-medium underline;
-  &:focus {
-    @apply outline-none;
-  }
-  &:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: 2px;
-  }
-  &.disabled,
-  &[disabled],
-  &:disabled {
-    @apply pointer-events-none opacity-50;
-  }
-}
+/* ============================================================================
+   FLYONUI LINK STYLES
+   Animated link underline effect
+   Source: FlyonUI
+   ============================================================================ */
 
 .link:where(.link-animated) {
   @apply relative no-underline before:pointer-events-none before:absolute before:start-0 before:bottom-0 before:h-px before:w-full before:bg-current before:transition-transform before:duration-300 before:ease-in-out before:content-[''];
@@ -880,4 +871,14 @@ dialog.modal[open] {
 .link:where(.link-animated):hover::before {
   transform-origin: 0% 50%;
   transform: scale3d(1, 1, 1);
+}
+
+/* ============================================================================
+   SWUP ARTICLE FRAGMENT ANIMATIONS
+   Individual card animations are handled by tailwindcss-motion presets
+   ============================================================================ */
+
+/* Minimal transition to satisfy swup's animation detection */
+#articles {
+  transition: opacity 0.01s;
 }
