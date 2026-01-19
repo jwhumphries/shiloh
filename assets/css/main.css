@@ -854,6 +854,34 @@ dialog.modal[open] {
 }
 
 /* ============================================================================
+   TABLE OF CONTENTS STYLING
+   ============================================================================ */
+
+#toc-nav a {
+  transition: color 0.15s ease-out;
+}
+
+#toc-nav a.active {
+  @apply relative font-bold text-base-content;
+}
+
+/* Animated underline for active TOC link */
+#toc-nav a.active::before {
+  @apply pointer-events-none absolute bottom-0 start-0 h-0.5 w-full bg-secondary content-[''];
+  transform-origin: 0% 50%;
+  animation: toc-underline-in 0.3s ease-out forwards;
+}
+
+@keyframes toc-underline-in {
+  from {
+    transform: scale3d(0, 1, 1);
+  }
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+/* ============================================================================
    FLYONUI LINK STYLES
    Animated link underline effect
    Source: FlyonUI

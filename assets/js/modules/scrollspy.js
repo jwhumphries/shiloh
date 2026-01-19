@@ -40,8 +40,8 @@ export function initScrollspy() {
       });
     },
     {
-      // Offset to account for fixed header and trigger slightly before heading reaches top
-      rootMargin: '-80px 0px -70% 0px',
+      // Small active zone at top of viewport - only top ~10%
+      rootMargin: '0px 0px -90% 0px',
       threshold: 0
     }
   );

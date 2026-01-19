@@ -2,15 +2,6 @@
 {{- if and $fragments $fragments.Headings }}
 {{- $rootHeadings := (index $fragments.Headings 0).Headings }}
 {{- if $rootHeadings }}
-<style>
-  #toc-nav a.active {
-    color: var(--color-primary) !important;
-    font-weight: 500 !important;
-  }
-  #toc-nav a {
-    transition: color 0.15s ease-out;
-  }
-</style>
 <aside class="toc-sidebar hidden lg:block">
   <div class="sticky top-4">
     <nav class="max-h-[calc(100vh-8rem)] overflow-y-auto" id="toc-nav">
