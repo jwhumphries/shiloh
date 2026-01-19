@@ -40,17 +40,24 @@ export function initScrollToTop(swup) {
   // Initial check
   updateVisibility();
 
-  // Handle click - use swup's scroll plugin if available
+  // Handle click - use custom smooth scroll animation matching ToC behavior
   btn.onclick = () => {
-    if (swup) {
-      // Try to use swup's scroll plugin for consistent animation
-      const scrollPlugin = swup.findPlugin('SwupScrollPlugin');
-      if (scrollPlugin && typeof scrollPlugin.scrollTo === 'function') {
-        scrollPlugin.scrollTo(0);
-        return;
+    const start = window.scrollY;
+    const targetY = 0;
+    const duration = 400; // milliseconds, matches ToC scroll
+    const startTime = performance.now();
+
+    function step(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease out cubic (matches ToC scroll)
+      const eased = 1 - Math.pow(1 - progress, 3);
+      window.scrollTo(0, start + (targetY - start) * eased);
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
       }
     }
-    // Fallback to native smooth scroll
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    requestAnimationFrame(step);
   };
 }

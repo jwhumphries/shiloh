@@ -103,3 +103,11 @@ mainSections = ["samples"]
 
 [taxonomy]
   showTermCount = true
+
+[swup]
+  enable = true
+  animation = "fade"
+  nativeTransitions = true
+  showProgressBar = true
+  preloadOnHover = true
+  preloadVisibleLinks = true
