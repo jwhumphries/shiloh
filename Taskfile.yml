@@ -21,7 +21,7 @@ tasks:
   docker-run:
     internal: true
     cmds:
-      - docker run --rm {{.DOCKER_ARGS}} -v "{{.USER_WORKING_DIR}}:/{{.NAME}}" {{.NAME}}:{{.TARGET}}
+      - docker run --rm --user $(id -u):$(id -g) {{.DOCKER_ARGS}} -v "{{.USER_WORKING_DIR}}:/{{.NAME}}" {{.NAME}}:{{.TARGET}}
 
   clean-node-modules:
     internal: true
