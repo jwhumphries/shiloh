@@ -169,7 +169,7 @@ fingerprintAlgorithm = "sha256"
   editAppendPath = true
 
   # Show heading anchors
-  showHeadingAnchors = true
+  showHeadingAnchors = false
 
   # Show article pagination (prev/next)
   showPagination = true

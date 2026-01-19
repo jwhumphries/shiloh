@@ -40,7 +40,7 @@
           <span class="status status-primary animate-bounce" aria-current="page" aria-label="{{ i18n "pagination.page" | default "Page" }} {{ $pageNum }} ({{ i18n "pagination.current" | default "current" }})"></span>
         {{- else }}
           {{- /* Other pages - clickable neutral status */ -}}
-          <a href="{{ .URL }}" class="status status-neutral hover:status-secondary transition-colors" aria-label="{{ i18n "pagination.page" | default "Page" }} {{ $pageNum }}" data-pagination-direction="{{ if lt $pageNum $currentPage }}prev{{ else }}next{{ end }}"></a>
+          <a href="{{ .URL }}" class="status status-base-300 hover:status-secondary transition-colors" aria-label="{{ i18n "pagination.page" | default "Page" }} {{ $pageNum }}" data-pagination-direction="{{ if lt $pageNum $currentPage }}prev{{ else }}next{{ end }}"></a>
         {{- end }}
       {{- end }}
     {{- end }}

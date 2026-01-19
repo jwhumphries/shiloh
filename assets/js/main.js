@@ -9,6 +9,7 @@ import SwupScrollPlugin from '@swup/scroll-plugin';
 import SwupA11yPlugin from '@swup/a11y-plugin';
 import SwupProgressPlugin from '@swup/progress-plugin';
 import SwupFragmentPlugin from '@swup/fragment-plugin';
+import SwupSlideTheme from '@swup/slide-theme';
 
 // Import local modules
 import { initCodeCopy } from './modules/code-copy.js';
@@ -18,7 +19,6 @@ import { initScrollToTop } from './modules/scroll-to-top.js';
 // Initialize swup
 const swup = new Swup({
   containers: ['#swup'],
-  animationSelector: '#swup',
   cache: true,
   animateHistoryBrowsing: true,
   native: false,
@@ -27,6 +27,15 @@ const swup = new Swup({
     // Ignore links with data-no-swup attribute
     if (el?.closest('[data-no-swup]')) {
       return true;
+    }
+    // Ignore hash-only links (e.g., href="#section")
+    // These are same-page anchors and should scroll, not navigate
+    if (url.hash) {
+      const currentPath = window.location.pathname.replace(/\/$/, '');
+      const targetPath = url.pathname.replace(/\/$/, '');
+      if (currentPath === targetPath) {
+        return true;
+      }
     }
     // Ignore external links (only check if origin exists)
     if (url.origin && url.origin !== window.location.origin) {
@@ -88,7 +97,8 @@ const swup = new Swup({
       ]
     }),
     new SwupA11yPlugin(),
-    new SwupProgressPlugin()
+    new SwupProgressPlugin(),
+    new SwupSlideTheme()
   ]
 });
 
