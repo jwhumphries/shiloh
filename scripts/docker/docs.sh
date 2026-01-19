@@ -3,11 +3,11 @@ set -e
 
 cd /"${THEME_NAME}"
 
-echo "📦 Installing npm dependencies..."
-npm install
-
 echo "🔄 Syncing Hugo module dependencies..."
 hugo mod npm pack
+
+echo "📦 Installing npm dependencies..."
+npm install
 
 echo "🏗️ Building documentation site..."
 hugo \

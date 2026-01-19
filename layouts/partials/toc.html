@@ -7,18 +7,21 @@
     color: var(--color-primary) !important;
     font-weight: 500 !important;
   }
+  #toc-nav a {
+    transition: color 0.15s ease-out;
+  }
 </style>
 <aside class="toc-sidebar hidden lg:block">
   <div class="sticky top-4">
     <nav class="max-h-[calc(100vh-8rem)] overflow-y-auto" id="toc-nav">
-      <ul class="text-sm leading-6 [--scrollspy-offset:16]" id="toc-scrollspy" data-scrollspy="#article-content">
+      <ul class="text-sm leading-6">
         <li class="text-base-content font-semibold mb-2 flex items-center gap-2">
           <span class="icon-[tabler--list] size-4"></span>
           {{ i18n "article.table_of_contents" | default "On This Page" }}
         </li>
         {{- range $rootHeadings }}
           {{- $hasChildren := and .Headings (gt (len .Headings) 0) }}
-        <li{{ if $hasChildren }} data-scrollspy-group=""{{ end }}>
+        <li>
           <a href="#{{ .ID }}" class="toc-link text-base-content/70 hover:text-base-content block py-1">
             {{ .Title }}
           </a>

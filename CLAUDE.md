@@ -17,9 +17,9 @@ task dev
 Starts the development environment in Docker:
 - Builds the `dev` target image with Hugo, npm, and Tailwind CLI
 - Mounts project directory to `/shiloh`
-- Runs `npm install` and `hugo mod npm pack`
+- Runs `hugo mod npm pack` then `npm install` (order matters for swup packages)
 - Launches Hugo server on http://localhost:1313 with `exampleSite` as content source
-- Hugo Pipes compiles Tailwind CSS on-the-fly with live reload
+- Hugo Pipes compiles Tailwind CSS and bundles JS on-the-fly with live reload
 - Auto-cleans `node_modules` on exit
 
 ### Sync Dependencies
@@ -34,7 +34,7 @@ Syncs Hugo module dependencies to package.json:
 task docs
 ```
 Builds the exampleSite as static HTML:
-- Runs `npm install` and `hugo mod npm pack`
+- Runs `hugo mod npm pack` then `npm install` (order matters for swup packages)
 - Runs Hugo build with `--minify --buildDrafts`
 - Outputs to `exampleSite/public/` directory
 - Auto-cleans `node_modules` on exit
@@ -96,6 +96,30 @@ Hugo config split across `config/_default/`:
 - `build.toml` - Build stats for Tailwind class detection
 - `module.toml` - Hugo mounts for assets and fonts
 
+### JavaScript Build Pipeline (Hugo js.Build)
+JavaScript is bundled using Hugo's `js.Build` with ESBuild:
+- **Entry point**: `assets/js/main.js`
+- **Modules**: `assets/js/modules/` (code-copy, scrollspy, scroll-to-top)
+- **Processing**: Hugo's `js.Build` bundles and minifies
+- **Output**: Fingerprinted JS in `public/js/`
+
+The `js.html` partial handles:
+- Development: Bundled JS with inline source maps
+- Production: Minified and fingerprinted JS with integrity hash
+
+### Swup Page Transitions
+The theme uses [swup](https://swup.js.org/) for smooth page transitions:
+- **Container**: `#swup` div with `transition-fade` class in `baseof.html`
+- **Plugins**: head, preload (replaces quicklink), scroll, a11y, progress
+- **CSS**: Transition animations in `main.css` (supports native View Transitions API)
+- **Config**: `site.Params.swup` in `params.toml`
+
+Script reinitialization after navigation is handled in `main.js`:
+- Code copy buttons
+- Custom scrollspy (Intersection Observer based, replaces FlyonUI scrollspy)
+- FlyonUI components (`HSStaticMethods.autoInit()`)
+- Iconify icons (`Iconify.scan()`)
+
 ### Custom CSS Utilities
 Defined in `assets/css/main.css`:
 - `article-prose` - Typography system for article content
@@ -103,6 +127,7 @@ Defined in `assets/css/main.css`:
 - `font-prose` - Serif font mode (Lora + Fraunces)
 - `bg-card` / `bg-card-hover` - Theme-aware card backgrounds
 - Chroma syntax highlighting using daisyUI color variables
+- Swup transition classes (`transition-fade`, `transition-slide`)
 
 ## Important Notes
 

@@ -20,8 +20,6 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
-        with:
-          fetch-depth: 0
 
       - name: Install Task
         run: |
@@ -44,87 +42,26 @@ jobs:
         with:
           path: 'exampleSite/public/'
 
-  create_release:
-    runs-on: ubuntu-latest
-    needs: build_and_update
-    outputs:
-      new_tag: ${{ steps.version.outputs.new_tag }}
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
-        with:
-          fetch-depth: 0
-
-      - name: Get PR Labels
-        id: pr_labels
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          # Find the PR that was merged into this commit
-          PR_NUMBER=$(gh pr list --state merged --base release --json number,mergeCommit \
-            --jq ".[] | select(.mergeCommit.oid == \"${{ github.sha }}\") | .number")
-
-          if [ -n "$PR_NUMBER" ]; then
-            echo "Found merged PR: #$PR_NUMBER"
-            LABELS=$(gh pr view "$PR_NUMBER" --json labels --jq '.labels[].name' | tr '\n' ' ')
-            echo "Labels: $LABELS"
-            echo "labels=$LABELS" >> "$GITHUB_OUTPUT"
-          else
-            echo "No PR found for this commit, defaulting to patch"
-            echo "labels=" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Get Next Version
-        id: version
-        run: |
-          # Get the latest tag, default to v0.0.0 if none exists
-          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
-          echo "Latest tag: $LATEST_TAG"
-
-          # Parse version components
-          VERSION=${LATEST_TAG#v}
-          MAJOR=$(echo "$VERSION" | cut -d. -f1)
-          MINOR=$(echo "$VERSION" | cut -d. -f2)
-          PATCH=$(echo "$VERSION" | cut -d. -f3)
-
-          # Determine bump type from PR labels
-          LABELS="${{ steps.pr_labels.outputs.labels }}"
-          if echo "$LABELS" | grep -qw "major"; then
-            echo "Bumping MAJOR version"
-            NEW_MAJOR=$((MAJOR + 1))
-            NEW_TAG="v${NEW_MAJOR}.0.0"
-          elif echo "$LABELS" | grep -qw "minor"; then
-            echo "Bumping MINOR version"
-            NEW_MINOR=$((MINOR + 1))
-            NEW_TAG="v${MAJOR}.${NEW_MINOR}.0"
-          else
-            echo "Bumping PATCH version (default)"
-            NEW_PATCH=$((PATCH + 1))
-            NEW_TAG="v${MAJOR}.${MINOR}.${NEW_PATCH}"
-          fi
-
-          echo "New tag: $NEW_TAG"
-          echo "new_tag=$NEW_TAG" >> "$GITHUB_OUTPUT"
-
-      - name: Create and Push Tag
+      - name: Commit and Push CSS
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git tag -a "${{ steps.version.outputs.new_tag }}" -m "Release ${{ steps.version.outputs.new_tag }}"
-          git push origin "${{ steps.version.outputs.new_tag }}"
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@da05d552573ad5aba039eaac05058a918a7bf631 # v2
-        with:
-          tag_name: ${{ steps.version.outputs.new_tag }}
-          generate_release_notes: true
+          if [[ -n $(git status --porcelain assets/css/compiled/main.css) ]]; then
+            echo "CSS changes detected. Committing..."
+            git add assets/css/compiled/main.css
+            git commit -m "chore(release): update compiled css [skip ci]"
+            git push origin release
+          else
+            echo "No changes to 'assets/css/compiled/main.css'."
+          fi
 
   deploy_docs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: [build_and_update, create_release]
+    needs: build_and_update
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

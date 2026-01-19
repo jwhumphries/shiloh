@@ -1,0 +1,21 @@
+{{- /* Hugo js.Build partial for bundling JavaScript with ESBuild */ -}}
+{{- $opts := dict
+  "targetPath" "js/main.js"
+  "minify" (not hugo.IsDevelopment)
+  "sourceMap" (cond hugo.IsDevelopment "inline" "")
+  "target" "es2020"
+  "format" "iife"
+  "defines" (dict "process.env.NODE_ENV" (cond hugo.IsDevelopment "\"development\"" "\"production\""))
+-}}
+
+{{- with resources.Get "js/main.js" }}
+  {{- with . | js.Build $opts }}
+    {{- if hugo.IsDevelopment }}
+      <script src="{{ .RelPermalink }}" defer></script>
+    {{- else }}
+      {{- with . | fingerprint }}
+        <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" defer></script>
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}

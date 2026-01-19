@@ -6,21 +6,15 @@ ENV THEME_NAME=${THEME_NAME}
 COPY --from=tailwind /usr/local/bin/tailwindcss /usr/local/bin/
 WORKDIR /${THEME_NAME}
 
-# Development target - runs Hugo dev server with live reload
-# Requires project directory to be mounted to /${THEME_NAME}
 FROM hugo AS dev
 EXPOSE 1313
 COPY --chmod=755 scripts/docker/dev.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
-# Release target - updates package.json with Hugo module dependencies
-# Requires project directory to be mounted to /${THEME_NAME}
 FROM hugo AS release
 COPY --chmod=755 scripts/docker/release.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
-# Docs target - builds the documentation site
-# Requires project directory to be mounted to /${THEME_NAME}
 FROM hugo AS docs
 COPY --chmod=755 scripts/docker/docs.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]

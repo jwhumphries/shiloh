@@ -7,7 +7,7 @@
 {{- /* FlyonUI JavaScript for interactive components */ -}}
 <script src="https://cdn.jsdelivr.net/npm/flyonui@2/flyonui.js"></script>
 
-{{- /* Search functionality */ -}}
+{{- /* Search functionality - Fuse.js loaded separately for lazy loading */ -}}
 {{- if site.Params.enableSearch | default true }}
   {{- $fuseJS := resources.Get "js/fuse.min.js" }}
   {{- if $fuseJS }}
@@ -21,20 +21,5 @@
   {{- end }}
 {{- end }}
 
-{{- /* Code copy button */ -}}
-{{- if site.Params.enableCodeCopy | default true }}
-  {{- $codeCopyJS := resources.Get "js/code-copy.js" }}
-  {{- if $codeCopyJS }}
-    <script src="{{ $codeCopyJS.RelPermalink }}"></script>
-  {{- end }}
-{{- end }}
-
-{{- /* Quicklink for faster navigation */ -}}
-{{- if site.Params.enableQuicklink | default true }}
-  <script src="https://unpkg.com/quicklink@2.3.0/dist/quicklink.umd.js"></script>
-  <script>
-    window.addEventListener('load', () => {
-      quicklink.listen();
-    });
-  </script>
-{{- end }}
+{{- /* Main JS bundle - includes swup and all modules */ -}}
+{{- partial "js.html" . -}}
