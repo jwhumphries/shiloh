@@ -96,10 +96,8 @@
 
 @plugin "daisyui" {
   themes: shiloh --default, shiloh-dark, brodie, brodie-dark;
-  prefix: daisy-;
 }
 
-@plugin "flyonui";
 @plugin "@iconify/tailwind4";
 
 @plugin "daisyui/theme" {
@@ -257,7 +255,12 @@
 }
 
 /* Remove focus ring and borders on headings and their anchor links when targeted */
-h1, h2, h3, h4, h5, h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 h1:target,
 h2:target,
 h3:target,
@@ -282,7 +285,12 @@ h6:target,
 }
 
 /* Ensure headings themselves never get a border */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   border: none !important;
 }
 
@@ -841,4 +849,35 @@ dialog.modal[open] {
 
 .chroma .err {
   color: var(--color-error);
+}
+
+/* Custom DaisyUI Styles */
+.link {
+  @apply inline-block cursor-pointer font-medium underline;
+  &:focus {
+    @apply outline-none;
+  }
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+  &.disabled,
+  &[disabled],
+  &:disabled {
+    @apply pointer-events-none opacity-50;
+  }
+}
+
+.link:where(.link-animated) {
+  @apply relative no-underline before:pointer-events-none before:absolute before:start-0 before:bottom-0 before:h-px before:w-full before:bg-current before:transition-transform before:duration-300 before:ease-in-out before:content-[''];
+}
+
+.link:where(.link-animated)::before {
+  transform-origin: 100% 50%;
+  transform: scale3d(0, 1, 1);
+}
+
+.link:where(.link-animated):hover::before {
+  transform-origin: 0% 50%;
+  transform: scale3d(1, 1, 1);
 }

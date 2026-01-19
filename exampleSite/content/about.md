@@ -12,7 +12,6 @@ Shiloh is a modern Hugo theme designed for blogs, documentation sites, and conte
 - [Hugo](https://gohugo.io/) 0.151.0+ - Static site generator
 - [Tailwind CSS v4](https://tailwindcss.com/) - Oxide engine with native CSS imports
 - [daisyUI v5](https://daisyui.com/) - Component library with custom themes
-- [FlyonUI v2](https://flyonui.com/) - Extended UI components
 
 ### Client-Side Libraries
 
@@ -38,7 +37,7 @@ Shiloh prioritizes:
 
 ## Inspiration
 
-This theme was heavily inspired by [Congo](https://github.com/jpanther/congo), an excellent Hugo theme by James Panther. Shiloh shares many of Congo's configuration patterns while updating the underlying CSS framework to Tailwind v4, daisyUI v5, FlyonUI, and adding enhanced accessibility features.
+This theme was heavily inspired by [Congo](https://github.com/jpanther/congo), an excellent Hugo theme by James Panther. Shiloh shares many of Congo's configuration patterns while updating the underlying CSS framework to Tailwind v4 and daisyUI v5, and adding enhanced accessibility features.
 
 ## License
 

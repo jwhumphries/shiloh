@@ -9,14 +9,14 @@
 {{- $id := printf "preview-%d" (index (seq 1000000 | shuffle) 0) }}
 {{- $code := trim .Inner "\n\r" }}
 <div class="not-prose my-6">
-  <div class="daisy-tabs daisy-tabs-lift">
-    <input type="radio" name="{{ $id }}" class="daisy-tab" aria-label="Preview" checked="checked" />
-    <div class="daisy-tab-content bg-base-100 border-base-300 rounded-box p-6">
+  <div class="tabs tabs-lift">
+    <input type="radio" name="{{ $id }}" class="tab" aria-label="Preview" checked="checked" />
+    <div class="tab-content bg-base-100 border-base-300 rounded-box p-6">
       {{ $code | safeHTML }}
     </div>
 
-    <input type="radio" name="{{ $id }}" class="daisy-tab" aria-label="HTML" />
-    <div class="daisy-tab-content bg-base-100 border-base-300 rounded-box p-6">
+    <input type="radio" name="{{ $id }}" class="tab" aria-label="HTML" />
+    <div class="tab-content bg-base-100 border-base-300 rounded-box p-6">
       {{ highlight $code "html" "" }}
     </div>
   </div>

@@ -17,7 +17,6 @@
       "@iconify-json/tabler": "project",
       "@iconify/tailwind4": "project",
       "daisyui": "project",
-      "flyonui": "project",
       "theme-change": "project"
     }
   },
@@ -33,13 +32,12 @@
     "fuse.js": "^7.1.0",
     "swup": "^4.0.0"
   },
-  "description": "A custom Hugo theme built with Tailwind CSS v4, daisyUI, and FlyonUI",
+  "description": "A custom Hugo theme built with Tailwind CSS v4 and daisyUI",
   "devDependencies": {
     "@iconify-json/line-md": "1.2.13",
     "@iconify-json/tabler": "1.2.26",
     "@iconify/tailwind4": "1.2.1",
     "daisyui": "5.5.14",
-    "flyonui": "2.4.1",
     "theme-change": "2.5.0"
   },
   "name": "shiloh",

@@ -49,7 +49,7 @@
           {{- $url := index $link $platform }}
           {{- if $url }}
           <a href="{{ $url }}"
-            class="btn btn-circle btn-text btn-primary btn-sm"
+            class="btn btn-circle btn-text btn-sm"
             aria-label="{{ $config.label }}"
             {{- if not (hasPrefix $url "mailto:") }} target="_blank" rel="noopener noreferrer"{{ end }}>
             <span class="{{ $config.icon }} text-xl text-neutral"></span>

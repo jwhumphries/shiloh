@@ -27,8 +27,8 @@ enableQuicklink = true
 # Site Metadata
 # ------------------------------------------------------------------------------
 
-description = "A modern Hugo theme built with Tailwind CSS v4, daisyUI, and FlyonUI"
-keywords = ["hugo", "theme", "shiloh", "tailwindcss", "daisyui", "flyonui"]
+description = "A modern Hugo theme built with Tailwind CSS v4 and daisyUI"
+keywords = ["hugo", "theme", "shiloh", "tailwindcss", "daisyui"]
 mainSections = ["samples"]
 
 # ------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ mainSections = ["samples"]
   name = "Shiloh"
   image = "/shiloh-author.png"
   headline = "A Happy Dog"
-  bio = "Built with Tailwind CSS v4, daisyUI v5, and FlyonUI v2"
+  bio = "Built with Tailwind CSS v4 and daisyUI v5"
   links = [
     { github = "https://github.com/jwhumphries/shiloh" },
   ]

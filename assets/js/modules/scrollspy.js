@@ -1,7 +1,6 @@
 /**
  * Custom Scrollspy Module
  * Uses Intersection Observer for TOC highlighting
- * Replaces FlyonUI scrollspy dependency
  */
 
 let observer = null;

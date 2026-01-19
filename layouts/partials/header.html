@@ -1,8 +1,8 @@
 <header class="bg-base-100 border-b border-base-300">
   <div class="page-container">
-    <nav class="daisy-navbar px-0" role="navigation" aria-label="{{ i18n " nav.main" | default "Main navigation" }}">
+    <nav class="navbar px-0" role="navigation" aria-label="{{ i18n " nav.main" | default "Main navigation" }}">
       {{- /* Logo / Site Title */ -}}
-      <div class="daisy-navbar-start">
+      <div class="navbar-start">
         <a href="{{ "/" | relURL }}"
           class="flex items-center gap-3 text-xl font-bold">
           {{- with site.Params.header.logo }}
@@ -15,14 +15,14 @@
             {{- end }}
           {{- end }}
           {{- if site.Params.header.showTitle }}
-          <button class="btn btn-lg btn-soft btn-primary waves waves-primary text-2xl">{{ site.Title }}</button>
+          <button class="btn btn-lg btn-soft btn-primary text-2xl">{{ site.Title }}</button>
           {{- end }}
         </a>
       </div>
 
       {{- /* Desktop Menu */ -}}
-      <div class="daisy-navbar-center hidden lg:flex">
-        <ul class="daisy-menu daisy-menu-horizontal px-1 gap-4 text-xl">
+      <div class="navbar-center hidden lg:flex">
+        <ul class="menu menu-horizontal px-1 gap-4 text-xl">
           {{- range site.Menus.main }}
           {{- if not (eq .Params.type "search") }}
           <li>
@@ -36,10 +36,10 @@
       </div>
 
       {{- /* Actions: Search + Mobile Menu */ -}}
-      <div class="daisy-navbar-end gap-2">
+      <div class="navbar-end gap-2">
         {{- /* Search Button */ -}}
         {{- if site.Params.enableSearch | default true }}
-        <button id="search-toggle" class="btn btn-text btn-circle bg-base-300" aria-label="{{ i18n " ui.search" |
+        <button id="search-toggle" class="btn btn-text btn-circle" aria-label="{{ i18n " ui.search" |
           default "Search" }}">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
             aria-hidden="true">
@@ -50,14 +50,14 @@
         {{- end }}
 
         {{- /* Mobile Menu Toggle */ -}}
-        <details class="daisy-dropdown daisy-dropdown-end lg:hidden">
-          <summary class="btn daisy-btn-ghost btn-circle" aria-label="{{ i18n " ui.menu" | default "Menu" }}">
+        <details class="dropdown dropdown-end lg:hidden">
+          <summary class="btn btn-ghost btn-circle" aria-label="{{ i18n " ui.menu" | default "Menu" }}">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
               stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </summary>
-          <ul class="daisy-menu daisy-dropdown-content daisy-menu-sm z-50 mt-3 w-52 rounded-box bg-base-100 p-2 shadow-lg border border-base-300">
+          <ul class="menu dropdown-content menu-sm z-50 mt-3 w-52 rounded-box bg-base-100 p-2 shadow-lg border border-base-300">
             {{- range site.Menus.main }}
             {{- if not (eq .Params.type "search") }}
             <li>
