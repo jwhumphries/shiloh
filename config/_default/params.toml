@@ -42,8 +42,29 @@ enableImageLazyLoading = true
 # Enable WebP image format
 enableImageWebp = true
 
-# Enable Quicklink for faster navigation
-enableQuicklink = true
+# ------------------------------------------------------------------------------
+# Swup Page Transitions
+# ------------------------------------------------------------------------------
+# Swup provides smooth page transitions and replaces quicklink for preloading
+
+[swup]
+  # Enable swup page transitions
+  enable = true
+
+  # Animation type: "fade" or "slide"
+  animation = "fade"
+
+  # Use native View Transitions API (Chrome 111+, Safari 18+)
+  nativeTransitions = true
+
+  # Show progress bar for slow connections
+  showProgressBar = true
+
+  # Preload links on hover
+  preloadOnHover = true
+
+  # Preload visible links (like quicklink did)
+  preloadVisibleLinks = true
 
 # ------------------------------------------------------------------------------
 # Site Metadata

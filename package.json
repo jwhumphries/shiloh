@@ -4,7 +4,13 @@
       "@fontsource-variable/fira-code": "project",
       "@fontsource-variable/fraunces": "project",
       "@fontsource-variable/lora": "project",
-      "fuse.js": "project"
+      "@swup/a11y-plugin": "project",
+      "@swup/head-plugin": "project",
+      "@swup/preload-plugin": "project",
+      "@swup/progress-plugin": "project",
+      "@swup/scroll-plugin": "project",
+      "fuse.js": "project",
+      "swup": "project"
     },
     "devDependencies": {
       "@iconify-json/line-md": "project",
@@ -19,7 +25,13 @@
     "@fontsource-variable/fira-code": "5.2.7",
     "@fontsource-variable/fraunces": "5.2.9",
     "@fontsource-variable/lora": "5.2.8",
-    "fuse.js": "^7.1.0"
+    "@swup/a11y-plugin": "^4.0.0",
+    "@swup/head-plugin": "^2.0.0",
+    "@swup/preload-plugin": "^3.0.0",
+    "@swup/progress-plugin": "^3.0.0",
+    "@swup/scroll-plugin": "^3.0.0",
+    "fuse.js": "^7.1.0",
+    "swup": "^4.0.0"
   },
   "description": "A custom Hugo theme built with Tailwind CSS v4, daisyUI, and FlyonUI",
   "devDependencies": {
