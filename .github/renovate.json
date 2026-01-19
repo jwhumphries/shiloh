@@ -9,8 +9,8 @@
   "minimumReleaseAge": "1 day",
   "platformAutomerge": true,
   "npm": {
-    "fileMatch": [
-      "(^|/)package\\.hugo\\.json$"
+    "managerFilePatterns": [
+      "/(^|/)package\\.hugo\\.json$/"
     ]
   },
   "packageRules": [
