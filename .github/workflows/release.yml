@@ -1,6 +1,8 @@
 name: Release Pipeline
 on:
-  push:
+  pull_request:
+    types:
+      - closed
     branches:
       - release
 
@@ -15,10 +17,14 @@ concurrency:
 
 jobs:
   build_and_update:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          fetch-depth: '0'
 
       - name: Install Task
         run: |
@@ -37,30 +43,16 @@ jobs:
           fi
 
       - name: Bump version and push tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@a22cf08638b34d5badda920f9daf6e72c477b07b # v6.2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          default_bump: patch
+        uses: anothrNick/github-tag-action@v1.75.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG_PREFIX: v
+          PRERELEASE: true
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
         with:
           path: 'exampleSite/public/'
-
-      - name: Commit and Push CSS
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          if [[ -n $(git status --porcelain assets/css/compiled/main.css) ]]; then
-            echo "CSS changes detected. Committing..."
-            git add assets/css/compiled/main.css
-            git commit -m "chore(release): update compiled css [skip ci]"
-            git push origin release
-          else
-            echo "No changes to 'assets/css/compiled/main.css'."
-          fi
 
   deploy_docs:
     environment:
