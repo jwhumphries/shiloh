@@ -898,3 +898,109 @@ dialog.modal[open] {
 #articles {
   transition: opacity 0.01s;
 }
+
+/* ============================================================================
+   FOOTNOTE POPOVER
+   Inline info icon with popover content using the Popover API + CSS Anchor
+   ============================================================================ */
+
+.footnote-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-info);
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  vertical-align: baseline;
+  transition: opacity 0.15s ease-out;
+}
+
+.footnote-trigger:hover {
+  opacity: 0.7;
+}
+
+.footnote-trigger > span {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+}
+
+/* Popover styling with anchor positioning */
+.footnote-content {
+  width: 16rem;
+  padding: 0.75rem;
+  background-color: var(--color-base-100);
+  border: 1px solid var(--color-base-300);
+  border-radius: var(--radius-box);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  /* Anchor positioning */
+  position-area: top;
+  position-try-fallbacks: flip-block;
+  margin-bottom: 0.5rem;
+}
+
+.footnote-title {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--color-base-content);
+}
+
+.footnote-body {
+  color: var(--color-base-content);
+  opacity: 0.8;
+}
+
+.footnote-body p {
+  margin: 0;
+}
+
+.footnote-body p + p {
+  margin-top: 0.5em;
+}
+
+.footnote-body ul,
+.footnote-body ol {
+  margin: 0.25em 0;
+  padding-left: 1.25em;
+}
+
+.footnote-body ul {
+  list-style-type: disc;
+}
+
+.footnote-body ol {
+  list-style-type: decimal;
+}
+
+.footnote-body li {
+  margin: 0.125em 0;
+}
+
+.footnote-body li::marker {
+  color: var(--color-primary);
+}
+
+.footnote-body strong,
+.footnote-body b {
+  font-weight: 600;
+  color: var(--color-secondary);
+}
+
+.footnote-body em,
+.footnote-body i {
+  font-style: italic;
+}
+
+.footnote-body a {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.footnote-body a:hover {
+  opacity: 0.8;
+}

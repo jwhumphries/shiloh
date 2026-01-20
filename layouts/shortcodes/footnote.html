@@ -1,0 +1,18 @@
+{{- /*
+  Footnote Shortcode
+
+  Creates an inline info icon that shows a popover with additional content when clicked.
+  Uses the Popover API with CSS anchor positioning.
+  Content is in a <template> to avoid breaking paragraph structure; JS creates the popover.
+
+  Usage:
+    {{< footnote >}}Your footnote content here{{< /footnote >}}
+
+    With title:
+    {{< footnote title="Did you know?" >}}Your footnote content here{{< /footnote >}}
+*/ -}}
+{{- $title := .Get "title" | default "More info" -}}
+{{- $content := $.Page.RenderString (dict "display" "block") .Inner -}}
+{{- $id := printf "fn-%s" (substr (md5 (printf "%s%s" .Page.File.UniqueID .Inner)) 0 8) -}}
+{{- $anchor := printf "--anchor-%s" $id -}}
+<button type="button" popovertarget="{{ $id }}" class="footnote-trigger" title="{{ $title }}" style="anchor-name:{{ $anchor }}"><span class="icon-[tabler--info-square-rounded]"></span></button><template data-footnote-template="{{ $id }}"><div popover id="{{ $id }}" class="footnote-content" style="position-anchor:{{ $anchor }}">{{- if $title }}<strong class="footnote-title">{{ $title }}</strong>{{- end }}<div class="footnote-body">{{ $content }}</div></div></template>

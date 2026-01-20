@@ -15,6 +15,7 @@ import SwupSlideTheme from '@swup/slide-theme';
 import { initCodeCopy } from './modules/code-copy.js';
 import { initScrollspy, destroyScrollspy } from './modules/scrollspy.js';
 import { initScrollToTop } from './modules/scroll-to-top.js';
+import { initFootnotes, destroyFootnotes } from './modules/footnotes.js';
 
 // Initialize swup
 const swup = new Swup({
@@ -107,11 +108,13 @@ function initPageScripts() {
   initCodeCopy();
   initScrollspy();
   initScrollToTop(swup);
+  initFootnotes();
 }
 
 // Cleanup before content replacement
 function cleanupPageScripts() {
   destroyScrollspy();
+  destroyFootnotes();
 }
 
 // Initialize on first load
