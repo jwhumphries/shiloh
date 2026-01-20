@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Shiloh is a Hugo theme based on Congo v2, built with Tailwind CSS v4 (Oxide engine), daisyUI v5, and FlyonUI v2. The theme provides responsive design, dark mode support, search functionality, and uses OKLCH color space for modern color handling.
+Shiloh is a Hugo theme based on Congo v2, built with Tailwind CSS v4 (Oxide engine) and daisyUI v5. The theme provides responsive design, dark mode support, search functionality, and uses OKLCH color space for modern color handling.
 
 ## Commands
 
@@ -68,7 +68,7 @@ All stages use the Hugo image with Tailwind CLI binary. Entrypoint scripts are i
 - **Processing**: Hugo's `css.TailwindCSS` pipe compiles CSS during build
 - **Class Detection**: `@source "hugo_stats.json"` - Hugo's buildStats tracks used classes
 - **Output**: Fingerprinted CSS in `public/css/`
-- **Plugins** (via `@plugin` directives): daisyui, flyonui, @iconify/tailwind4 (tabler icons)
+- **Plugins** (via `@plugin` directives): daisyui, @iconify/tailwind4 (tabler icons)
 - **Themes**: `shiloh`, `shiloh-dark`, `brodie`, `brodie-dark` defined inline using OKLCH colors
 
 ### Self-Hosted Fonts (Fontsource)
@@ -116,8 +116,7 @@ The theme uses [swup](https://swup.js.org/) for smooth page transitions:
 
 Script reinitialization after navigation is handled in `main.js`:
 - Code copy buttons
-- Custom scrollspy (Intersection Observer based, replaces FlyonUI scrollspy)
-- FlyonUI components (`HSStaticMethods.autoInit()`)
+- Custom scrollspy (Intersection Observer based)
 - Iconify icons (`Iconify.scan()`)
 
 ### Custom CSS Utilities

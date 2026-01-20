@@ -24,7 +24,7 @@
 */ -}}
 {{- $size := .Get "size" }}
 {{- $color := .Get "color" }}
-<span class="daisy-text-rotate {{ $size }} {{ $color }}">
+<span class="text-rotate {{ $size }} {{ $color }}">
   <span>
     {{- $lines := split .Inner "\n" }}
     {{- range $lines }}
