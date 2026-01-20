@@ -43,6 +43,7 @@ Both themes use OKLCH color space for perceptually uniform colors. The color pal
 | `enableSearch` | boolean | `true` | Enable Fuse.js search |
 | `enableCodeCopy` | boolean | `true` | Show copy button on code blocks |
 | `enableImageLazyLoading` | boolean | `true` | Lazy load images |
+| `enableImageWebp` | boolean | `true` | Convert images to WebP |
 | `enableQuicklink` | boolean | `true` | Prefetch links on hover |
 
 ## Metadata

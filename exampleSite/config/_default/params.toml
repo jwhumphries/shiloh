@@ -20,6 +20,7 @@ defaultThemeColor = "#ffffff"
 enableSearch = true
 enableCodeCopy = true
 enableImageLazyLoading = true
+enableImageWebp = true
 enableQuicklink = true
 
 # ------------------------------------------------------------------------------
