@@ -26,7 +26,7 @@
           {{- range site.Menus.main }}
           {{- if not (eq .Params.type "search") }}
           <li>
-            <a href="{{ .URL | relURL }}" class="btn btn-text">
+            <a href="{{ .URL | relURL }}" style="box-shadow: none;" class="btn btn-lg bg-base-100 outline-base-100 border-base-100 hover:border-primary/30 hover:bg-primary/20 transition-colors text-base-content">
               {{ .Name }}
             </a>
           </li>
@@ -35,7 +35,7 @@
         </ul>
       </div>
 
-      {{- /* Actions: Search + Mobile Menu */ -}}
+      {{- /* Actions: Search + Links + Mobile Menu */ -}}
       <div class="navbar-end gap-2">
         {{- /* Search Button */ -}}
         {{- if site.Params.enableSearch | default true }}
@@ -46,6 +46,16 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
+        </button>
+        {{- end }}
+        {{- if site.Params.header.showAppearanceSwitcher | default true }}
+        <button id="theme-toggle" class="btn btn-txt btn-circle" aria-label="{{ i18n " ui.toggle_theme" | default "Toggle theme" }}">
+          <label class="swap swap-rotate">
+            <input type="checkbox" data-toggle-theme="{{ site.Params.colorScheme | default " shiloh" }},{{
+              site.Params.colorScheme | default "shiloh" }}-dark" data-act-class="swap-active" />
+            <span class="swap-on icon-[line-md--moon-alt-loop] h-6 w-6" aria-hidden="true"></span>
+            <span class="swap-off icon-[line-md--sunny-loop] h-6 w-6" aria-hidden="true"></span>
+          </label>
         </button>
         {{- end }}
 

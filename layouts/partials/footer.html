@@ -13,17 +13,6 @@
       </div>
       {{- end }}
     </nav>
-    {{- /* Right Section: Appearance Switcher */ -}}
-    {{- if site.Params.footer.showAppearanceSwitcher | default true }}
-    <aside>
-      <label class="swap swap-rotate" aria-label="{{ i18n " ui.toggle_theme" | default "Toggle theme" }}">
-        <input type="checkbox" data-toggle-theme="{{ site.Params.colorScheme | default " shiloh" }},{{
-          site.Params.colorScheme | default "shiloh" }}-dark" data-act-class="swap-active" />
-        <span class="swap-on icon-[line-md--moon-rising-alt-loop] h-6 w-6" aria-hidden="true"></span>
-        <span class="swap-off icon-[line-md--sun-rising-loop] h-6 w-6" aria-hidden="true"></span>
-      </label>
-    </aside>
-    {{- end }}
   </div>
 </footer>
 {{- if site.Params.footer.showCopyright | default true }}
@@ -34,10 +23,10 @@
       <p class="text-base-content/50 text-xs">
         {{ i18n "footer.powered_by" | default "Powered by" }}
         <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer"
-          class="link link-animated text-primary hover:text-secondary transition-colors">Hugo</a>
+          class="link link-animated font-bold text-primary hover:text-secondary transition-colors">Hugo</a>
         {{ i18n "footer.and" | default "&" }}
         <a href="https://shiloh.johnhumphries.dev" target="_blank" rel="noopener noreferrer"
-          class="link link-animated text-primary hover:text-secondary transition-colors">Shiloh</a>
+          class="link link-animated font-bold text-primary hover:text-secondary transition-colors">Shiloh</a>
       </p>
       {{- end }}
       <p class="text-base-content/60 text-sm">

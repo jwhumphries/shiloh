@@ -21,7 +21,11 @@
 
   {{- /* Articles List */ -}}
   {{- if .Pages }}
-    <div id="articles">
+    <div id="articles" data-swup-fragment-name="articles">
+    {{- /* Pagination (above articles) */ -}}
+    <div class="mb-8">
+      {{- partial "pagination.html" . -}}
+    </div>
     {{- /* Group by Year Option */ -}}
     {{- if .Params.groupByYear | default (site.Params.list.groupByYear | default true) }}
       {{- range (.Paginate (.Pages.GroupByDate "2006")).PageGroups }}
@@ -31,7 +35,7 @@
           </h2>
           <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 items-start">
             {{- range .Pages }}
-              {{- partial "article-card.html" . }}
+              {{- partial "article-card.html" (dict "page" . "class" "motion-preset-focus") }}
             {{- end }}
           </div>
         </section>
@@ -40,14 +44,11 @@
       {{- /* Regular List */ -}}
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 items-start">
         {{- range (.Paginate .Pages).Pages }}
-          {{- partial "article-card.html" . }}
+          {{- partial "article-card.html" (dict "page" . "class" "motion-preset-focus") }}
         {{- end }}
       </div>
     {{- end }}
     </div>
-
-    {{- /* Pagination */ -}}
-    {{- partial "pagination.html" . -}}
   {{- else }}
     {{- /* Empty State */ -}}
     <div class="flex flex-col items-center justify-center py-16 text-center">

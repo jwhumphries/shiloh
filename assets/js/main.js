@@ -8,6 +8,8 @@ import SwupPreloadPlugin from '@swup/preload-plugin';
 import SwupScrollPlugin from '@swup/scroll-plugin';
 import SwupA11yPlugin from '@swup/a11y-plugin';
 import SwupProgressPlugin from '@swup/progress-plugin';
+import SwupFragmentPlugin from '@swup/fragment-plugin';
+import SwupSlideTheme from '@swup/slide-theme';
 
 // Import local modules
 import { initCodeCopy } from './modules/code-copy.js';
@@ -17,7 +19,6 @@ import { initScrollToTop } from './modules/scroll-to-top.js';
 // Initialize swup
 const swup = new Swup({
   containers: ['#swup'],
-  animationSelector: '#swup',
   cache: true,
   animateHistoryBrowsing: true,
   native: false,
@@ -26,6 +27,15 @@ const swup = new Swup({
     // Ignore links with data-no-swup attribute
     if (el?.closest('[data-no-swup]')) {
       return true;
+    }
+    // Ignore hash-only links (e.g., href="#section")
+    // These are same-page anchors and should scroll, not navigate
+    if (url.hash) {
+      const currentPath = window.location.pathname.replace(/\/$/, '');
+      const targetPath = url.pathname.replace(/\/$/, '');
+      if (currentPath === targetPath) {
+        return true;
+      }
     }
     // Ignore external links (only check if origin exists)
     if (url.origin && url.origin !== window.location.origin) {
@@ -75,8 +85,20 @@ const swup = new Swup({
         });
       }
     }),
+    new SwupFragmentPlugin({
+      rules: [
+        {
+          from: '(.*)',
+          to: '(.*)',
+          containers: ['#articles'],
+          // Only use fragment replacement for pagination links
+          if: (visit) => visit.trigger.el?.hasAttribute('data-pagination-direction')
+        }
+      ]
+    }),
     new SwupA11yPlugin(),
-    new SwupProgressPlugin()
+    new SwupProgressPlugin(),
+    new SwupSlideTheme()
   ]
 });
 
@@ -106,9 +128,30 @@ swup.hooks.on('page:view', initPageScripts);
 swup.hooks.on('content:replace', cleanupPageScripts);
 
 // Close search modal when navigation starts
-swup.hooks.on('visit:start', () => {
+swup.hooks.on('visit:start', (visit) => {
   const searchModal = document.getElementById('search-modal');
   if (searchModal && searchModal.open) {
     searchModal.close();
   }
+
+  // Detect direction for sliding animation based on data-pagination-direction attribute
+  const clickedLink = visit.trigger.el;
+  if (clickedLink) {
+    const direction = clickedLink.getAttribute('data-pagination-direction');
+    if (direction === 'next') {
+      document.documentElement.classList.add('is-animating-next');
+      document.documentElement.classList.remove('is-animating-prev');
+    } else if (direction === 'prev') {
+      document.documentElement.classList.add('is-animating-prev');
+      document.documentElement.classList.remove('is-animating-next');
+    } else {
+      // Reset if not pagination
+      document.documentElement.classList.remove('is-animating-next', 'is-animating-prev');
+    }
+  }
+});
+
+// Clean up animation direction classes after navigation completes
+swup.hooks.on('visit:end', () => {
+  document.documentElement.classList.remove('is-animating-next', 'is-animating-prev');
 });
