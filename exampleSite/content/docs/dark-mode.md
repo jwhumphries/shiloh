@@ -33,7 +33,7 @@ autoSwitchAppearance = true      # Respect system preference
 The theme toggle button appears in the header (navbar). Control its visibility:
 
 ```toml
-[footer]
+[header]
   showAppearanceSwitcher = true  # Show/hide the toggle button
 ```
 
