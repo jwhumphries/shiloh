@@ -12,6 +12,7 @@ Complete reference for all theme features and configuration options.
 - [Installation]({{< ref "installation" >}}) - Install Shiloh and set up your development environment
 - [Configuration]({{< ref "configuration" >}}) - Site-wide settings and theme parameters
 - [Front Matter]({{< ref "front-matter" >}}) - Page-level options and overrides
+- [Customization]({{< ref "customization" >}}) - Custom CSS, extend head, and template overrides
 
 ## Features
 

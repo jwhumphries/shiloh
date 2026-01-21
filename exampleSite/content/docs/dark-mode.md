@@ -37,35 +37,50 @@ The theme toggle button appears in the header (navbar). Control its visibility:
   showAppearanceSwitcher = true  # Show/hide the toggle button
 ```
 
-## Custom Themes
+## Built-in Themes
 
-Shiloh defines two daisyUI themes in `assets/css/main.css`:
+Shiloh includes four daisyUI themes in `assets/css/main.css`:
 
-### Light Theme (`shiloh`)
+| Theme | Type | Description |
+|-------|------|-------------|
+| `shiloh` | Light | Default light theme with warm, earthy tones |
+| `shiloh-dark` | Dark | Dark companion to shiloh theme |
+| `brodie` | Light | Alternative light theme with purple/violet accents |
+| `brodie-dark` | Dark | Dark companion to brodie theme |
+
+### Theme Definition Syntax
+
+Themes are defined using daisyUI v5's `@plugin` syntax:
 
 ```css
-@plugin "daisyui" {
-  themes:
-    shiloh --default --light {
-      primary: oklch(0.6 0.118 184.704);
-      secondary: oklch(0.398 0.07 227.392);
-      accent: oklch(0.769 0.188 70.08);
-      /* ... more colors */
-    }
+@plugin "daisyui/theme" {
+  name: "shiloh";
+  default: true;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-primary: oklch(52% 0.09 142);
+  --color-secondary: oklch(62% 0.11 55);
+  --color-accent: oklch(78% 0.12 85);
+  --color-base-100: oklch(99.1% 0.005 109.000);
+  --color-base-content: oklch(25% 0.02 90);
+  /* ... more colors */
 }
 ```
 
-### Dark Theme (`shiloh-dark`)
+### Dark Theme Example
 
 ```css
-@plugin "daisyui" {
-  themes:
-    shiloh-dark --dark {
-      primary: oklch(0.7 0.118 184.704);
-      secondary: oklch(0.6 0.1 227.392);
-      accent: oklch(0.8 0.15 70.08);
-      /* ... more colors */
-    }
+@plugin "daisyui/theme" {
+  name: "shiloh-dark";
+  default: false;
+  prefersdark: false;
+  color-scheme: "dark";
+  --color-primary: oklch(65% 0.12 142);
+  --color-secondary: oklch(70% 0.13 55);
+  --color-accent: oklch(80% 0.13 85);
+  --color-base-100: oklch(19% 0.01 240);
+  --color-base-content: oklch(90% 0.01 109);
+  /* ... more colors */
 }
 ```
 
@@ -90,19 +105,37 @@ Code blocks automatically adapt to the current theme. The syntax highlighting co
 
 To create your own theme:
 
-1. Copy the theme definition in `assets/css/main.css`
-2. Rename it (e.g., `my-theme`)
-3. Adjust the OKLCH color values
-4. Update `colorScheme` in your site configuration
+1. Create `assets/css/custom.css` in your project (see [Customization]({{< ref "customization" >}}))
+2. Add a new theme definition using the `@plugin "daisyui/theme"` syntax
+3. Update `colorScheme` in your site configuration
 
 ```css
-@plugin "daisyui" {
-  themes:
-    my-theme --default --light {
-      primary: oklch(0.5 0.2 260);
-      /* customize all colors */
-    }
+/* assets/css/custom.css */
+@plugin "daisyui/theme" {
+  name: "my-theme";
+  default: false;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-primary: oklch(50% 0.2 260);
+  --color-secondary: oklch(60% 0.15 300);
+  --color-accent: oklch(70% 0.18 80);
+  --color-base-100: oklch(98% 0.01 260);
+  --color-base-200: oklch(94% 0.02 260);
+  --color-base-300: oklch(90% 0.03 260);
+  --color-base-content: oklch(20% 0.02 260);
+  --color-neutral: oklch(30% 0.02 260);
+  --color-neutral-content: oklch(95% 0.01 260);
+  --color-info: oklch(65% 0.1 240);
+  --color-success: oklch(65% 0.12 160);
+  --color-warning: oklch(70% 0.15 70);
+  --color-error: oklch(55% 0.15 25);
 }
+```
+
+Then in your `params.toml`:
+
+```toml
+colorScheme = "my-theme"
 ```
 
 ## JavaScript API
