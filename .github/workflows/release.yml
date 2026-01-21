@@ -43,7 +43,7 @@ jobs:
           fi
 
       - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@v1.75.0
+        uses: anothrNick/github-tag-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG_PREFIX: v
