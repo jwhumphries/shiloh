@@ -23,6 +23,7 @@ All parameters go in `params` section of your site configuration. Shiloh uses a 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `colorScheme` | string | `"shiloh"` | daisyUI theme name |
+| `font` | string | `"code"` | Font family: `"code"` (Fira Code) or `"prose"` (Fraunces + Lora) |
 | `defaultAppearance` | string | `"light"` | Initial theme: `"light"` or `"dark"` |
 | `autoSwitchAppearance` | boolean | `true` | Respect system preference |
 | `defaultThemeColor` | string | `"#ffffff"` | Browser chrome color |
@@ -44,7 +45,29 @@ Both themes use OKLCH color space for perceptually uniform colors. The color pal
 | `enableCodeCopy` | boolean | `true` | Show copy button on code blocks |
 | `enableImageLazyLoading` | boolean | `true` | Lazy load images |
 | `enableImageWebp` | boolean | `true` | Convert images to WebP |
-| `enableQuicklink` | boolean | `true` | Prefetch links on hover |
+
+## Swup Page Transitions
+
+Shiloh uses [swup](https://swup.js.org/) for smooth page transitions and link preloading. Configure in `params.swup`:
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `enable` | boolean | `true` | Enable swup page transitions |
+| `animation` | string | `"fade"` | Animation type: `"fade"` or `"slide"` |
+| `nativeTransitions` | boolean | `true` | Use native View Transitions API (Chrome 111+, Safari 18+) |
+| `showProgressBar` | boolean | `true` | Show progress bar for slow connections |
+| `preloadOnHover` | boolean | `true` | Preload links on hover |
+| `preloadVisibleLinks` | boolean | `true` | Preload visible links in viewport |
+
+```toml
+[swup]
+  enable = true
+  animation = "fade"
+  nativeTransitions = true
+  showProgressBar = true
+  preloadOnHover = true
+  preloadVisibleLinks = true
+```
 
 ## Metadata
 
@@ -87,11 +110,11 @@ author:
 
 Configure in `params.header`:
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `logo` | string | Logo image path |
-| `logoDark` | string | Dark mode logo path |
-| `showAppearanceSwitcher` | boolean | Show theme toggle in header |
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `showTitle` | boolean | `true` | Show site title in header |
+| `logo` | string | `""` | Logo image path (relative to `static/` or `assets/` for inline SVG) |
+| `showAppearanceSwitcher` | boolean | `true` | Show theme toggle in header |
 
 The header includes:
 
@@ -101,6 +124,8 @@ The header includes:
 - Theme toggle button
 - Mobile hamburger menu (screens < 1024px)
 
+For inline SVG logos that support theme colors, place the SVG in `assets/` and reference it. The SVG will be styled with `text-base-content` for automatic theme support.
+
 ## Footer
 
 Configure in `params.footer`:
@@ -108,6 +133,7 @@ Configure in `params.footer`:
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `showCopyright` | boolean | `true` | Show copyright notice |
+| `showAttribution` | boolean | `true` | Show "Powered by Hugo & Shiloh" |
 | `showScrollToTop` | boolean | `true` | Show scroll-to-top button |
 
 ## Homepage
@@ -136,6 +162,7 @@ Configure in `params.article`:
 | `showReadingTime` | boolean | `true` | Show reading time |
 | `showTableOfContents` | boolean | `true` | Show TOC sidebar |
 | `showTaxonomies` | boolean | `false` | Show tags/categories |
+| `displayTaxonomies` | array | `["tags", "categories"]` | Which taxonomies to display |
 | `showWordCount` | boolean | `false` | Show word count |
 | `showComments` | boolean | `false` | Show comments section |
 | `sharingLinks` | array | `[]` | Social sharing buttons |

@@ -1,0 +1,15 @@
+/*
+ * Custom Styles
+ * =============
+ * Override this file in your project's assets/css/custom.css to add custom styles.
+ *
+ * This file is processed by Tailwind CSS, so you can use:
+ * - @apply directives to compose utility classes
+ * - @theme to access theme variables
+ * - Any valid CSS
+ *
+ * Example:
+ *   .my-custom-class {
+ *     @apply text-primary font-bold;
+ *   }
+ */

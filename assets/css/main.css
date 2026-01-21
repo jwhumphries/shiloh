@@ -1004,3 +1004,11 @@ dialog.modal[open] {
 .footnote-body a:hover {
   opacity: 0.8;
 }
+
+/* ============================================================================
+   CUSTOM STYLES
+   Override assets/css/custom.css in your project to add custom styles.
+   This import is processed by Tailwind, so @apply and @theme are available.
+   ============================================================================ */
+
+@import "custom.css";

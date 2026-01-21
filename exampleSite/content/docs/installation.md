@@ -33,7 +33,7 @@ hugo mod get -u
 Clone the theme into your `themes` directory:
 
 ```bash
-git submodule add https://github.com/jwhumphires/shiloh.git themes/shiloh
+git submodule add https://github.com/jwhumphries/shiloh.git themes/shiloh
 ```
 
 Add to your `hugo.yaml`:
