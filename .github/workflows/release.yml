@@ -60,7 +60,7 @@ jobs:
 
   bump_version:
     runs-on: ubuntu-latest
-    needs: deploy-docs
+    needs: deploy_docs
     steps:
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@v1
