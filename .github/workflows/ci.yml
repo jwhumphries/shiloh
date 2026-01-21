@@ -1,30 +1,42 @@
-name: Release Pipeline
+name: CI
 on:
   pull_request:
-    types:
-      - closed
     branches:
+      - dev
       - release
 
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
-  build_and_deploy:
-    if: github.event.pull_request.merged == true
+  # Only runs for PRs targeting release branch
+  check_source_branch:
+    if: github.base_ref == 'release'
     runs-on: ubuntu-latest
     steps:
+      - name: Check if source branch and repo are allowed
+        run: |
+          SOURCE_BRANCH="${{ github.event.pull_request.head.ref }}"
+          ALLOWED_BRANCH="${{ github.event.repository.default_branch }}"
+          SOURCE_REPO="${{ github.event.pull_request.head.repo.full_name }}"
+          TARGET_REPO="${{ github.event.repository.full_name }}"
+
+          if [ "$SOURCE_REPO" != "$TARGET_REPO" ]; then
+            echo "Error: Pull requests from external forks are not allowed into 'release'."
+            exit 1
+          fi
+
+          if [ "$SOURCE_BRANCH" != "$ALLOWED_BRANCH" ]; then
+            echo "Error: Merges into 'release' are only allowed from the '$ALLOWED_BRANCH' branch."
+            echo "You are trying to merge from '$SOURCE_BRANCH'."
+            exit 1
+          fi
+
+  verify_build:
+    runs-on: ubuntu-latest
+    # For release PRs, wait for source branch check; for dev PRs, run immediately
+    needs: [check_source_branch]
+    if: always() && (needs.check_source_branch.result == 'success' || needs.check_source_branch.result == 'skipped')
+    steps:
       - name: Checkout Code
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-        with:
-          ref: ${{ github.event.pull_request.merge_commit_sha }}
-          fetch-depth: '0'
+        uses: actions/checkout@v4
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -63,30 +75,10 @@ jobs:
             ls -R exampleSite/public || echo "exampleSite/public does not exist"
             exit 1
           fi
+          echo "Build verified successfully"
 
+      # Rotate cache to prevent unbounded growth
       - name: Move cache
         run: |
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
-
-      - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: 'exampleSite/public/'
-
-      - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@4ed44965e0db8dab2b466a16da04aec3cc312fd8 # v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG_PREFIX: v
-
-  deploy_docs:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build_and_deploy
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
