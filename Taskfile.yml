@@ -73,5 +73,7 @@ tasks:
       - rm -rf public
       - rm -rf exampleSite/public
       - rm -rf resources
+      - rm package.json
+      - rm exampleSite/hugo_stats.json
       - echo "✅ Cleanup complete"
     silent: true
