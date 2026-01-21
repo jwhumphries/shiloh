@@ -91,6 +91,7 @@ Configure in `params.header`:
 |-----------|------|-------------|
 | `logo` | string | Logo image path |
 | `logoDark` | string | Dark mode logo path |
+| `showAppearanceSwitcher` | boolean | Show theme toggle in header |
 
 The header includes:
 
@@ -107,7 +108,6 @@ Configure in `params.footer`:
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `showCopyright` | boolean | `true` | Show copyright notice |
-| `showAppearanceSwitcher` | boolean | `true` | Show theme toggle in header |
 | `showScrollToTop` | boolean | `true` | Show scroll-to-top button |
 
 ## Homepage
