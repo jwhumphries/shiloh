@@ -2,13 +2,15 @@
 <div class="page-container py-12">
 
   <div class="flex items-center gap-6 mb-8">
-    {{ if .Params.image }}
+    {{- with .Params.image }}
+      {{- $image := $.Resources.GetMatch . }}
+      {{- $src := cond (ne $image nil) $image.RelPermalink (. | relURL) }}
     <img
-      src="{{ .Params.image | relURL }}"
-      alt="{{ .Params.imageAlt | default .Title }}"
+      src="{{ $src }}"
+      alt="{{ $.Params.imageAlt | default $.Title }}"
       class="rounded-full w-24 h-24 object-cover shadow-lg border-2 border-base-content/10"
     />
-    {{ end }}
+    {{- end }}
     <div>
       <h1 class="text-4xl font-bold text-base-content">{{ .Title }}</h1>
       {{- /* Author - check page-level override first, then fall back to site config */ -}}
