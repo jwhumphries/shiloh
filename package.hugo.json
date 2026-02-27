@@ -18,7 +18,7 @@
     "swup": "^4.0.0"
   },
   "devDependencies": {
-    "@iconify-json/line-md": "1.2.13",
+    "@iconify-json/line-md": "1.2.14",
     "@iconify-json/tabler": "1.2.26",
     "@iconify/tailwind4": "1.2.1",
     "daisyui": "5.5.14",
