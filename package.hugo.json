@@ -21,7 +21,7 @@
     "@iconify-json/line-md": "1.2.14",
     "@iconify-json/tabler": "1.2.27",
     "@iconify/tailwind4": "1.2.1",
-    "daisyui": "5.5.14",
+    "daisyui": "5.5.19",
     "tailwindcss-motion": "1.1.1",
     "theme-change": "2.5.0"
   }
