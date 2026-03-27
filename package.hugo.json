@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@iconify-json/line-md": "1.2.16",
-    "@iconify-json/tabler": "1.2.28",
+    "@iconify-json/tabler": "1.2.32",
     "@iconify/tailwind4": "1.2.3",
     "daisyui": "5.5.19",
     "tailwindcss-motion": "1.1.1",
