@@ -18,6 +18,7 @@
       "@iconify-json/line-md": "project",
       "@iconify-json/tabler": "project",
       "@iconify/tailwind4": "project",
+      "@tailwindcss/cli": "project",
       "daisyui": "project",
       "tailwindcss-motion": "project",
       "theme-change": "project"
@@ -42,6 +43,7 @@
     "@iconify-json/line-md": "1.2.16",
     "@iconify-json/tabler": "1.2.28",
     "@iconify/tailwind4": "1.2.1",
+    "@tailwindcss/cli": "4.3.0",
     "daisyui": "5.5.19",
     "tailwindcss-motion": "1.1.1",
     "theme-change": "2.5.0"

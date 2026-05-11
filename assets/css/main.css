@@ -1011,4 +1011,4 @@ dialog.modal[open] {
    This import is processed by Tailwind, so @apply and @theme are available.
    ============================================================================ */
 
-@import "custom.css";
+@import "./custom.css";
