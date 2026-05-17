@@ -8,6 +8,7 @@ hugo mod npm pack
 
 echo "📦 Installing npm dependencies..."
 npm install
+export PATH="/${THEME_NAME}/node_modules/.bin:${PATH}"
 
 echo "🚀 Starting Hugo development server..."
 hugo server \
