@@ -1,4 +1,4 @@
-FROM ghcr.io/gohugoio/hugo:latest@sha256:cef5b132b220dd5a661787d410124afe807b0ed3a79829604bdf0c3eefb85488 AS hugo
+FROM ghcr.io/gohugoio/hugo:latest@sha256:31afb889009554709eaaef938033442e884a7f4746a4a0d9b81c4a6919d76037 AS hugo
 
 ARG THEME_NAME=shiloh
 ENV THEME_NAME=${THEME_NAME}
