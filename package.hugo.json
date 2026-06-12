@@ -24,6 +24,6 @@
     "@tailwindcss/cli": "4.3.0",
     "daisyui": "5.5.23",
     "tailwindcss-motion": "1.1.1",
-    "theme-change": "2.5.2"
+    "theme-change": "3.0.2"
   }
 }
